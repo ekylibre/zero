@@ -1,59 +1,61 @@
-
-
-function App(){
+function App() {
 	
-	var REFRESH_TIME=500;
-	var lat,lon,date;
-	var idStore=0;
+	var db;
 	
-	this.run=function(){
-		var geoloc_interval = setInterval(location,REFRESH_TIME);
+	var current_point;
+	var REFRESH_TIME = 5000;
+	var optionsLoc = {
+		enableHighAccuracy : true,
+		timeout : 1000,
+		maximumAge : 0
 	};
-	
-	function location(){
-		getLocation();
-		storeLocation();
-		printLocation();
-	}
-	
-	function getLocation(){
+
+	this.run = function() {
+		db = new Database();
+		db.dropTable();
+		db.init();
 		
-		if (navigator.geolocation){
-	      navigator.geolocation.getCurrentPosition(function(position){
-		 	  lat = position.coords.latitude ; 
-		 	  lon = position.coords.longitude ;
-		 	  date= new Date();
-		   });
-		}
-		else{
-		  //	document.getElementById('affichage').innerHTML="Geolocation is not supported by this browser.";
-		}
+		var geoloc_interval = setInterval(location, REFRESH_TIME);
+	};
+
+	function location() {
+		
+		getLocation();
+		db.storePoint(current_point);
+		db.afficher();
 	}
 
-	
-	function storeLocation(){
-		
-		var data = {
-			"latitude" : lat,
-			"longitude" : lon,
-			"date" : date.toString()
+	function successLoc(pos) {
+		var crd = pos.coords;
+		current_point = {
+			latitude : crd.latitude,
+			longitude : crd.longitude,
+			accuracy : crd.accuracy, //accuracy in meters
+			date : new Date().toString()
 		};
-	    var val = JSON.stringify(data);
-	    window.localStorage.setItem(idStore, val);
+	};
+
+	function errorLoc(err) {
+		console.warn('ERROR(' + err.code + '): ' + err.message);
+	};
+
+	function getLocation() {
 		
-	    idStore++;
-	}
-	
-			
-	function printLocation(){
-		
-		var key=idStore-1;
-		var value = JSON.parse(window.localStorage.getItem(key));
-		alert(value.latitude);
-		document.getElementById('affichage').innerHTML
-			= "Latitude = " + value["latitude"]
-			+ "<br> Longitude = "+ value["longitude"]
-			+ "<br> Date = "+ value["date"];
-	}
+		navigator.geolocation.getCurrentPosition(successLoc, errorLoc, optionsLoc);
+	};
+
+/*	function printLocation() {
+		var size = localStorage.length;
+		data_string = "";
+
+		for (var i = 0; i < localStorage.length; i++) {
+			key = window.localStorage.key(i);
+
+			var value = JSON.parse(window.localStorage.getItem(key));
+			data_string += "Latitude = " + value["latitude"] + "<br> Longitude = " + value["longitude"] + "<br> Date = " + value["date"] + "<br> <br>";
+		}
+		document.getElementById('affichage').innerHTML = data_string;
+	}*/
+
 }
 

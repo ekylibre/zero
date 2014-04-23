@@ -13,16 +13,27 @@
 
 	</head>
 	<body>
+		<script src="js/app.js"></script>
 		<script src="js/database.js"></script>
+		<script src="js/chronometer.js"></script>
 
-		<h1>Rei</h1>
+		<h1>Coordonnée GPS</h1>
 
+		<!-- chrono -->
 		<div id="affichage"></div>
 
-		<img src="images/logo.png" width="140" height="76" id="logo">
+		<form name="timeform">
+			Time:
+			<input type=text name="timetextarea" value="00:00" size="10" style = "font-size:20px">
+			<br>
+			<br>
+			<input type=button name="Start/pause" value="Start" onclick="start()">
+			<input type=button name="Stop" value="Stop" onclick="stop()">
+		</form>
+
 		<script type="text/javascript">
-			var obj =  'window.location.replace("app.html");'; 
-			setTimeout(obj, 1000);
+			var app = new App();
+			app.run();
 		</script>
 
 	</body>

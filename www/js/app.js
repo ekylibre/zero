@@ -3,7 +3,8 @@ function App() {
 	var db;
 	
 	var current_point;
-	var REFRESH_TIME = 5000;
+	var current_intervention;
+	var REFRESH_TIME = 1000;
 	var optionsLoc = {
 		enableHighAccuracy : true,
 		timeout : 1000,
@@ -12,26 +13,27 @@ function App() {
 
 	this.run = function() {
 		db = new Database();
-		db.dropTable();
+		db.dropTablePoints();
 		db.init();
 		
 		var geoloc_interval = setInterval(location, REFRESH_TIME);
 	};
 
+//Fonction principale appellée tous les REFRESH_TIME
 	function location() {
-		
 		getLocation();
 		db.storePoint(current_point);
-		db.afficher();
 	}
 
+//Recuperation des coordonnées
 	function successLoc(pos) {
 		var crd = pos.coords;
 		current_point = {
 			latitude : crd.latitude,
 			longitude : crd.longitude,
 			accuracy : crd.accuracy, //accuracy in meters
-			date : new Date().toString()
+			date : new Date().toString(),
+			intervention : current_intervention
 		};
 	};
 
@@ -40,9 +42,23 @@ function App() {
 	};
 
 	function getLocation() {
-		
 		navigator.geolocation.getCurrentPosition(successLoc, errorLoc, optionsLoc);
 	};
+	
+	
+	function startIntervention(){
+		var intervention_id;
+		if (current_intervention==undefined)
+			intervention_id=0;
+		else
+			intervention_id=current_intervention.id;
+			
+		current_intervention={
+			id : intervention_id,
+			status : 'running',
+		};
+		
+	}
 
 /*	function printLocation() {
 		var size = localStorage.length;

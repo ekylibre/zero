@@ -1,6 +1,6 @@
 function App() {
 
-	var db;
+	var db = null;
 
 	var current_point;
 	var REFRESH_TIME = 1000;
@@ -12,15 +12,24 @@ function App() {
 		maximumAge : 0
 	};
 
-	this.init = function() {
-		db = new Database();
-		db.dropTablePoints();
-		db.init();
+	 this.initialize=function(){
+		if (db == null) {
+			db = new Database();
+			db.create();
+		}
+		else
+			console.log("Database already initialized");
 	};
 
-	this.run = function() {
-		geoloc_interval = setInterval(location, REFRESH_TIME);
-	};
+	function run() {
+		if (geoloc_interval == null)
+			geoloc_interval = setInterval(location, REFRESH_TIME);
+	}
+
+	function stop() {
+		clearInterval(geoloc_interval);
+		geoloc_interval = null;
+	}
 
 	//Fonction principale appellée tous les REFRESH_TIME
 	function location() {
@@ -50,18 +59,21 @@ function App() {
 	};
 
 	this.startIntervention = function() {
-		var debut = new Date();
 		getLocation();
 		setTimeout(function() {
 			current_point.type = "start";
 			db.storePoint(current_point);
-			app.run();
+			run();
 		}, 1000);
-
 	};
 
-	this.finishIntervention = function() {
-
+	this.endIntervention = function() {
+		getLocation();
+		setTimeout(function() {
+			current_point.type = "end";
+			db.storePoint(current_point);
+			stop();
+		}, 1000);
 	};
 	/*	function printLocation() {
 	 var size = localStorage.length;

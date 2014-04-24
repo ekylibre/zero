@@ -9,7 +9,6 @@
 		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
 		<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 		<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
-		<script type="text/javascript" charset="utf-8" src="cordova/cordova.js"></script>
 
 	</head>
 	<body>
@@ -22,43 +21,53 @@
 		<!-- chrono -->
 		<div id="affichage"></div>
 
-		<input type="button" id="StartIntervention" name="StartIntervention" value="Start Intervention">
-
-		<!--	Time:
-		<input type=text id="timetextarea" name="timetextarea" value="00:00" size="10" style = "font-size:20px">
-		<br />
-		<br />
-		<input type=button id="Start/Pause" name="StartPause" value="Start" onclick="start()">
-		<input type=button id="Stop" name="Stop" value="Stop" onclick="stop()">  -->
+		<button id="buttonStartIntervention" type="button" value="Start Intervention" style="bl">
+			Start Intervention
+		</button>
+		<button id="buttonFinishIntervention" type="button" value="Finish Intervention">
+			Finish Intervention
+		</button>
 
 		<script type="text/javascript">
-			var app = new App();
-			app.init();
+			var app;
+			var buttonstart;
+			var buttonfinish;
+			document.addEventListener("deviceready", onDeviceReady, false);
+
+			function onDeviceReady() {
+				buttonstart = document.getElementById('buttonStartIntervention');
+				buttonfinish = document.getElementById('buttonFinishIntervention');
+
+				app = new App();
+				app.initialize();
+				
+				bindEvent();
+			}
+
+			function bindEvent() {
+				buttonstart.addEventListener('click', StartInterventionClicked, false);
+				buttonfinish.addEventListener('click', FinishInterventionClicked, false);
+			}
 
 			function startIntervention(app) {
+				var buttonstart = document.getElementById('buttonStartIntervention');
 				app.startIntervention();
+				buttonstart.setAttribute('style', 'display:block;');
 			}
 
 			function finishIntervention(app) {
-				app.finishIntervention();
+				app.endIntervention();
+				buttonfinish.setAttribute('style', 'display:block;');
 			}
 
 			function StartInterventionClicked() {
-				document.getElementById('StartIntervention').value = "Finish Intervention";
-				document.getElementById('StartIntervention').removeEventListener('click', StartInterventionClicked);
-				document.getElementById('StartIntervention').addEventListener('click', evtFct = FinishInterventionClicked, false);
 				startIntervention(app);
 			}
 
 			function FinishInterventionClicked() {
-				document.getElementById('StartIntervention').value = "Start Intervention";
-				document.getElementById('StartIntervention').removeEventListener('click', FinishInterventionClicked);
-				document.getElementById('StartIntervention').addEventListener('click', evtFct = StartInterventionClicked, false);
+				buttonstart.value = "Start Intervention";
 				finishIntervention(app);
 			}
-
-			document.getElementById('StartIntervention').addEventListener('click', evtFct = StartInterventionClicked, false);
-
 		</script>
 	</body>
 </html>

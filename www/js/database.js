@@ -1,15 +1,19 @@
 //Lancer la base
 function Database() {
-	var db = openDatabase("database", "1", "database", 65536);
+	var db;
 
-
+	this.create=function(){
+		db = openDatabase("database", "1", "database", 65536);
+		dropTablePoints();
+		createTable();
+	};
+	
 //Creation de la table des points
-	this.init = function() {
+	function createTable () {
 		var query = "CREATE TABLE IF NOT EXISTS points (id INTEGER PRIMARY KEY AUTOINCREMENT,name, latitude FLOAT, longitude FLOAT , date DATE, accuracy NUMERIC, type TEXT, code TEXT, quantity NUMERIC, unit TEXT)";
 		//Creation de la table POINTS 
 		db.transaction(function(tx) {
 			tx.executeSql(query, [], function(tx, result) {
-
 			});
 		}, function(error) {
 			console.log("Transaction Error: " + error.message);
@@ -17,10 +21,10 @@ function Database() {
 			console.log("Table created");
 			console.log("Transaction Success");
 		});
-	};
+	}
 
 //On efface la table Point
-	this.dropTablePoints = function() {
+	function dropTablePoints() {
 		db.transaction(function(tx) {
 			tx.executeSql('DROP TABLE IF EXISTS points');
 		});
@@ -41,29 +45,6 @@ function Database() {
 			});
 		}
 	};
-
-	/*//Appelle la fonction printSuccess
-	this.afficher = function() {
-		var result=[];
-		
-		db.transaction(function(tx) {
-			tx.executeSql("SELECT COUNT(*) as count FROM points", [], function(tx, result) {
-				for (var i = 0; i < result.rows.length; ++i) {
-					var row = result.rows.item(i);
-					result[i]={
-						lat : row['latitude'],
-						lon : row['longitude'],
-						acc : row['accuracy']
-					};
-				}
-			});
-		}, function(error) {
-			console.log("Affichage Error: " + error.message);
-		}, function() {
-			console.log(result);
-			callback(result);
-		});
-	};*/
 
 	function querySuccessDefault(tx, result) {
 		console.log("Query Success");

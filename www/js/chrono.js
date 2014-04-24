@@ -22,15 +22,14 @@ function showtimer() {
 	if(seconds_passed < 10){
 		seconds_passed = "0" + seconds_passed;
 	}
-	document.getElementById("timetextarea").value = minutes_passed + ":" + seconds_passed;
+	document.timeform.timetextarea.value = minutes_passed + ":" + seconds_passed;
 	timercount = setTimeout("showtimer()", 1000);
 }
 
 function start(){
 	if(!timercount){
-		alert("in");
 	timestart   = new Date();
-	document.getElementById("timetextarea").value = "00:00";
+	document.timeform.timetextarea.value = "00:00";
 	timercount  = setTimeout("showtimer()", 1000);
 	}
 	else{
@@ -67,7 +66,7 @@ function stop() {
 		if(seconds_passed < 10){
 			seconds_passed = "0" + seconds_passed;
 		}
-		document.getElementById("timetextarea").value = minutes_passed + ":" + seconds_passed;
+		document.timeform.timetextarea.value = minutes_passed + ":" + seconds_passed;
 	}
 	timestart = null;
 }
@@ -78,5 +77,5 @@ function pause(){
 
 function Reset() {
 	timestart = null;
-	document.getElementById("timetextarea").value = "00:00";
+	document.timeform.timetextarea.value = "00:00";
 }

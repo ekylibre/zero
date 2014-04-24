@@ -5,7 +5,7 @@ function Database() {
 
 //Creation de la table des points
 	this.init = function() {
-		var query = "CREATE TABLE IF NOT EXISTS points (id INTEGER PRIMARY KEY AUTOINCREMENT,name, latitude FLOAT, longitude FLOAT , date DATE, accuracy NUMERIC, type TEXT, code TEXT, quantity NUMERIC, unit TEXT, intervention_id NUMERIC)";
+		var query = "CREATE TABLE IF NOT EXISTS points (id INTEGER PRIMARY KEY AUTOINCREMENT,name, latitude FLOAT, longitude FLOAT , date DATE, accuracy NUMERIC, type TEXT, code TEXT, quantity NUMERIC, unit TEXT)";
 		//Creation de la table POINTS 
 		db.transaction(function(tx) {
 			tx.executeSql(query, [], function(tx, result) {
@@ -29,9 +29,9 @@ function Database() {
 //Ajoute une entrée a partir d'un point {latitude,longitude,date,accuracy}
 	this.storePoint = function(point) {
 		if (point != undefined) {
-			var query = "INSERT INTO points (latitude,longitude,date,accuracy,type,intervention_id) VALUES (?,?,?,?,?,?);";
+			var query = "INSERT INTO points (latitude,longitude,date,accuracy,type) VALUES (?,?,?,?,?);";
 			db.transaction(function(tx) {
-				tx.executeSql(query, [point.latitude, point.longitude, point.date, point.accuracy,'point',point.intervention], function(tx, result) {
+				tx.executeSql(query, [point.latitude, point.longitude, point.date, point.accuracy,point.type], function(tx, result) {
 					console.log("Query Success");
 				});
 			}, function(error) {

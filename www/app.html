@@ -14,60 +14,61 @@
 	<body>
 		<script src="js/app.js"></script>
 		<script src="js/database.js"></script>
-		<script src="js/chronometer.js"></script>
+		<script src="js/menu.js"></script>
 
 		<h1>Coordonnée GPS</h1>
 
-		<!-- chrono -->
-		<div id="affichage"></div>
+		<!-- Start of first page -->
+		<div data-role="page" id="foo">
 
-		<button id="buttonStartIntervention" type="button" value="Start Intervention" style="bl">
-			Start Intervention
-		</button>
-		<button id="buttonFinishIntervention" type="button" value="Finish Intervention">
-			Finish Intervention
-		</button>
+			<div data-role="header">
+				<h1>Foo</h1>
+			</div><!-- /header -->
+
+			<div data-role="content">
+
+				<div id="buttonStart">
+					<button id="buttonStartIntervention" type="button" value="Start Intervention" style="bl">
+						Start Intervention
+					</button>
+				</div>
+
+				<div id="buttonFinish">
+					<button id="buttonFinishIntervention" type="button" value="Finish Intervention">
+						Finish Intervention
+					</button>
+				</div>
+			</div><!-- /content -->
+
+			<div data-role="footer">
+				<h4>Page Footer</h4>
+			</div><!-- /footer -->
+		</div><!-- /page -->
+
+		<!-- Start of second page -->
+		<div data-role="page" id="bar">
+
+			<div data-role="header">
+				<h1>Bar</h1>
+			</div><!-- /header -->
+
+			<div data-role="content">
+				<p>
+					I'm the second in the source order so I'm hidden when the page loads. I'm just shown if a link that references my ID is beeing clicked.
+				</p>
+				<p>
+					<a href="#foo">Back to foo</a>
+				</p>
+			</div><!-- /content -->
+
+			<div data-role="footer">
+				<h4>Page Footer</h4>
+			</div><!-- /footer -->
+		</div><!-- /page -->
 
 		<script type="text/javascript">
-			var app;
-			var buttonstart;
-			var buttonfinish;
-			document.addEventListener("deviceready", onDeviceReady, false);
-
-			function onDeviceReady() {
-				buttonstart = document.getElementById('buttonStartIntervention');
-				buttonfinish = document.getElementById('buttonFinishIntervention');
-
-				app = new App();
-				app.initialize();
-				
-				bindEvent();
-			}
-
-			function bindEvent() {
-				buttonstart.addEventListener('click', StartInterventionClicked, false);
-				buttonfinish.addEventListener('click', FinishInterventionClicked, false);
-			}
-
-			function startIntervention(app) {
-				var buttonstart = document.getElementById('buttonStartIntervention');
-				app.startIntervention();
-				buttonstart.setAttribute('style', 'display:block;');
-			}
-
-			function finishIntervention(app) {
-				app.endIntervention();
-				buttonfinish.setAttribute('style', 'display:block;');
-			}
-
-			function StartInterventionClicked() {
-				startIntervention(app);
-			}
-
-			function FinishInterventionClicked() {
-				buttonstart.value = "Start Intervention";
-				finishIntervention(app);
-			}
+			initialize();
 		</script>
 	</body>
+
 </html>

@@ -4,7 +4,7 @@ function Database() {
 
 	this.create = function() {
 		db = openDatabase("database", "1", "database", 65536);
-	//	dropTablePoints();
+		dropTablePoints();
 		createTable();
 	};
 
@@ -35,10 +35,6 @@ function Database() {
 		if (point != undefined) {
 			var query = "INSERT INTO points (name,latitude,longitude,date,accuracy,type,code,quantity,unit) VALUES (?,?,?,?,?,?,?,?,?);";
 
-			for (i in point) {
-				if (point[i] == undefined)
-					point[i] = "";
-			}
 			db.transaction(function(tx) {
 				tx.executeSql(query, [point.name, point.latitude, point.longitude, point.date, point.accuracy, point.type, point.code, point.quantity, point.unit], function(tx, result) {
 					console.log("Query Success");

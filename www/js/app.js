@@ -60,7 +60,6 @@ function App() {
 			var point = createLocPoint(crd, "loc_point");
 			db.storePoint(point);
 		}
-
 	};
 
 	function successLocStart(pos) {

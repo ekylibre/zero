@@ -6,17 +6,29 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Rei</title>
 		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
+		<link rel="stylesheet" href="css/flipclock/flipclock.css">
+
 		<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 		<script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
 		<script type="text/javascript" src="phonegap.js"></script>
 		<script type="text/javascript" src="js/menu.js"></script>
 		<script type="text/javascript" src="js/app.js"></script>
-		<script type="text/javascript" src="js/database.js"></script>
+		<script type="text/javascript" src="js/database/database.js"></script>
+		<script type="text/javascript" src="js/database/migrator.js"></script>
 
+		<script src="js/flipclock/libs/base.js"></script>
+		<script src="js/flipclock/libs/flipclock.js"></script>
+		<script src="js/flipclock/faces/counter.js"></script>
+		<script src="js/flipclock/faces/hourlycounter.js"></script>
+		<script src="js/flipclock/faces/dailycounter.js"></script>
+		<script src="js/flipclock/faces/minutecounter.js"></script>
+		<script src="js/flipclock/faces/twentyfourhourclock.js"></script>
+		<script src="js/flipclock/faces/twelvehourclock.js"></script>
 	</head>
 	<body>
 		<!-- Start of first page: #one -->
-		<div data-role="page" id="one">
+		x
+		<div data-role="page" id="home">
 
 			<div data-role="header">
 				<h1>Ekylibre</h1>
@@ -25,7 +37,7 @@
 			<div data-role="content" >
 
 				<p>
-					<a href="#two" data-role="button" data-transition="flip"> Start</a>
+					<a href="#interventions" data-role="button" data-transition="flip"> Start</a>
 				</p>
 
 			</div><!-- /content -->
@@ -39,7 +51,7 @@
 		<!-- -->
 
 		<!-- Start of second page: #two -->
-		<div data-role="page" id="two" data-theme="a">
+		<div data-role="page" id="interventions" data-theme="a">
 
 			<div data-role="header">
 				<h1>Interventions</h1>
@@ -50,13 +62,78 @@
 					<div id="buttonStart">
 						<a href="#two" data-role="button" data-icon="plus" id="buttonStartIntervention">Start Intervention</a>
 					</div>
+					<div id="buttonPause">
+						<a href="#two" data-role="button" data-icon="minus" id="buttonFinishIntervention">Pause</a>
+					</div>
 					<div id="buttonFinish">
 						<a href="#two" data-role="button" data-icon="minus" id="buttonFinishIntervention">Finish Intervention</a>
 					</div>
+
+					<div id="buttonResume">
+						<a href="#two" data-role="button" data-icon="minus" id="buttonFinishIntervention">Resume</a>
+					</div>
 				</p>
+
+				<!--clock -->
+				<div class="clock"></div>
+
+				<script type="text/javascript">
+					var clock = $('.clock').FlipClock(0);
+					clock.stop();
+				</script>
+				<!--clock -->
+				
+				
+				<fieldset data-role="controlgroup"  data-type="horizontal" data-role="fieldcontain">
+					<input type="radio" name=" radio-choice-a" id="radio-choice-a" value="on" checked="checked" />
+					<label for="radio-choice-a">On</label>
+					<input type="radio" name=" radio-choice-a" id="radio-choice-b" value="off"  />
+					<label for="radio-choice-b">Off</label>
+				</fieldset>
 				<script type="text/javascript">
 					initialize();
 				</script>
+
+			</div><!-- /content -->
+
+			<div data-role="footer">
+				<h4>Page Footer</h4>
+				<div id="buttonConfig">
+					<a href="#config" data-role="button" data-rel="dialog" data-icon="gear" data-transition="flip">Configuration</a>
+				</div>
+			</div><!-- /footer -->
+		</div><!-- /page two -->
+
+		<!-- -->
+		<!-- -->
+		<!-- -->
+		<!-- -->
+
+		<div data-role="page" id="config" data-theme="a">
+
+			<div data-role="header">
+				<h1>Configuration</h1>
+			</div><!-- /header -->
+
+			<div data-role="content" data-theme="a">
+
+				<div data-role="fieldcontain" class="ui-hide-label">
+					<form method="post" action="demoform.asp">
+						<label for="URL">URL :</label>
+						<input type="text" name="url" id="url" value="" placeholder="url"/>
+						<label for="URL">login :</label>
+						<input type="text" name="login" id="login" value="" placeholder="login"/>
+						<label for="URL">mot de passe :</label>
+						<input type="text" name="passwrd" id="passwrd" value="" placeholder="mot de passe"/>
+						<input type="Valider" data-inline="true" value="Submit">
+					</form>
+				</div>
+				<p>
+					<label>
+						<input type="checkbox" name="checkVocal" />
+						saisir vocalement le nom de l'intervention </label>
+				</p>
+				<script type="text/javascript"></script>
 			</div><!-- /content -->
 
 			<div data-role="footer">

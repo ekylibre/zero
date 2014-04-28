@@ -4,7 +4,6 @@ function App() {
 
 	var REFRESH_TIME = 1000;
 	var geoloc_interval = null;
-	var running;
 
 	var optionsLoc = {
 		enableHighAccuracy : true,
@@ -24,12 +23,10 @@ function App() {
 	function run() {
 		if (geoloc_interval == null) {
 			geoloc_interval = setInterval(location, REFRESH_TIME);
-			running = true;
 		}
 	}
 
 	function stop() {
-		running = false;
 		clearInterval(geoloc_interval);
 		geoloc_interval = null;
 	}
@@ -38,7 +35,7 @@ function App() {
 
 	//Fonction principale appellée tous les REFRESH_TIME
 	function location() {
-		navigator.geolocation.getCurrentPosition(successLoc, errorLoc, optionsLoc);
+		getCurrentPosition(successLoc);
 	}
 
 	function createLocPoint(crd, typePoint) {
@@ -49,45 +46,58 @@ function App() {
 			date : new Date().toString(),
 			type : typePoint
 		};
-		return point;
+		db.storePoint(point);
 	}
 
 	//////////////////////////////////////
 
-	function successLoc(pos) {
-		if (running) {
-			var crd = pos.coords;
-			var point = createLocPoint(crd, "loc_point");
-			db.storePoint(point);
-		}
-	};
-
 	function successLocStart(pos) {
-		var crd = pos.coords;
-		var point = createLocPoint(crd, "start_point");
-		db.storePoint(point);
-		run();
-	};
+		createLocPoint(pos.coords, "start");
+	}
+
+	function successLocResume(pos) {
+		createLocPoint(pos.coords, "resume");
+	}
 
 	function successLocEnd(pos) {
-		stop();
-		var crd = pos.coords;
-		var point = createLocPoint(crd, "end_point");
-		db.storePoint(point);
-	};
+		createLocPoint(pos.coords, "end");
+	}
+
+	function successLocPause(pos) {
+		createLocPoint(pos.coords, "pause");
+	}
+
+	function successLoc(pos) {
+		createLocPoint(pos.coords, "loc");
+	}
 
 	function errorLoc(err) {
 		console.warn('ERROR(' + err.code + '): ' + err.message);
+	}
+
+	function getCurrentPosition(successLocation) {
+		navigator.geolocation.getCurrentPosition(successLocation, errorLoc, optionsLoc);
+	}
+
+	////////////////////////////////////////
+	this.startIntervention = function() {
+		getCurrentPosition(successLocStart);
+		run();
 	};
 
-	///////////////////////////////////
-	this.startIntervention = function() {
-		navigator.geolocation.getCurrentPosition(successLocStart, errorLoc, optionsLoc);
+	this.resumeIntervention = function() {
+		getCurrentPosition(successLocResume);
+		run();
 	};
 
 	this.endIntervention = function() {
-		navigator.geolocation.getCurrentPosition(successLocEnd, errorLoc, optionsLoc);
+		stop();
+		getCurrentPosition(successLocEnd);
 	};
 
+	this.pauseIntervention = function() {
+		stop();
+		getCurrentPosition(successLocPause);
+	};
 }
 

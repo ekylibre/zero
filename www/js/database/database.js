@@ -3,7 +3,24 @@ function Database() {
 	var db;
 
 	this.create = function() {
-		db = openDatabase("database", "1", "database", 65536);
+		db = openDatabase("database", "", "database", 65536);
+
+
+////////Migration
+		var M = new Migrator(db);
+	/*	M.migration(1, function(t) {
+			t.executeSql("create table foo...");
+		});
+		M.migration(2, function(t) {
+			t.executeSql("alter table foo...");
+		});
+		M.migration(3, function(t) {
+			t.executeSql("create table foo2...");
+		});
+*/
+//		M.doIt();
+
+		///////Test
 		dropTablePoints();
 		createTable();
 	};

@@ -1,26 +1,68 @@
 <!DOCTYPE html>
-<!-- /?enableripple=cordova-3.4.0 -->
 <html>
-<head>
-        <meta charset="utf-8" />
-        <meta name="format-detection" content="telephone=no" />
-        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-        <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <title>Rei</title>
-    </head>
-    <body>
-        <div class="app">
-            <h1>Rei</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
-            </div>
-        </div>
-        <script type="text/javascript" src="phonegap.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript">
-            app.initialize();
-        </script>
-    </body>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Rei</title>
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
+		<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+		<script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
+		<script type="text/javascript" src="phonegap.js"></script>
+		<script type="text/javascript" src="js/menu.js"></script>
+		<script type="text/javascript" src="js/app.js"></script>
+		<script type="text/javascript" src="js/database.js"></script>
+
+	</head>
+	<body>
+		<!-- Start of first page: #one -->
+		<div data-role="page" id="one">
+
+			<div data-role="header">
+				<h1>Ekylibre</h1>
+			</div><!-- /header -->
+
+			<div data-role="content" >
+
+				<p>
+					<a href="#two" data-role="button" data-transition="flip"> Start</a>
+				</p>
+
+			</div><!-- /content -->
+
+			<div data-role="footer" data-theme="d"></div><!-- /footer -->
+		</div><!-- /page one -->
+
+		<!-- -->
+		<!-- -->
+		<!-- -->
+		<!-- -->
+
+		<!-- Start of second page: #two -->
+		<div data-role="page" id="two" data-theme="a">
+
+			<div data-role="header">
+				<h1>Interventions</h1>
+			</div><!-- /header -->
+
+			<div data-role="content" data-theme="a">
+				<p>
+					<div id="buttonStart">
+						<a href="#two" data-role="button" data-icon="plus" id="buttonStartIntervention">Start Intervention</a>
+					</div>
+					<div id="buttonFinish">
+						<a href="#two" data-role="button" data-icon="minus" id="buttonFinishIntervention">Finish Intervention</a>
+					</div>
+				</p>
+				<script type="text/javascript">
+					initialize();
+				</script>
+			</div><!-- /content -->
+
+			<div data-role="footer">
+				<h4>Page Footer</h4>
+			</div><!-- /footer -->
+		</div><!-- /page two -->
+
+	</body>
 </html>

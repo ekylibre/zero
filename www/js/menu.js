@@ -1,40 +1,20 @@
-$(document).ready(function() {
-	$("#buttonFinish").hide();
-	
-	
-	$("#buttonStart").click(function() {
-		$(this).hide();
-		$("#buttonFinish").show();
-	});
-	
-	$("#buttonFinish").click(function() {
-		$("#buttonStart").show();
-		$(this).hide();
-	});
-});
-
-var app;
-
 function initialize() {
-	bindEvents();
-}
+	$(document).ready(function() {
+		var app=new App();
+		app.initialize();
+		
+		$("#buttonFinish").hide();
 
-function bindEvents() {
-	document.addEventListener('deviceready', this.onDeviceReady, false);
-}
+		$("#buttonStart").click(function() {
+			$(this).hide();
+			$("#buttonFinish").show();
+			app.startIntervention();
+		});
 
-function onDeviceReady() {
-	document.getElementById('buttonStartIntervention').addEventListener('click', startInterventionClicked, false);
-	document.getElementById('buttonFinishIntervention').addEventListener('click', finishInterventionClicked, false);
-
-	app = new App();
-	app.initialize();
-}
-
-function startInterventionClicked() {
-	app.startIntervention();
-}
-
-function finishInterventionClicked() {
-	app.endIntervention();
+		$("#buttonFinish").click(function() {
+			$("#buttonStart").show();
+			$(this).hide();
+			app.endIntervention();
+		});
+	});
 }

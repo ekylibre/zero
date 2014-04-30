@@ -3,31 +3,27 @@ function Database() {
 	var db;
 
 	this.create = function() {
-		db = openDatabase("database", "", "database", 65536);
+		db = openDatabase("Rey_database", "", "database", 65536);
 
-
-////////Migration
+		////////Migration
 		var M = new Migrator(db);
-	/*	M.migration(1, function(t) {
-			t.executeSql("create table foo...");
+		M.migration(1, function(t) {
+			t.executeSql("CREATE TABLE IF NOT EXISTS points (id INTEGER PRIMARY KEY AUTOINCREMENT,name, latitude FLOAT, longitude FLOAT , date DATE, accuracy NUMERIC, type TEXT, code TEXT, quantity NUMERIC, unit TEXT)");
 		});
-		M.migration(2, function(t) {
-			t.executeSql("alter table foo...");
-		});
-		M.migration(3, function(t) {
-			t.executeSql("create table foo2...");
-		});
-*/
-//		M.doIt();
+	/*	M.migration(2, function(t) {
+			t.executeSql("CREATE TABLE IF NOT EXISTS pointsss (id INTEGER PRIMARY KEY AUTOINCREMENT,name, latitude FLOAT, longitude FLOAT , date DATE, accuracy NUMERIC, type TEXT, code TEXT, quantity NUMERIC, unit TEXT)");
+		});*/
+		//	M.migration(3, function(t) {
+		//		t.executeSql("create table foo2...");
+		//	});
+		M.doIt();
 
 		///////Test
-		dropTablePoints();
-		createTable();
 	};
 
 	//Creation de la table des points
 	function createTable() {
-		var query = "CREATE TABLE IF NOT EXISTS points (id INTEGER PRIMARY KEY AUTOINCREMENT,name, latitude FLOAT, longitude FLOAT , date DATE, accuracy NUMERIC, type TEXT, code TEXT, quantity NUMERIC, unit TEXT)";
+		var query = "CREATE TABLE IF NOT EXISTS points (id INTEGER PRIMARY KEY AUTOINCREMENT,name, latitude FLOAT, longitude FLOAT , date DATE, accuracy NUMERIC, type TEXT, code TEXT, quantity NUMERIC, unit TEXT);";
 		//Creation de la table POINTS
 		db.transaction(function(tx) {
 			tx.executeSql(query, [], function(tx, result) {

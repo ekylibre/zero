@@ -4,6 +4,7 @@ function App() {
 
 	var REFRESH_TIME = 1000;
 	var geoloc_interval = null;
+	var active_mode;
 
 	var optionsLoc = {
 		enableHighAccuracy : true,
@@ -17,6 +18,7 @@ function App() {
 			db.create();
 		} else
 			console.log("Database already initialized");
+		active_mode = false;
 	};
 
 	///////////////////////////////////////
@@ -31,6 +33,14 @@ function App() {
 		geoloc_interval = null;
 	}
 
+	function isRunning() {
+		return geoloc_interval != null;
+	}
+
+
+	this.activeMode = function() {
+		return active_mode;
+	};
 	/////////////////////////////////////
 
 	//Fonction principale appellée tous les REFRESH_TIME
@@ -71,6 +81,14 @@ function App() {
 		createLocPoint(pos.coords, "loc");
 	}
 
+	function successLocActiveModeOn(pos) {
+		createLocPoint(pos.coords, "Active-mode-on");
+	}
+
+	function successLocActiveModeOff(pos) {
+		createLocPoint(pos.coords, "Active-mode-off");
+	}
+
 	function errorLoc(err) {
 		console.warn('ERROR(' + err.code + '): ' + err.message);
 	}
@@ -98,6 +116,20 @@ function App() {
 	this.pauseIntervention = function() {
 		stop();
 		getCurrentPosition(successLocPause);
+	};
+
+	this.activeModeOn = function() {
+		if (isRunning() && !active_mode) {
+			active_mode = true;
+			getCurrentPosition(successLocActiveModeOn);
+		}
+	};
+
+	this.activeModeOff = function() {
+		if (isRunning() && active_mode) {
+			active_mode = false;
+			getCurrentPosition(successLocActiveModeOff);
+		}
 	};
 }
 

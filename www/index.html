@@ -6,7 +6,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Rei</title>
 		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
-		<link rel="stylesheet" href="css/flipclock/flipclock.css">
+		<link rel="stylesheet" type="text/css" href="css/jquery.countdown.css">
+		<link rel="stylesheet" type="text/css" href="css/menu.css">
 
 		<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 		<script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
@@ -15,35 +16,30 @@
 		<script type="text/javascript" src="js/app.js"></script>
 		<script type="text/javascript" src="js/database/database.js"></script>
 		<script type="text/javascript" src="js/database/migrator.js"></script>
+		<script type="text/javascript" src="js/countdown/jquery.plugin.js"></script>
+		<script type="text/javascript" src="js/countdown/jquery.countdown.js"></script>
 
-		<script src="js/flipclock/libs/base.js"></script>
-		<script src="js/flipclock/libs/flipclock.js"></script>
-		<script src="js/flipclock/faces/counter.js"></script>
-		<script src="js/flipclock/faces/hourlycounter.js"></script>
-		<script src="js/flipclock/faces/dailycounter.js"></script>
-		<script src="js/flipclock/faces/minutecounter.js"></script>
-		<script src="js/flipclock/faces/twentyfourhourclock.js"></script>
-		<script src="js/flipclock/faces/twelvehourclock.js"></script>
 	</head>
 	<body>
 		<!-- Start of first page: #one -->
-		
+
 		<div data-role="page" id="home">
 
 			<div data-role="header">
-				<h1>Ekylibre</h1>
+				<h1>Home</h1>
 			</div><!-- /header -->
 
 			<div data-role="content" >
 
 				<p>
-					<a href="#interventions" data-role="button" data-transition="flip"> Start</a>
+					<img src="img/ekylibre.png" alt="start" width="150" height="50px" />
+					<a href="#interventions" data-role="button" data-transition="flip"> Launch</a>
 				</p>
 
 			</div><!-- /content -->
 
 			<div data-role="footer" data-theme="d"></div><!-- /footer -->
-		</div><!-- /page one -->
+		</div><!-- /page home -->
 
 		<!-- -->
 		<!-- -->
@@ -58,50 +54,37 @@
 			</div><!-- /header -->
 
 			<div data-role="content" data-theme="a">
-				<p>
+				<div class= "buttons">
+
 					<div id="buttonStart">
-						<a href="#two" data-role="button" data-icon="plus" id="buttonStartIntervention">Start Intervention</a>
+						<a> <img src="img/Record-Normal-Red-icon.png" alt="start" width="50px" height="50px" /> </a>
 					</div>
 					<div id="buttonPause">
-						<a href="#two" data-role="button" data-icon="minus" id="buttonFinishIntervention">Pause</a>
+						<a><img src="img/Pause-Disabled-icon.png" alt="start" width="50px" height="50px" /></a>
 					</div>
+
 					<div id="buttonResume">
-						<a href="#two" data-role="button" data-icon="minus" id="buttonFinishIntervention">Resume</a>
+						<a><img src="img/Play-icon.png" alt="start" width="50px" height="50px" /></a>
 					</div>
+
 					<div id="buttonFinish">
-						<a href="#two" data-role="button" data-icon="minus" id="buttonFinishIntervention">Finish Intervention</a>
+						<a><img src="img/Stop-icon.png" alt="start" width="50px" height="50px" /></a>
 					</div>
-
-				</p>
-
-				<!--clock -->
-				<div class="clock"></div>
-
-				<script type="text/javascript">
-					var clock = $('.clock').FlipClock(0);
-					clock.stop();
-				</script>
-				<!--clock -->
-
-				<script type="text/javascript">
-					initialize();
-				</script>
-
-			</div><!-- /content -->
-
-			<div data-role="footer">
-				<h4>Options</h4>
-				<div id="buttonConfig">
-					<a href="#config" data-role="button" data-rel="dialog" data-icon="gear" data-transition="flip">Configuration</a>
-					<fieldset data-role="controlgroup"  data-type="horizontal" data-role="fieldcontain">
-						<input type="radio" name=" radio-choice-a" id="radio-choice-a" value="on" checked="checked" />
-						<label for="radio-choice-a">On</label>
-						<input type="radio" name=" radio-choice-a" id="radio-choice-b" value="off"  />
-						<label for="radio-choice-b">Off</label>
-					</fieldset>
 				</div>
-			</div><!-- /footer -->
-		</div><!-- /page two -->
+
+				<div id="clock"></div>
+
+				<div id="buttonActiveOn">
+					<a><img src="img/settings.png" alt="start" width="50px" height="50px" />ON</a>
+				</div>
+				<div id="buttonActiveOff">
+					<a><img src="img/settings.png" alt="start" width="50px" height="50px" />OFF</a>
+				</div>
+			</div>
+			<script>
+				initialize();
+			</script>
+		</div><!-- /page interventions -->
 
 		<!-- -->
 		<!-- -->
@@ -132,13 +115,8 @@
 						<input type="checkbox" name="checkVocal" />
 						saisir vocalement le nom de l'intervention </label>
 				</p>
-				<script type="text/javascript"></script>
 			</div><!-- /content -->
-
-			<div data-role="footer">
-				<h4>Page Footer</h4>
-			</div><!-- /footer -->
-		</div><!-- /page two -->
+		</div><!-- /page config -->
 
 	</body>
 </html>

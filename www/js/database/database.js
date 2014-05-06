@@ -3,15 +3,15 @@ function Database() {
 	var db;
 
 	this.create = function() {
-		db = openDatabase("Rey_database", "", "database", 65536);
+		db = openDatabase("base_test", "", "database", 65536);
 
 		////////Migration
 		var M = new Migrator(db);
 		M.migration(1, function(t) {
 			t.executeSql("CREATE TABLE IF NOT EXISTS points (id INTEGER PRIMARY KEY AUTOINCREMENT,name, latitude FLOAT, longitude FLOAT , date DATE, accuracy NUMERIC, type TEXT, code TEXT, quantity NUMERIC, unit TEXT)");
 		});
-	/*	M.migration(2, function(t) {
-			t.executeSql("CREATE TABLE IF NOT EXISTS pointsss (id INTEGER PRIMARY KEY AUTOINCREMENT,name, latitude FLOAT, longitude FLOAT , date DATE, accuracy NUMERIC, type TEXT, code TEXT, quantity NUMERIC, unit TEXT)");
+		/*	M.migration(2, function(t) {
+		t.executeSql("CREATE TABLE IF NOT EXISTS pointsss (id INTEGER PRIMARY KEY AUTOINCREMENT,name, latitude FLOAT, longitude FLOAT , date DATE, accuracy NUMERIC, type TEXT, code TEXT, quantity NUMERIC, unit TEXT)");
 		});*/
 		//	M.migration(3, function(t) {
 		//		t.executeSql("create table foo2...");

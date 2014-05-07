@@ -53,12 +53,16 @@ function App() {
 			latitude : crd.latitude,
 			longitude : crd.longitude,
 			accuracy : crd.accuracy, //accuracy in meters
-			date : new Date().toString(),
+			date : new Date().getTime(),
 			type : typePoint
 		};
 		db.storePoint(point);
 	}
-
+	
+	this.showInterventions=function(){
+		db.getInterventions();
+	};
+	
 	//////////////////////////////////////
 
 	function successLocStart(pos) {

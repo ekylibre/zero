@@ -9,6 +9,7 @@
 		<link rel="stylesheet" type="text/css" href="css/jquery.countdown.css">
 		<link rel="stylesheet" type="text/css" href="css/menu.css">
 
+
 		<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 		<script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
 		<script type="text/javascript" src="phonegap.js"></script>
@@ -20,7 +21,7 @@
 		<script type="text/javascript" src="js/countdown/jquery.countdown.js"></script>
 
 	</head>
-	<body>
+	<body onload="onLoad()">
 		<!-- Start of first page: #one -->
 
 		<div data-role="page" id="home">
@@ -80,10 +81,12 @@
 				<div id="buttonActiveOff">
 					<a><img src="img/settings.png" alt="start" width="50px" height="50px" />OFF</a>
 				</div>
+				<div id="clockActiveMode"></div>
+
+				<div id="interventionsTab">
+					Tableau
+				</div>
 			</div>
-			<script>
-				initialize();
-			</script>
 		</div><!-- /page interventions -->
 
 		<!-- -->

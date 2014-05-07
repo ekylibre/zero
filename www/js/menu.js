@@ -1,20 +1,23 @@
-function initialize() {
+function onLoad() {
+	document.addEventListener("deviceready", onDeviceReady, false);
+}
+
+function onDeviceReady() {
 	$(document).ready(function() {
+		document.addEventListener("deviceready", onDeviceReady, false);
 		//Initialisation de l'appli
 		var app = new App();
 		app.initialize();
-
 		document.addEventListener("menubutton", onMenuKeyDown, false);
 		document.addEventListener("backbutton", onBackKeyDown, false);
 		//Initialisation de l'horloge
-		function createClock() {
-			$('#clock').countdown({
+		function createClock(clock) {
+			$(clock).countdown({
 				since : new Date(),
 				format : 'HMS',
 				description : ' ',
 				compact : true
 			});
-			$('#clock').countdown('pause');
 		}
 
 		function onMenuKeyDown() {
@@ -25,7 +28,10 @@ function initialize() {
 			$.mobile.changePage('#interventions', 'flip', true, true);
 		}
 
-		createClock();
+
+		app.showInterventions();
+
+		$('#clock').countdown('pause');
 		//affichage de boutons
 		$("#buttonFinish").hide();
 		$("#buttonPause").hide();
@@ -34,8 +40,8 @@ function initialize() {
 		$("#buttonActiveOn").hide();
 
 		$("#buttonStart").click(function() {
-			$('#clock').countdown('toggle');
-			$(this).hide();
+			$('#clock').countdown('destroy');
+			createClock('#clock');
 			//affichage de boutons
 			$("#buttonFinish").show();
 			$("#buttonPause").show();
@@ -45,8 +51,6 @@ function initialize() {
 
 		$("#buttonFinish").click(function() {
 			$('#clock').countdown('destroy');
-			createClock();
-
 			//affichage de boutons
 			$("#buttonStart").show();
 			$("#buttonPause").hide();
@@ -87,16 +91,18 @@ function initialize() {
 		});
 
 		$("#buttonActiveOn").click(function() {
+			createClock("#clockActiveMode");
 			$("#buttonActiveOn").hide();
 			$("#buttonActiveOff").show();
 			app.activeModeOn();
 		});
 
 		$("#buttonActiveOff").click(function() {
+			$('#clockActiveMode').countdown('destroy');
 			$("#buttonActiveOff").hide();
 			$("#buttonActiveOn").show();
 			app.activeModeOff();
 		});
+
 	});
 }
-

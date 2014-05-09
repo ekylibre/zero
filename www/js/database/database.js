@@ -7,7 +7,7 @@ function Database() {
 	};
 
 	this.create = function() {
-		db = openDatabase("base_test4", "", "database", 65536);
+		db = openDatabase("base_test9", "", "database", 65536);
 		////////Migration
 		var M = new Migrator(db);
 		M.migration(1, function(t) {
@@ -47,14 +47,15 @@ function Database() {
 	};
 
 	//Ajoute une entrée a partir d'un point {latitude,longitude,date,accuracy}
-	this.storePoint = function(point) {
+	this.storePoint = function(point, write) {
 		if (point != undefined) {
 			var query = "INSERT INTO points (name,latitude,longitude,date,accuracy,type,code,quantity,unit) VALUES (?,?,?,?,?,?,?,?,?);";
-
 			db.transaction(function(tx) {
 				tx.executeSql(query, [point.name, point.latitude, point.longitude, point.date, point.accuracy, point.type, point.code, point.quantity, point.unit], function(tx, result) {
 					console.log("Query Success");
 				});
+				if (point.type == 'end' || point.type == 'start')
+					write();
 			}, function(error) {
 				console.log("Transaction Error: " + error.message);
 			}, function() {
@@ -65,7 +66,6 @@ function Database() {
 
 	function formattedDate(date) {
 		var d = new Date(date || Date.now()), month = '' + (d.getMonth() + 1), day = '' + d.getDate(), year = d.getFullYear();
-
 		if (month.length < 2)
 			month = '0' + month;
 		if (day.length < 2)
@@ -74,36 +74,61 @@ function Database() {
 		return [day, month, year].join('/');
 	}
 
+	function time_format(d) {
+		hours = format_two_digits(d.getHours());
+		minutes = format_two_digits(d.getMinutes());
+		seconds = format_two_digits(d.getSeconds());
+		return hours + ":" + minutes + ":" + seconds;
+	}
 
-	this.getInterventions = function() {
-		var query = "SELECT * from points where type = 'start';";
+	function format_two_digits(n) {
+		return n < 10 ? '0' + n : n;
+	}
+
+
+	this.writeInterventions = function() {
+		var query = "SELECT * from points where type in ('start', 'end')";
 		//Creation de la table POINTS
-		$('#interventionsTab').html("<table><caption>Interventions</caption><thead><tr><th>Titre</th><th>Durée</th><th>Date debut</th></tr></thead><tbody>");
+		$('#interventionsTab').html("<table><caption>Interventions</caption>");
+		$('#interventionsTab').append("<tr><th>Title</th><th>Duration</th><th>Begining</th></tr>");
 
 		db.transaction(function(tx) {
 			tx.executeSql(query, [], function(tx, rs) {
 				var i = 0;
+				var num_int = 1;
 				while (i < rs.rows.length - 1) {
-					alert(i);
 					var row1 = rs.rows.item(i);
 					var row2 = rs.rows.item(i + 1);
-
-					date1 = new Date(row2.date);
+					date1 = new Date(row1.date);
 					date2 = new Date(row2.date);
-					var duree = date2.getTime() - date1.getTime();
-					alert("d1 " + date1.getTime() + "d2 " + date2.getTime());
-					$('#interventionsTab').append("<tr><th>Int" + i + "</th><th> " + duree + " </th><th>" + formattedDate(date1) + "</th></tr>");
+					var duree = new Date(date2.getTime() - date1.getTime());
+					duree.setTime(duree.getTime() + (duree.getTimezoneOffset() * 1000 * 60));
+					$('#interventionsTab').append("<tr><th> " + num_int + " : </th><th> " + time_format(duree) + " </th><th> " + formattedDate(date1) + " </th></tr>");
 					if (row2.type == 'end') {
 						i += 2;
 					} else {
 						row1 = row2;
 						i++;
 					}
+					num_int++;
 				}
-				$('#interventionsTab').append("</tbody></table>");
+				$('#interventionsTab').append("</table>");
+
 			}, function(error) {
 				console.log("Transaction Error: " + error.message);
-				$('#interventionsTab').append("</tbody></table>");
+			});
+		});
+	};
+
+	this.checkLastPoint = function() {
+		var query = "SELECT * from points where id = MAX(Select id from points);";
+		db.transaction(function(tx) {
+			tx.executeSql(query, [], function(tx, rs) {
+				if (!rs.rows.item(0).type=='end'){
+					$.mobile.changePage('#close_error', 'flip', true, true);
+				}
+			}, function(error) {
+				console.log("Transaction Error: " + error.message);
 			});
 		});
 	};

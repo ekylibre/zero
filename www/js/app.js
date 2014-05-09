@@ -5,6 +5,7 @@ function App() {
 	var REFRESH_TIME = 1000;
 	var geoloc_interval = null;
 	var active_mode;
+	var running;
 
 	var optionsLoc = {
 		enableHighAccuracy : true,
@@ -16,6 +17,9 @@ function App() {
 		if (db == null) {
 			db = new Database();
 			db.create();
+			db.checkLastPoint();
+			running = false;
+			db.writeInterventions();
 		} else
 			console.log("Database already initialized");
 		active_mode = false;
@@ -33,7 +37,7 @@ function App() {
 		geoloc_interval = null;
 	}
 
-	function isRunning() {
+	function locationIsRunning() {
 		return geoloc_interval != null;
 	}
 
@@ -53,16 +57,20 @@ function App() {
 			latitude : crd.latitude,
 			longitude : crd.longitude,
 			accuracy : crd.accuracy, //accuracy in meters
-			date : new Date().getTime(),
+			date : new Date(),
 			type : typePoint
 		};
-		db.storePoint(point);
+		if (typePoint == 'end' || typePoint == 'start')
+			db.storePoint(point, db.writeInterventions);
+		else
+			db.storePoint(point);
 	}
-	
-	this.showInterventions=function(){
-		db.getInterventions();
+
+
+	this.showInterventions = function() {
+		db.writeInterventions();
 	};
-	
+
 	//////////////////////////////////////
 
 	function successLocStart(pos) {
@@ -105,6 +113,7 @@ function App() {
 	this.startIntervention = function() {
 		getCurrentPosition(successLocStart);
 		run();
+		running = true;
 	};
 
 	this.resumeIntervention = function() {
@@ -115,6 +124,7 @@ function App() {
 	this.endIntervention = function() {
 		stop();
 		getCurrentPosition(successLocEnd);
+		running = false;
 	};
 
 	this.pauseIntervention = function() {
@@ -123,14 +133,14 @@ function App() {
 	};
 
 	this.activeModeOn = function() {
-		if (isRunning() && !active_mode) {
+		if (locationIsRunning() && !active_mode) {
 			active_mode = true;
 			getCurrentPosition(successLocActiveModeOn);
 		}
 	};
 
 	this.activeModeOff = function() {
-		if (isRunning() && active_mode) {
+		if (locationIsRunning() && active_mode) {
 			active_mode = false;
 			getCurrentPosition(successLocActiveModeOff);
 		}

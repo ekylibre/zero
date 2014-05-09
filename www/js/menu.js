@@ -10,6 +10,7 @@ function onDeviceReady() {
 		app.initialize();
 		document.addEventListener("menubutton", onMenuKeyDown, false);
 		document.addEventListener("backbutton", onBackKeyDown, false);
+		document.addEventListener("endcallbutton", onEndCallKeyDown, false);
 		//Initialisation de l'horloge
 		function createClock(clock) {
 			$(clock).countdown({
@@ -28,8 +29,12 @@ function onDeviceReady() {
 			$.mobile.changePage('#interventions', 'flip', true, true);
 		}
 
+		function onEndCallKeyDown() {
+			if (app.running) {
+				app.endIntervention();
+			}
+		}
 
-		app.showInterventions();
 
 		$('#clock').countdown('pause');
 		//affichage de boutons
@@ -46,7 +51,9 @@ function onDeviceReady() {
 			$("#buttonFinish").show();
 			$("#buttonPause").show();
 			$("#buttonActiveOn").show();
+			$("#buttonActiveOff").hide();
 			app.startIntervention();
+			$('#clockActiveMode').countdown('destroy');
 		});
 
 		$("#buttonFinish").click(function() {
@@ -60,6 +67,7 @@ function onDeviceReady() {
 			$(this).hide();
 
 			app.activeModeOff();
+			$('#clockActiveMode').countdown('destroy');
 			app.endIntervention();
 		});
 
@@ -103,6 +111,5 @@ function onDeviceReady() {
 			$("#buttonActiveOn").show();
 			app.activeModeOff();
 		});
-
 	});
 }

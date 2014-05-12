@@ -17,7 +17,6 @@ function App() {
 		if (db == null) {
 			db = new Database();
 			db.create();
-			db.checkLastPoint();
 			running = false;
 			db.writeInterventions();
 		} else

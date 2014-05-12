@@ -89,9 +89,7 @@ function Database() {
 	this.writeInterventions = function() {
 		var query = "SELECT * from points where type in ('start', 'end')";
 		//Creation de la table POINTS
-		$('#interventionsTab').html("<table><caption>Interventions</caption>");
-		$('#interventionsTab').append("<tr><th>Title</th><th>Duration</th><th>Begining</th></tr>");
-
+		$('#interventions_table').html("<thead><tr><th>Title</th><th>Duration</th><th>Begining</th></tr></thead><tbody>");
 		db.transaction(function(tx) {
 			tx.executeSql(query, [], function(tx, rs) {
 				var i = 0;
@@ -103,7 +101,7 @@ function Database() {
 					date2 = new Date(row2.date);
 					var duree = new Date(date2.getTime() - date1.getTime());
 					duree.setTime(duree.getTime() + (duree.getTimezoneOffset() * 1000 * 60));
-					$('#interventionsTab').append("<tr><th> " + num_int + " : </th><th> " + time_format(duree) + " </th><th> " + formattedDate(date1) + " </th></tr>");
+					$('#interventions_table').append("<tr><th>" + num_int + "</th><td>" + time_format(duree) + "</td><td>" + formattedDate(date1) + "</td></tr>");
 					if (row2.type == 'end') {
 						i += 2;
 					} else {
@@ -112,8 +110,8 @@ function Database() {
 					}
 					num_int++;
 				}
-				$('#interventionsTab').append("</table>");
-
+				$('#interventions_table').append("</tbody>");
+				//	table.find("thead").html(thead);
 			}, function(error) {
 				console.log("Transaction Error: " + error.message);
 			});
@@ -124,10 +122,11 @@ function Database() {
 		var query = "SELECT * from points where id = MAX(Select id from points);";
 		db.transaction(function(tx) {
 			tx.executeSql(query, [], function(tx, rs) {
-				if (!rs.rows.item(0).type=='end'){
+				if (!rs.rows.item(0).type == 'end') {
 					$.mobile.changePage('#close_error', 'flip', true, true);
 				}
 			}, function(error) {
+				alert(error);
 				console.log("Transaction Error: " + error.message);
 			});
 		});

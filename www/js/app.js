@@ -109,6 +109,29 @@ function App() {
 	}
 
 	////////////////////////////////////////
+
+	function checkIdentity() {
+		var logged = true
+		return logged;
+	}
+
+
+	this.pushData = function() {
+		if (checkIdentity())
+			db.send(id,passwrd);
+		else
+			console.log("utilisateur non identifié"); 
+	};
+
+			
+//Creation des points
+		//	url (String): URl de la pa ge à charger
+			//params (Map): (optionnel) paires de clé/valeur qui seront envoyées au serveur.
+			//callback (Fonction): (optionnel) fonction qui sera éxécutée dès que les données seront complètement chargées.
+
+
+
+	////////////////////////////////////////
 	this.startIntervention = function() {
 		getCurrentPosition(successLocStart);
 		run();

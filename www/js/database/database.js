@@ -23,6 +23,8 @@ function Database() {
 		///////Test
 	};
 
+	//////////////////////////////////////////////////////////////
+
 	//Creation de la table des points
 	function affichage() {
 		var query = "SELECT * from points;"//Creation de la table POINTS
@@ -46,6 +48,8 @@ function Database() {
 		});
 	};
 
+	//////////////////////////////////////////////////////////////
+
 	//Ajoute une entrée a partir d'un point {latitude,longitude,date,accuracy}
 	this.storePoint = function(point, write) {
 		if (point != undefined) {
@@ -63,28 +67,6 @@ function Database() {
 			});
 		}
 	};
-
-	function formattedDate(date) {
-		var d = new Date(date || Date.now()), month = '' + (d.getMonth() + 1), day = '' + d.getDate(), year = d.getFullYear();
-		if (month.length < 2)
-			month = '0' + month;
-		if (day.length < 2)
-			day = '0' + day;
-
-		return [day, month, year].join('/');
-	}
-
-	function time_format(d) {
-		hours = format_two_digits(d.getHours());
-		minutes = format_two_digits(d.getMinutes());
-		seconds = format_two_digits(d.getSeconds());
-		return hours + ":" + minutes + ":" + seconds;
-	}
-
-	function format_two_digits(n) {
-		return n < 10 ? '0' + n : n;
-	}
-
 
 	this.writeInterventions = function() {
 		var query = "SELECT * from points where type in ('start', 'end')";
@@ -118,19 +100,79 @@ function Database() {
 		});
 	};
 
-	this.checkLastPoint = function() {
-		var query = "SELECT * from points where id = MAX(Select id from points);";
+	//Create a JSON objects with an array of points. each element of the array contains an object with points table column names as attributs
+	this.send = function(id, passwrd,url) {
+		var points = new Array();
+		//On recupere tous les points
+		var query = "SELECT * from points;";
 		db.transaction(function(tx) {
-			tx.executeSql(query, [], function(tx, rs) {
-				if (!rs.rows.item(0).type == 'end') {
-					$.mobile.changePage('#close_error', 'flip', true, true);
+			tx.executeSql(query, [], function(tx, rs) {//success function
+				for ( i = 0; i < rs.rows.length; i++) {
+					var row = rs.rows.item(i);
+					var point = {
+						"name" : row["name"],
+						"latitude" : row["latitude"],
+						"longitude" : row["longitude"],
+						"date" : row["date"],
+						"accuracy" : row["accuracy"],
+						"type" : row["type"],
+						"code" : row["code"],
+						"quantity" : row["quantity"],
+						"unit" : row["unit"]
+					};
+					points.push(point);
 				}
-			}, function(error) {
-				alert(error);
+				$.post("url", {
+					id : this.id,
+					passwrd : this.passwrd,
+					points : this.points
+				}, function(data) {
+					alert("Data Loaded: " + data);
+				});
+
+			}, function(error) {// fonction d'erreur
 				console.log("Transaction Error: " + error.message);
 			});
 		});
 	};
+	////////////////////////////////////////////////////////////////
+
+	function formattedDate(date) {
+		var d = new Date(date || Date.now()), month = '' + (d.getMonth() + 1), day = '' + d.getDate(), year = d.getFullYear();
+		if (month.length < 2)
+			month = '0' + month;
+		if (day.length < 2)
+			day = '0' + day;
+
+		return [day, month, year].join('/');
+	}
+
+	function time_format(d) {
+		hours = format_two_digits(d.getHours());
+		minutes = format_two_digits(d.getMinutes());
+		seconds = format_two_digits(d.getSeconds());
+		return hours + ":" + minutes + ":" + seconds;
+	}
+
+	function format_two_digits(n) {
+		return n < 10 ? '0' + n : n;
+	}
+
+	/////////////////////////////////////////////////////////////////
+
+	/*	this.checkLastPoint = function() {
+	var query = "SELECT * from points where id = MAX(Select id from points);";
+	db.transaction(function(tx) {
+	tx.executeSql(query, [], function(tx, rs) {
+	if (!rs.rows.item(0).type == 'end') {
+	$.mobile.changePage('#close_error', 'flip', true, true);
+	}
+	}, function(error) {
+	alert(error);
+	console.log("Transaction Error: " + error.message);
+	});
+	});
+	};*/
 
 	function querySuccessDefault(tx, result) {
 		console.log("Query Success");

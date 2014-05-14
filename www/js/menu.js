@@ -22,11 +22,19 @@ function onDeviceReady() {
 		}
 
 		function onMenuKeyDown() {
-			$.mobile.changePage('#config', 'flip', true, true);
+			$.mobile.changePage('#config', {
+				transition : "flip",
+				reverse : false,
+				changeHash : false
+			});
 		}
 
 		function onBackKeyDown() {
-			$.mobile.changePage('#interventions', 'flip', true, true);
+			$.mobile.changePage('#interventions', {
+				transition : "flip",
+				reverse : false,
+				changeHash : false
+			});
 		}
 
 		function onEndCallKeyDown() {

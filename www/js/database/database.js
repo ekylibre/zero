@@ -101,7 +101,7 @@ function Database() {
 	};
 
 	//Create a JSON objects with an array of points. each element of the array contains an object with points table column names as attributs
-	this.send = function(id, passwrd,url) {
+	this.send = function() {
 		var points = new Array();
 		//On recupere tous les points
 		var query = "SELECT * from points;";
@@ -123,8 +123,8 @@ function Database() {
 					points.push(point);
 				}
 				$.post("url", {
-					id : this.id,
-					passwrd : this.passwrd,
+					id : window.localStorage.getItem("user"),
+					passwrd : window.localStorage.getItem("pwd"),
 					points : this.points
 				}, function(data) {
 					alert("Data Loaded: " + data);

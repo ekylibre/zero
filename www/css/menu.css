@@ -33,6 +33,15 @@
 	padding-right: 10px;
 }
 
+#isLogged{
+	text-align : right;
+	color : blue;
+}
+
+#errorLogLabel{
+	color: red;
+}
+
 table {
 	border-collapse: collapse;
 	width: 90%;

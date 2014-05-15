@@ -11,7 +11,7 @@
 		<link rel="stylesheet" href="Jquery-mobile/jquery.mobile-1.4.2.min.css">
 		<script src="Jquery/jquery-2.1.1.min.js"></script>
 		<script src="Jquery-mobile/jquery.mobile-1.4.2.js"></script>
-		
+
 		<script type="text/javascript" src="phonegap.js"></script>
 		<script type="text/javascript" src="js/menu.js"></script>
 		<script type="text/javascript" src="js/app.js"></script>
@@ -55,6 +55,9 @@
 			</div><!-- /header -->
 
 			<div data-role="content" data-theme="a">
+
+				<label id="isLogged"></label>
+
 				<div class= "buttons">
 
 					<div id="buttonStart">
@@ -71,8 +74,13 @@
 					<div id="buttonFinish">
 						<a data-role="button"><img src="img/Stop-icon.png" alt="start" width="50px" height="50px" /></a>
 					</div>
+					<div id="buttonSend">
+						<a data-role="button"><img src="img/synchro.png" alt="start" width="50px" height="50px" /></a>
+					</div>
 				</div>
-
+				
+				<label id="errorLabel"></label>
+				
 				<div id="clock"></div>
 
 				<div id="buttonActiveOn">
@@ -100,16 +108,22 @@
 
 			<div data-role="content" data-theme="a">
 
-				<div data-role="fieldcontain" class="ui-hide-label">
+				<div id="form-log" data-role="fieldcontain" class="ui-hide-label">
 					<form method="post" action="demoform.asp">
 						<label for="URL">URL :</label>
 						<input type="text" name="url" id="url" value="" placeholder="url"/>
 						<label for="URL">login :</label>
-						<input type="text" name="login" id="login" value="" placeholder="login"/>
+						<input type="text" name="user" id="user" value="" placeholder="user"/>
 						<label for="URL">mot de passe :</label>
-						<input type="text" name="passwrd" id="passwrd" value="" placeholder="mot de passe"/>
-						<input type="Valider" data-inline="true" value="Submit">
+						<input type="password" name="passwrd" id="pwd" value="" placeholder="mot de passe"/>
+						<label id="errorLogLabel"></label>
+						<div id="buttonSubmit" >
+							<a data-role="button"> Validate </a>
+						</div>
 					</form>
+				</div>
+				<div id="buttonDisconnection" >
+					<a data-role="button">Disconnect</a>
 				</div>
 				<p>
 					<label>

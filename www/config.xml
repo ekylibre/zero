@@ -24,8 +24,6 @@
 	-->
 	<preference name="permissions"                value="none"/>
 
-	
-
 	<!-- Customize your app and platform with the preference element. -->
 	<!-- <preference name="phonegap-version"      value="3.4.0" /> -->      <!-- all: current version of PhoneGap -->
 	<preference name="orientation"                value="portrait" />

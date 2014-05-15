@@ -2,6 +2,16 @@ function onLoad() {
 	document.addEventListener("deviceready", onDeviceReady, false);
 }
 
+function disconnection() {
+	window.localStorage.clear("user");
+	window.localStorage.clear("pwd");
+	window.localStorage.clear("url");
+	$("#isLogged").text("login");
+	$("#buttonDisconnection").hide();
+	$("#form-log").show();
+	window.location("interventions");
+}
+
 function onDeviceReady() {
 	$(document).ready(function() {
 		document.addEventListener("deviceready", onDeviceReady, false);
@@ -11,6 +21,15 @@ function onDeviceReady() {
 		document.addEventListener("menubutton", onMenuKeyDown, false);
 		document.addEventListener("backbutton", onBackKeyDown, false);
 		document.addEventListener("endcallbutton", onEndCallKeyDown, false);
+
+		if (window.localStorage.getItem("user") != null) {
+			$("#form-log").hide();
+			$("#isLogged").html(window.localStorage.getItem("user") + "</br> logout");
+		} else {
+			$("#isLogged").html("</br> login");
+			$("#buttonDisconnection").hide();
+		}
+
 		//Initialisation de l'horloge
 		function createClock(clock) {
 			$(clock).countdown({
@@ -43,6 +62,18 @@ function onDeviceReady() {
 			}
 		}
 
+
+		$("#isLogged").click(function() {
+			if (window.localStorage.getItem("user") != null) {
+				disconnection();
+			} else {
+				$.mobile.changePage('#config', {
+					transition : "flip",
+					reverse : false,
+					changeHash : false
+				});
+			}
+		});
 
 		$('#clock').countdown('pause');
 		//affichage de boutons
@@ -118,6 +149,52 @@ function onDeviceReady() {
 			$("#buttonActiveOff").hide();
 			$("#buttonActiveOn").show();
 			app.activeModeOff();
+		});
+
+		$("#buttonSend").click(function() {
+			app.pushData();
+			
+		});
+
+		$("#buttonSubmit").click(function() {
+			if ($("#user").val().length < 3 || $("#pwd").val().length < 3) {
+				$("#errorLogLabel").text("identifiant ou mot de passe invalide");
+			} else {
+				var user = $("#user").val();
+				var pwd = $("#pwd").val();
+				var url = $("#url").val();
+				window.localStorage.setItem("user", $("#user").val());
+				window.localStorage.setItem("pwd", $("#pwd").val());
+				window.localStorage.setItem("url", $("#url").val());
+				$("#form-log").hide();
+				$("#buttonDisconnection").show();
+				$("#isLogged").html(user + "<br> logout");
+				$.mobile.changePage('#interventions', {
+					transition : "flip",
+					reverse : false,
+					changeHash : false
+				});
+			}
+			/*$.post(url, {
+			 "pseudo" : user,
+			 "pass" : pwd
+			 }, function(msg) {
+			 if (msg.indexOf("erreur") >= 0) {
+			 $("errorLogLabel").text("identifiant ou mot de passe invalide");
+			 } else {
+
+			 }
+			 });*/
+		});
+
+		$("#buttonDisconnection").click(function() {
+			window.localStorage.removeItem("user");
+			window.localStorage.removeItem("pwd");
+			window.localStorage.removeItem("url");
+			$("#form-log").show();
+			$("#buttonDisconnection").hide();
+			$("#isLogged").text("login");
+
 		});
 	});
 }

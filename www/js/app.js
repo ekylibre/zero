@@ -111,14 +111,15 @@ function App() {
 	////////////////////////////////////////
 
 	function checkIdentity() {
-		var logged = true
-		return logged;
+		if (!window.localStorage.getItem("user")!=null)
+			$("errorLabel")
+		return (window.localStorage.getItem("user")!=null);
 	}
 
 
 	this.pushData = function() {
 		if (checkIdentity())
-			db.send(id,passwrd);
+			db.send();
 		else
 			console.log("utilisateur non identifié"); 
 	};

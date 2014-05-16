@@ -7,7 +7,7 @@ function Database() {
 	};
 
 	this.create = function() {
-		db = openDatabase("base_test9", "", "database", 65536);
+		db = openDatabase("base_test10", "", "database", 65536);
 		////////Migration
 		var M = new Migrator(db);
 		M.migration(1, function(t) {

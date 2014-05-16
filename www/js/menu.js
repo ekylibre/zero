@@ -6,27 +6,30 @@ function disconnection() {
 	window.localStorage.clear("user");
 	window.localStorage.clear("pwd");
 	window.localStorage.clear("url");
-	$("#isLogged").text("login");
+
+	$("#isLogged").html("<img src='img/login.png' alt='start' width='75px' height='25px'/>");
 	$("#buttonDisconnection").hide();
 	$("#form-log").show();
-	window.location("interventions");
+	window.location("#interventions");
 }
 
 function onDeviceReady() {
 	$(document).ready(function() {
-		document.addEventListener("deviceready", onDeviceReady, false);
+		
+		document.removeEventListener("deviceready", onDeviceReady, false);
 		//Initialisation de l'appli
 		var app = new App();
 		app.initialize();
+		
 		document.addEventListener("menubutton", onMenuKeyDown, false);
 		document.addEventListener("backbutton", onBackKeyDown, false);
 		document.addEventListener("endcallbutton", onEndCallKeyDown, false);
 
 		if (window.localStorage.getItem("user") != null) {
 			$("#form-log").hide();
-			$("#isLogged").html(window.localStorage.getItem("user") + "</br> logout");
+			$("#isLogged").html("<img src='img/logout.png' alt='start' width='75px' height='25px'/></br>");
 		} else {
-			$("#isLogged").html("</br> login");
+			$("#isLogged").html("<img src='img/login.png' alt='start' width='75px' height='25px'/>");
 			$("#buttonDisconnection").hide();
 		}
 
@@ -61,7 +64,6 @@ function onDeviceReady() {
 				app.endIntervention();
 			}
 		}
-
 
 		$("#isLogged").click(function() {
 			if (window.localStorage.getItem("user") != null) {
@@ -153,7 +155,7 @@ function onDeviceReady() {
 
 		$("#buttonSend").click(function() {
 			app.pushData();
-			
+
 		});
 
 		$("#buttonSubmit").click(function() {
@@ -168,7 +170,7 @@ function onDeviceReady() {
 				window.localStorage.setItem("url", $("#url").val());
 				$("#form-log").hide();
 				$("#buttonDisconnection").show();
-				$("#isLogged").html(user + "<br> logout");
+				$("#isLogged").html("<img src='img/logout.png' alt='start' width='75px' height='25px'/>");
 				$.mobile.changePage('#interventions', {
 					transition : "flip",
 					reverse : false,
@@ -187,14 +189,28 @@ function onDeviceReady() {
 			 });*/
 		});
 
+		$("#buttonMenu").click(function() {
+			$.mobile.changePage('#config', {
+				transition : "flip",
+				reverse : false,
+				changeHash : false
+			});
+		});
+
 		$("#buttonDisconnection").click(function() {
 			window.localStorage.removeItem("user");
 			window.localStorage.removeItem("pwd");
 			window.localStorage.removeItem("url");
 			$("#form-log").show();
 			$("#buttonDisconnection").hide();
-			$("#isLogged").text("login");
-
+			$("#isLogged").html("<img src='img/login.png' alt='start' width='75px' height='25px'/>");
+		});
+		$("#buttonBack").click(function() {
+			$.mobile.changePage('#interventions', {
+				transition : "flip",
+				reverse : false,
+				changeHash : false
+			});
 		});
 	});
 }

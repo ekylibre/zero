@@ -55,9 +55,9 @@
 			</div><!-- /header -->
 
 			<div data-role="content" data-theme="a">
-
-				<label id="isLogged"></label>
-
+				<div class="logButton">
+					<a id="isLogged"><img src="img/Play-icon.png" alt="start" width="75px" height="25px"/></a>
+				</div>
 				<div class= "buttons">
 
 					<div id="buttonStart">
@@ -77,10 +77,13 @@
 					<div id="buttonSend">
 						<a data-role="button"><img src="img/synchro.png" alt="start" width="50px" height="50px" /></a>
 					</div>
+					<div id="buttonMenu">
+						<a data-role="button"><img src="img/right.png" alt="start" width="50px" height="50px" /></a>
+					</div>
 				</div>
-				
+
 				<label id="errorLabel"></label>
-				
+
 				<div id="clock"></div>
 
 				<div id="buttonActiveOn">
@@ -114,21 +117,34 @@
 						<input type="text" name="url" id="url" value="" placeholder="url"/>
 						<label for="URL">login :</label>
 						<input type="text" name="user" id="user" value="" placeholder="user"/>
-						<label for="URL">mot de passe :</label>
+						<label for="URL">password :</label>
 						<input type="password" name="passwrd" id="pwd" value="" placeholder="mot de passe"/>
 						<label id="errorLogLabel"></label>
-						<div id="buttonSubmit" >
-							<a data-role="button"> Validate </a>
-						</div>
 					</form>
+					<!-- Buttons-->
+					<div id="buttonSubmit" >
+						<a data-role="button"> Validate </a>
+					</div>
+
 				</div>
-				<div id="buttonDisconnection" >
-					<a data-role="button">Disconnect</a>
+
+				<div class="logButton" id="buttonDisconnection" >
+					<a><img src="img/logout.png" alt="start" width="75px" height="25px"/></a>
 				</div>
+
+				<div class= "buttons">
+					<div id="buttonBack">
+						<a data-role="button"><img src="img/left.png" alt="start" width="50px" height="50px" /></a>
+					</div>
+
+				</div>
+
+				<label>
+					<input type="checkbox" name="checkVocal" />
+					saisir vocalement le nom de l'intervention </label>
+
 				<p>
-					<label>
-						<input type="checkbox" name="checkVocal" />
-						saisir vocalement le nom de l'intervention </label>
+
 				</p>
 			</div><!-- /content -->
 		</div><!-- /page config -->

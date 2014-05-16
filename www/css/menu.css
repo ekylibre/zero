@@ -33,7 +33,7 @@
 	padding-right: 10px;
 }
 
-#isLogged{
+.logButton{
 	text-align : right;
 	color : blue;
 }

@@ -61,7 +61,7 @@
 				<div class= "buttons">
 
 					<div id="buttonStart">
-						<a data-role="button"> <img src="img/Record-Normal-Red-icon.png" alt="start" width="50px" height="50px" /> </a>
+						<a data-role="button" href="#"> <img src="img/Record-Normal-Red-icon.png" alt="start" width="50px" height="50px" /> </a>
 					</div>
 					<div id="buttonPause">
 						<a data-role="button"><img src="img/Pause-Disabled-icon.png" alt="start" width="50px" height="50px" /></a>
@@ -136,17 +136,26 @@
 					<div id="buttonBack">
 						<a data-role="button"><img src="img/left.png" alt="start" width="50px" height="50px" /></a>
 					</div>
+				</div
 
+				<div data-role="fieldcontain">
+					<fieldset data-role="controlgroup" id="radio-Intervention">
+						<legend>
+							Intervention Name :
+						</legend>
+						<input type="radio" name="radio-choice-1" id="radio-Intervention-Vocale" value="Vocale"  />
+						<label for="radio-Intervention-Vocale">Vocale</label>
+
+						<input type="radio" name="radio-choice-1" id="radio-Intervention-Write" value="Write"  />
+						<label for="radio-Intervention-Write">Write</label>
+
+						<input type="radio" name="radio-choice-1" id="radio-Intervention-Auto" value="Auto"/>
+						<label for="radio-Intervention-Auto">Auto</label>
+					</fieldset>
 				</div>
 
-				<label>
-					<input type="checkbox" name="checkVocal" />
-					saisir vocalement le nom de l'intervention </label>
-
-				<p>
-
-				</p>
 			</div><!-- /content -->
+
 		</div><!-- /page config -->
 
 		<div data-role="page" id="close_error" data-theme="a">
@@ -159,6 +168,21 @@
 
 			</div><!-- /content -->
 		</div><!-- /page config -->
+		<div id ="nameChoice" data-role="dialog" data-theme="a">
+			<div data-role="header">
+				<h3>Intervention name</h3>
+				<div data-role="fieldcontain">
+
+					
+					<label for="name">Write the name of your intervention : </label>
+						<input type="text" name="url" id="interventionTextName" value="" placeholder="intervention name"/>
+					<div id="buttonNameSubmit" >
+						<a data-role="button"> Validate </a>
+					</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
 	</body>
 </html>

@@ -7,7 +7,7 @@ function Database() {
 	};
 
 	this.create = function() {
-		db = openDatabase("base_test10", "", "database", 65536);
+		db = openDatabase("base_test11", "", "database", 65536);
 		////////Migration
 		var M = new Migrator(db);
 		M.migration(1, function(t) {
@@ -67,7 +67,9 @@ function Database() {
 			});
 		}
 	};
-
+	
+//Ecrit le tableau des interventions
+//On prend les lignes 2 par 2 pour faire la difference des dates, afin d'obtenir la durée de l'intervention
 	this.writeInterventions = function() {
 		var query = "SELECT * from points where type in ('start', 'end')";
 		//Creation de la table POINTS
@@ -81,9 +83,17 @@ function Database() {
 					var row2 = rs.rows.item(i + 1);
 					date1 = new Date(row1.date);
 					date2 = new Date(row2.date);
+					
+					var name;
+					if (row1.name=="undefined"){
+						name="int n° "+num_int;
+					}
+					else{
+						name=row1.name;
+					}	
 					var duree = new Date(date2.getTime() - date1.getTime());
 					duree.setTime(duree.getTime() + (duree.getTimezoneOffset() * 1000 * 60));
-					$('#interventions_table').append("<tr><th>" + num_int + "</th><td>" + time_format(duree) + "</td><td>" + formattedDate(date1) + "</td></tr>");
+					$('#interventions_table').append("<tr><th>" + name + "</th><td>" + time_format(duree) + "</td><td>" + formattedDate(date1) + "</td></tr>");
 					if (row2.type == 'end') {
 						i += 2;
 					} else {

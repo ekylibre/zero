@@ -15,16 +15,18 @@ function disconnection() {
 
 function onDeviceReady() {
 	$(document).ready(function() {
-		
+
 		document.removeEventListener("deviceready", onDeviceReady, false);
 		//Initialisation de l'appli
 		var app = new App();
 		app.initialize();
-		
+
+		//////Evenement sur les boutons natifs
 		document.addEventListener("menubutton", onMenuKeyDown, false);
 		document.addEventListener("backbutton", onBackKeyDown, false);
 		document.addEventListener("endcallbutton", onEndCallKeyDown, false);
 
+		/////////Gestion de l'icone de log'
 		if (window.localStorage.getItem("user") != null) {
 			$("#form-log").hide();
 			$("#isLogged").html("<img src='img/logout.png' alt='start' width='75px' height='25px'/></br>");
@@ -33,6 +35,36 @@ function onDeviceReady() {
 			$("#buttonDisconnection").hide();
 		}
 
+		$("nameOption").controlgroup({
+			corners : false
+		});
+
+		////////gestion des Radio buttons
+
+		$("#radio-Intervention").find("input[type='radio']").bind("change", function() {
+			window.localStorage.setItem("saisie", this.value);
+		});
+
+		$("input[type='radio']").checkboxradio();
+		switch (window.localStorage.getItem("saisie")) {
+			case undefined :
+				$('#radio-Intervention-Auto').attr("checked", true).checkboxradio("refresh");
+				break;
+			case "Auto":
+				$("#radio-Intervention-Auto").attr("checked", true).checkboxradio("refresh");
+				break;
+			case "Vocale":
+				$('#radio-Intervention-Vocale').attr("checked", true).checkboxradio("refresh");
+				break;
+			case "Write":
+				$('#radio-Intervention-Write').attr("checked", true).checkboxradio("refresh");
+				break;
+			case "default":
+				$('#radio-Intervention-Auto').attr("checked", true).checkboxradio("refresh");
+				break;
+		}
+
+		//$("input[type='radio']").attr("checked", true).checkboxradio("refresh");
 		//Initialisation de l'horloge
 		function createClock(clock) {
 			$(clock).countdown({
@@ -65,6 +97,7 @@ function onDeviceReady() {
 			}
 		}
 
+
 		$("#isLogged").click(function() {
 			if (window.localStorage.getItem("user") != null) {
 				disconnection();
@@ -86,15 +119,41 @@ function onDeviceReady() {
 		$("#buttonActiveOn").hide();
 
 		$("#buttonStart").click(function() {
-			$('#clock').countdown('destroy');
-			createClock('#clock');
-			//affichage de boutons
-			$("#buttonFinish").show();
-			$("#buttonPause").show();
-			$("#buttonActiveOn").show();
-			$("#buttonActiveOff").hide();
-			app.startIntervention();
-			$('#clockActiveMode').countdown('destroy');
+			switch (window.localStorage.getItem("saisie")) {
+				case "Write" :
+					window.location.href = "#nameChoice";
+
+					break;
+				case "Auto" :
+					$('#clock').countdown('destroy');
+					createClock('#clock');
+					//affichage de boutons
+					$("#buttonFinish").show();
+					$("#buttonPause").show();
+					$("#buttonActiveOn").show();
+					$("#buttonActiveOff").hide();
+					app.startIntervention();
+					$('#clockActiveMode').countdown('destroy');
+					break;
+			}
+		});
+
+		$("#buttonNameSubmit").click(function() {
+			if ($("#interventionTextName").val().length < 3) {
+				alert("name length must be more than 3");
+			} else {
+				var int_name = $("#interventionTextName").val();
+				$('#clock').countdown('destroy');
+				createClock('#clock');
+				//affichage de boutons
+				$("#buttonFinish").show();
+				$("#buttonPause").show();
+				$("#buttonActiveOn").show();
+				$("#buttonActiveOff").hide();
+				app.startIntervention(int_name);
+				$('#clockActiveMode').countdown('destroy');
+				window.location.href = "#interventions";
+			}
 		});
 
 		$("#buttonFinish").click(function() {
@@ -168,6 +227,7 @@ function onDeviceReady() {
 				window.localStorage.setItem("user", $("#user").val());
 				window.localStorage.setItem("pwd", $("#pwd").val());
 				window.localStorage.setItem("url", $("#url").val());
+				
 				$("#form-log").hide();
 				$("#buttonDisconnection").show();
 				$("#isLogged").html("<img src='img/logout.png' alt='start' width='75px' height='25px'/>");
@@ -205,6 +265,7 @@ function onDeviceReady() {
 			$("#buttonDisconnection").hide();
 			$("#isLogged").html("<img src='img/login.png' alt='start' width='75px' height='25px'/>");
 		});
+		
 		$("#buttonBack").click(function() {
 			$.mobile.changePage('#interventions', {
 				transition : "flip",

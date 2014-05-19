@@ -6,6 +6,7 @@ function App() {
 	var geoloc_interval = null;
 	var active_mode;
 	var running;
+	var intervention_name;
 
 	var optionsLoc = {
 		enableHighAccuracy : true,
@@ -51,13 +52,14 @@ function App() {
 		getCurrentPosition(successLoc);
 	}
 
-	function createLocPoint(crd, typePoint) {
+	function createLocPoint(crd, typePoint, name) {
 		var point = {
 			latitude : crd.latitude,
 			longitude : crd.longitude,
 			accuracy : crd.accuracy, //accuracy in meters
 			date : new Date(),
-			type : typePoint
+			type : typePoint,
+			name : name
 		};
 		if (typePoint == 'end' || typePoint == 'start')
 			db.storePoint(point, db.writeInterventions);
@@ -73,7 +75,7 @@ function App() {
 	//////////////////////////////////////
 
 	function successLocStart(pos) {
-		createLocPoint(pos.coords, "start");
+		createLocPoint(pos.coords, "start", intervention_name);
 	}
 
 	function successLocResume(pos) {
@@ -111,9 +113,9 @@ function App() {
 	////////////////////////////////////////
 
 	function checkIdentity() {
-		if (!window.localStorage.getItem("user")!=null)
+		if (!window.localStorage.getItem("user") != null)
 			$("errorLabel")
-		return (window.localStorage.getItem("user")!=null);
+		return (window.localStorage.getItem("user") != null);
 	}
 
 
@@ -121,19 +123,17 @@ function App() {
 		if (checkIdentity())
 			db.send();
 		else
-			console.log("utilisateur non identifié"); 
+			console.log("utilisateur non identifié");
 	};
 
-			
-//Creation des points
-		//	url (String): URl de la pa ge à charger
-			//params (Map): (optionnel) paires de clé/valeur qui seront envoyées au serveur.
-			//callback (Fonction): (optionnel) fonction qui sera éxécutée dès que les données seront complètement chargées.
-
-
+	//Creation des points
+	//	url (String): URl de la pa ge à charger
+	//params (Map): (optionnel) paires de clé/valeur qui seront envoyées au serveur.
+	//callback (Fonction): (optionnel) fonction qui sera éxécutée dès que les données seront complètement chargées.
 
 	////////////////////////////////////////
-	this.startIntervention = function() {
+	this.startIntervention = function(name) {
+		intervention_name = name;
 		getCurrentPosition(successLocStart);
 		run();
 		running = true;

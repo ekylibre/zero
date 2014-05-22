@@ -67,9 +67,9 @@ function Database() {
 			});
 		}
 	};
-	
-//Ecrit le tableau des interventions
-//On prend les lignes 2 par 2 pour faire la difference des dates, afin d'obtenir la durée de l'intervention
+
+	//Ecrit le tableau des interventions
+	//On prend les lignes 2 par 2 pour faire la difference des dates, afin d'obtenir la durée de l'intervention
 	this.writeInterventions = function() {
 		var query = "SELECT * from points where type in ('start', 'end')";
 		//Creation de la table POINTS
@@ -83,14 +83,13 @@ function Database() {
 					var row2 = rs.rows.item(i + 1);
 					date1 = new Date(row1.date);
 					date2 = new Date(row2.date);
-					
+
 					var name;
-					if (row1.name=="undefined"){
-						name="int n° "+num_int;
+					if (row1.name == "undefined") {
+						name = "int n° " + num_int;
+					} else {
+						name = row1.name;
 					}
-					else{
-						name=row1.name;
-					}	
 					var duree = new Date(date2.getTime() - date1.getTime());
 					duree.setTime(duree.getTime() + (duree.getTimezoneOffset() * 1000 * 60));
 					$('#interventions_table').append("<tr><th>" + name + "</th><td>" + time_format(duree) + "</td><td>" + formattedDate(date1) + "</td></tr>");
@@ -132,14 +131,24 @@ function Database() {
 					};
 					points.push(point);
 				}
-				$.post("url", {
+				var obj = {
 					id : window.localStorage.getItem("user"),
 					passwrd : window.localStorage.getItem("pwd"),
 					points : this.points
-				}, function(data) {
-					alert("Data Loaded: " + data);
+				};
+				$.ajax({
+					type : "POST",
+					url : my_url,
+					data : obj,
+					dataType : "json",
+					success : function(data) {
+						console.log("send success");
+					},
+					error : function(data) {
+						console.log("send error");
+						console.log(data);
+					}
 				});
-
 			}, function(error) {// fonction d'erreur
 				console.log("Transaction Error: " + error.message);
 			});

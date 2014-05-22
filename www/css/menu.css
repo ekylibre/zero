@@ -33,12 +33,17 @@
 	padding-right: 10px;
 }
 
-.logButton{
-	text-align : right;
-	color : blue;
+.logButton {
+	text-align: right;
+	color: blue;
 }
 
-#errorLogLabel{
+#errorLogLabel {
+	color: red;
+}
+
+
+#errorLabel {
 	color: red;
 }
 
@@ -57,20 +62,14 @@ caption {
 	font-weight: bold
 }
 
-@media ( min-width: 40em ) {
+@media (min-width: 40em) {
 	/* Affiche la ligne entête de la table et définit toutes les cellules à display: table-cell */
-	.my-custom-breakpoint td,
-	.my-custom-breakpoint th,
-	.my-custom-breakpoint tbody th,
-	.my-custom-breakpoint tbody td,
-	.my-custom-breakpoint thead td,
-	.my-custom-breakpoint thead th {
+	.my-custom-breakpoint td, .my-custom-breakpoint th, .my-custom-breakpoint tbody th, .my-custom-breakpoint tbody td, .my-custom-breakpoint thead td, .my-custom-breakpoint thead th {
 		display: table-cell;
 		margin: 0;
 	}
 	/* Masque les labels dans chaque cellule */
-	.my-custom-breakpoint td .ui-table-cell-label,
-	.my-custom-breakpoint th .ui-table-cell-label {
+	.my-custom-breakpoint td .ui-table-cell-label, .my-custom-breakpoint th .ui-table-cell-label {
 		display: none;
 	}
 }

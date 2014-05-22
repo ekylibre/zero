@@ -112,18 +112,11 @@ function App() {
 
 	////////////////////////////////////////
 
-	function checkIdentity() {
-		if (!window.localStorage.getItem("user") != null)
-			$("errorLabel")
-		return (window.localStorage.getItem("user") != null);
-	}
-
-
 	this.pushData = function() {
-		if (checkIdentity())
-			db.send();
+		if (window.localStorage.getItem("user") != null)
+			db.send();	
 		else
-			console.log("utilisateur non identifié");
+			$("#errorLabel").text("utilisateur non identifié");
 	};
 
 	//Creation des points

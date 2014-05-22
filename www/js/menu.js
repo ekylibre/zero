@@ -221,32 +221,43 @@ function onDeviceReady() {
 			if ($("#user").val().length < 3 || $("#pwd").val().length < 3) {
 				$("#errorLogLabel").text("identifiant ou mot de passe invalide");
 			} else {
-				var user = $("#user").val();
-				var pwd = $("#pwd").val();
-				var url = $("#url").val();
-				window.localStorage.setItem("user", $("#user").val());
-				window.localStorage.setItem("pwd", $("#pwd").val());
-				window.localStorage.setItem("url", $("#url").val());
-				
-				$("#form-log").hide();
-				$("#buttonDisconnection").show();
-				$("#isLogged").html("<img src='img/logout.png' alt='start' width='75px' height='25px'/>");
-				$.mobile.changePage('#interventions', {
-					transition : "flip",
-					reverse : false,
-					changeHash : false
+				var my_user = $("#user").val();
+				var my_pwd = $("#pwd").val();
+				var my_url = $("#url").val();
+
+				var obj = {
+					"user" : my_user,
+					"pass" : my_pwd
+				};
+				console.log(my_url);
+				$.ajax(my_url,{
+					type : "POST",
+					data : obj,
+					dataType : "json",
+					success : function(data) {
+						window.localStorage.setItem("user", $("#user").val());
+						window.localStorage.setItem("pwd", $("#pwd").val());
+						window.localStorage.setItem("url", $("#url").val());
+						alert("success");
+						$("#form-log").hide();
+						$("#buttonDisconnection").show();
+						$("#isLogged").html("<img src='img/logout.png' alt='start' width='75px' height='25px'/>");
+						$.mobile.changePage('#interventions', {
+							transition : "flip",
+							reverse : false,
+							changeHash : false
+						});
+					},
+					error : function(data) {
+						console.log(data);
+						$("errorLogLabel").text("identifiant ou mot de passe invalide");
+					}
 				});
 			}
-			/*$.post(url, {
-			 "pseudo" : user,
-			 "pass" : pwd
-			 }, function(msg) {
-			 if (msg.indexOf("erreur") >= 0) {
-			 $("errorLogLabel").text("identifiant ou mot de passe invalide");
-			 } else {
+		});
 
-			 }
-			 });*/
+		$("#buttonSend").click(function() {
+			app.pushData();
 		});
 
 		$("#buttonMenu").click(function() {
@@ -265,12 +276,20 @@ function onDeviceReady() {
 			$("#buttonDisconnection").hide();
 			$("#isLogged").html("<img src='img/login.png' alt='start' width='75px' height='25px'/>");
 		});
-		
+
 		$("#buttonBack").click(function() {
 			$.mobile.changePage('#interventions', {
 				transition : "flip",
 				reverse : false,
 				changeHash : false
+			});
+		});
+
+		$("#buttonCode").click(function() {
+			cordova.plugins.barcodeScanner.scan(function(result) {
+				alert("We got a barcode\n" + "Result: " + result.text + "\n" + "Format: " + result.format + "\n" + "Cancelled: " + result.cancelled);
+			}, function(error) {
+				alert("Scanning failed: " + error);
 			});
 		});
 	});

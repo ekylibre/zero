@@ -20,6 +20,8 @@
 		<script type="text/javascript" src="js/countdown/jquery.plugin.js"></script>
 		<script type="text/javascript" src="js/countdown/jquery.countdown.js"></script>
 
+		<script src="cordova.js"></script>
+
 	</head>
 	<body onload="onLoad()">
 		<!-- Start of first page: #one -->
@@ -80,6 +82,9 @@
 					<div id="buttonMenu">
 						<a data-role="button"><img src="img/right.png" alt="start" width="50px" height="50px" /></a>
 					</div>
+					<div id="buttonCode">
+						<a data-role="button"><img src="img/QRCode" alt="start" width="50px" height="50px" /></a>
+					</div>
 				</div>
 
 				<label id="errorLabel"></label>
@@ -110,7 +115,11 @@
 			</div><!-- /header -->
 
 			<div data-role="content" data-theme="a">
-
+				<div class= "buttons">
+					<div id="buttonBack">
+						<a data-role="button"><img src="img/left.png" alt="start" width="50px" height="50px" /></a>
+					</div>
+				</div>
 				<div id="form-log" data-role="fieldcontain" class="ui-hide-label">
 					<form method="post" action="demoform.asp">
 						<label for="URL">URL :</label>
@@ -126,18 +135,10 @@
 						<a data-role="button"> Validate </a>
 					</div>
 
-				</div>
-
-				<div class="logButton" id="buttonDisconnection" >
-					<a><img src="img/logout.png" alt="start" width="75px" height="25px"/></a>
-				</div>
-
-				<div class= "buttons">
-					<div id="buttonBack">
-						<a data-role="button"><img src="img/left.png" alt="start" width="50px" height="50px" /></a>
+					<div class="logButton" id="buttonDisconnection" >
+						<a><img src="img/logout.png" alt="start" width="75px" height="25px"/></a>
 					</div>
-				</div
-
+				</div>
 				<div data-role="fieldcontain">
 					<fieldset data-role="controlgroup" id="radio-Intervention">
 						<legend>
@@ -173,15 +174,14 @@
 				<h3>Intervention name</h3>
 				<div data-role="fieldcontain">
 
-					
 					<label for="name">Write the name of your intervention : </label>
-						<input type="text" name="url" id="interventionTextName" value="" placeholder="intervention name"/>
+					<input type="text" name="url" id="interventionTextName" value="" placeholder="intervention name"/>
 					<div id="buttonNameSubmit" >
 						<a data-role="button"> Validate </a>
 					</div>
-					</div>
 				</div>
 			</div>
+		</div>
 		</div>
 
 	</body>

@@ -12,7 +12,7 @@
     </engines>    
 
     <js-module src="www/barcodescanner.js" name="BarcodeScanner">
-        <clobbers target="cordova.plugins.barcodeScanner" />
+        <clobbers target="com.phonegap.plugins.barcodescanner" />
     </js-module>
 
     <!-- ios -->

@@ -28,7 +28,7 @@ describe('cordova.require object should exist', function () {
 	});
 
 	it("BarcodeScanner plugin should exist", function() {
-        scanner = cordova.require("cordova/plugin/BarcodeScanner")
+        scanner = cordova.require("com.phonegap.plugins.barcodescanner.BarcodeScanner")
         expect(scanner).toBeDefined();
 		expect(typeof scanner == 'object').toBe(true);
 	});

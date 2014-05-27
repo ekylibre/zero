@@ -28,7 +28,6 @@
 /home/julien-leveau/rei/platforms/android/assets/www/config.xml \
 /home/julien-leveau/rei/platforms/android/assets/www/index.html \
 /home/julien-leveau/rei/platforms/android/assets/www/js/app.js \
-/home/julien-leveau/rei/platforms/android/assets/www/js/barcodescanner.js \
 /home/julien-leveau/rei/platforms/android/assets/www/js/database \
 /home/julien-leveau/rei/platforms/android/assets/www/js/countdown \
 /home/julien-leveau/rei/platforms/android/assets/www/js/menu.js \

@@ -230,7 +230,7 @@ function onDeviceReady() {
 					"pass" : my_pwd
 				};
 				console.log(my_url);
-				$.ajax(my_url,{
+				$.ajax(my_url, {
 					type : "POST",
 					data : obj,
 					dataType : "json",
@@ -287,8 +287,7 @@ function onDeviceReady() {
 
 		$("#buttonCode").click(function() {
 			alert("button pushed");
-			var scanner=cordova.require("com.phonegap.plugins.barcodescanner.BarcodeScanner");
-			scanner.scan(function(result) {
+			cordova.plugins.barcodeScanner.scan(function(result) {
 				alert("We got a barcode\n" + "Result: " + result.text + "\n" + "Format: " + result.format + "\n" + "Cancelled: " + result.cancelled);
 			}, function(error) {
 				alert("Scanning failed: " + error);

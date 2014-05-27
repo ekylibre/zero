@@ -28,7 +28,6 @@ function App() {
 	function run() {
 		if(navigator.geolocation)
 		{	
-			alert("launch ok");
 			if (geoloc_interval == null) {
 				geoloc_interval = setInterval(location, REFRESH_TIME);
 			}
@@ -58,7 +57,6 @@ function App() {
 	}
 
 	function createLocPoint(crd, typePoint, name) {
-		alert("success");
 		var point = {
 			latitude : crd.latitude,
 			longitude : crd.longitude,
@@ -81,7 +79,6 @@ function App() {
 	//////////////////////////////////////
 
 	function successLocStart(pos) {
-		alert("start");
 		createLocPoint(pos.coords, "start", intervention_name);
 	}
 

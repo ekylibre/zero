@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- config.xml reference: https://build.phonegap.com/docs/config-xml -->
-<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap = "http://phonegap.com/ns/1.0" id="org.ekylibre.rei" version="0.1.0">
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap = "http://phonegap.com/ns/1.0" id="org.ekylibre.rei" version="0.0.0">
 	<name>Rei</name>
 	<description>Mobile app for tracking intelligency</description>
 	<author href="http://www.ekylibre.org" email="contact@ekylibre.org">Ekylibre Team</author>
@@ -9,7 +9,7 @@
 	<access origin="*" />
 	<preference name="Fullscreen" value="true" />
 	<preference name="WebViewBounce" value="true" />
-	<preference name="phonegap-version" value="3.3.0" />
+	<preference name="phonegap-version" value="3.4.0" />
 
 	<!--
 	Enable individual API permissions here.

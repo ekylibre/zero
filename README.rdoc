@@ -1,3 +1,0 @@
-= Rei
-
-Mobile app for tracking intelligency for Ekylibre.

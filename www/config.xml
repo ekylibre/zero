@@ -1,35 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!-- config.xml reference: https://build.phonegap.com/docs/config-xml -->
 <widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap = "http://phonegap.com/ns/1.0" id="org.ekylibre.rei" version="0.0.0">
-	<name>Rei</name>
-	<description>Mobile app for tracking intelligency</description>
-	<author href="http://www.ekylibre.org" email="contact@ekylibre.org">Ekylibre Team</author>
+	<name>
+		Rei
+	</name>
+	<description>
+		Mobile app for tracking intelligency
+	</description>
+	<author href="http://www.ekylibre.org" email="contact@ekylibre.org">
+		Ekylibre Team
+	</author>
 	<content src="index.html" />
 	<access origin="*" />
 	<preference name="Fullscreen" value="true" />
 	<preference name="WebViewBounce" value="true" />
 	<preference name="phonegap-version" value="3.4.0" />
-
+	<access origin="http://127.0.0.1*"/>
+	<!-- allow local pages -->
+	<access origin="localhost:3000/api/v1/crumbs" />
+	<access origin="localhost:3000/api/v1/crumbs" subdomains="true" />
+	<access origin=".*"/>
 	<!--
 	Enable individual API permissions here.
 	The "device" permission is required for the 'deviceready' event.
 	-->
-	
-	<!-- Plugins -->  
+	<!-- Plugins -->
 	<gap:plugin name="com.phonegap.plugins.barcodescanner" />
-	
-	
 	<feature name="http://api.phonegap.com/1.0/device" />
 	<feature name="http://api.phonegap.com/1.0/geolocation"/>
-
 	<!--
 	If you do not want any permissions to be added to your app, add the
 	following tag to your config.xml; you will still have the INTERNET
 	permission on your app, which PhoneGap requires.
 	-->
 	<preference name="permissions"              value="none"/>
-
 	<!-- Customize your app and platform with the preference element. -->
 	<!-- <preference name="phonegap-version"      value="3.4.0" /> -->      <!-- all: current version of PhoneGap -->
 	<preference name="orientation"                value="portrait" />
@@ -60,13 +64,11 @@
 	<!-- android: MIN SDK version supported on the target device. MAX version is blank by default. -->
 	<preference name="android-installLocation"    value="auto" />
 	<!-- android: app install location. 'auto' will choose. 'internalOnly' is device memory. 'preferExternal' is SDCard. -->
-
 	<!-- Plugins can also be added here. -->
 	<!--
 	<gap:plugin name="Example" />
 	A list of available plugins are available at https://build.phonegap.com/docs/plugins
 	-->
-
 	<!-- Define app icon for each platform. -->
 	<icon src="res/icon/android/icon-36-ldpi.png"   gap:platform="android"    gap:density="ldpi" />
 	<icon src="res/icon/android/icon-48-mdpi.png"   gap:platform="android"    gap:density="mdpi" />
@@ -82,7 +84,6 @@
 	<icon src="res/icon/webos/icon-64.png"          gap:platform="webos" />
 	<icon src="res/icon/windows-phone/icon-48.png"  gap:platform="winphone" />
 	<icon src="res/icon/windows-phone/icon-173.png" gap:platform="winphone"   gap:role="background" />
-
 	<!-- Define app splash screen for each platform. -->
 	<gap:splash src="res/screen/android/screen-ldpi-portrait.png"  gap:platform="android" gap:density="ldpi" />
 	<gap:splash src="res/screen/android/screen-mdpi-portrait.png"  gap:platform="android" gap:density="mdpi" />
@@ -94,5 +95,4 @@
 	<gap:splash src="res/screen/ios/screen-ipad-portrait.png"      gap:platform="ios"     width="768" height="1024" />
 	<gap:splash src="res/screen/ios/screen-ipad-landscape.png"     gap:platform="ios"     width="1024" height="768" />
 	<gap:splash src="res/screen/windows-phone/screen-portrait.jpg" gap:platform="winphone" />
-
 </widget>

@@ -52,9 +52,6 @@ function onDeviceReady() {
 			case "Auto":
 				$("#radio-Intervention-Auto").attr("checked", true).checkboxradio("refresh");
 				break;
-			case "Vocale":
-				$('#radio-Intervention-Vocale').attr("checked", true).checkboxradio("refresh");
-				break;
 			case "Write":
 				$('#radio-Intervention-Write').attr("checked", true).checkboxradio("refresh");
 				break;
@@ -121,9 +118,19 @@ function onDeviceReady() {
 			switch (window.localStorage.getItem("saisie")) {
 				case "Write" :
 					window.location.href = "#nameChoice";
-
 					break;
 				case "Auto" :
+					$('#clock').countdown('destroy');
+					createClock('#clock');
+					//affichage de boutons
+					$("#buttonFinish").show();
+					$("#buttonPause").show();
+					$("#buttonActiveOn").show();
+					$("#buttonActiveOff").hide();
+					app.startIntervention();
+					$('#clockActiveMode').countdown('destroy');
+					break;
+				default :
 					$('#clock').countdown('destroy');
 					createClock('#clock');
 					//affichage de boutons

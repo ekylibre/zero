@@ -24,6 +24,8 @@ function onDeviceReady() {
 		document.addEventListener("menubutton", onMenuKeyDown, false);
 		document.addEventListener("backbutton", onBackKeyDown, false);
 		document.addEventListener("endcallbutton", onEndCallKeyDown, false);
+		
+		
 
 		/////////Gestion de l'icone de log'
 		if (window.localStorage.getItem("user") != null) {
@@ -137,7 +139,7 @@ function onDeviceReady() {
 			}
 		});
 
-		$("#buttonNameSubmit").click(function() {
+		$("#buttonInterventionNameSubmit").click(function() {
 			if ($("#interventionTextName").val().length < 3) {
 				alert("name length must be more than 3");
 			} else {
@@ -152,7 +154,6 @@ function onDeviceReady() {
 				app.startIntervention(int_name);
 				$('#clockActiveMode').countdown('destroy');
 				window.location.href = "#interventions";
-				alert("val");
 			}
 		});
 
@@ -216,10 +217,15 @@ function onDeviceReady() {
 			app.pushData();
 		});
 
-		$("#buttonSubmit").click(function() {
+
+		$("#user").val()="localhost";
+		
+		$("#buttonSubmitLogin").click(function() {
 			if ($("#user").val().length < 3 || $("#pwd").val().length < 3) {
 				$("#errorLogLabel").text("identifiant ou mot de passe invalide");
 			} else {
+				if ($("#url").val()=="localhost")
+					$("#url").val()="localhost:3000/api/v1/crumbs";
 				var my_user = $("#user").val();
 				var my_pwd = $("#pwd").val();
 				var my_url = $("#url").val();
@@ -228,7 +234,6 @@ function onDeviceReady() {
 					"user" : my_user,
 					"pass" : my_pwd
 				};
-				console.log(my_url);
 				$.ajax(my_url, {
 					type : "POST",
 					data : obj,
@@ -237,7 +242,7 @@ function onDeviceReady() {
 						window.localStorage.setItem("user", $("#user").val());
 						window.localStorage.setItem("pwd", $("#pwd").val());
 						window.localStorage.setItem("url", $("#url").val());
-						alert("success");
+						alert("connection ok");
 						$("#form-log").hide();
 						$("#buttonDisconnection").show();
 						$("#isLogged").html("<img src='img/logout.png' alt='start' width='75px' height='25px'/>");

@@ -24,8 +24,6 @@ function onDeviceReady() {
 		document.addEventListener("menubutton", onMenuKeyDown, false);
 		document.addEventListener("backbutton", onBackKeyDown, false);
 		document.addEventListener("endcallbutton", onEndCallKeyDown, false);
-		
-		
 
 		/////////Gestion de l'icone de log'
 		if (window.localStorage.getItem("user") != null) {
@@ -216,44 +214,35 @@ function onDeviceReady() {
 		$("#buttonSend").click(function() {
 			app.pushData();
 		});
-		
+
 		$("#buttonSubmitLogin").click(function() {
 			if ($("#user").val().length < 3 || $("#pwd").val().length < 3) {
 				$("#errorLogLabel").text("identifiant ou mot de passe invalide");
 			} else {
-				alert("validate pushed");
-				if ($("#url").val()=="local")
-					$("#url").val()="localhost:3000/api/v1/crumbs";
-				var my_user = $("#user").val();
-				var my_pwd = $("#pwd").val();
+				if ($("#url").val() == "local")
+					$("#url").val() = "localhost:3000/api/v1/crumbs";
 				var my_url = $("#url").val();
-
-				var obj = {
-					"user" : my_user,
-					"pass" : my_pwd
-				};
-				$.ajax(my_url, {
-					type : "POST",
-					data : obj,
-					dataType : "json",
-					success : function(data) {
-						window.localStorage.setItem("user", $("#user").val());
-						window.localStorage.setItem("pwd", $("#pwd").val());
-						window.localStorage.setItem("url", $("#url").val());
-						alert("connection ok");
-						$("#form-log").hide();
-						$("#buttonDisconnection").show();
-						$("#isLogged").html("<img src='img/logout.png' alt='start' width='75px' height='25px'/>");
-						$.mobile.changePage('#interventions', {
-							transition : "flip",
-							reverse : false,
-							changeHash : false
-						});
-					},
-					error : function(data) {
-						alert(data);
+				$.post(my_url, ( {
+				user : $("#user").val(),
+				pass : $($("#pwd").val()
+			}), function(data) {
+				alert(data);
+				if (data != "") {
+					window.localStorage.setItem("user", $("#user").val());
+					window.localStorage.setItem("pwd", $("#pwd").val());
+					window.localStorage.setItem("url", $("#url").val());
+					alert("connection ok");
+					$("#form-log").hide();
+					$("#buttonDisconnection").show();
+					$("#isLogged").html("<img src='img/logout.png' alt='start' width='75px' height='25px'/>");
+					$.mobile.changePage('#interventions', {
+					transition : "flip",
+					reverse : false,
+					changeHash : false
+					} else {
 						$("errorLogLabel").text("identifiant ou mot de passe invalide");
 					}
+				}, 'json');
 				});
 			}
 		});

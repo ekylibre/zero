@@ -229,7 +229,7 @@ function onDeviceReady() {
 					pass : $("#pwd").val()
 				}
 				), function(data) {
-					alert(data);
+					alert("connect");
 					if (data != "") {
 						window.localStorage.setItem("user", $("#user").val());
 						window.localStorage.setItem("pwd", $("#pwd").val());

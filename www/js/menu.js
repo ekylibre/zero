@@ -221,6 +221,7 @@ function onDeviceReady() {
 			if ($("#user").val().length < 3 || $("#pwd").val().length < 3) {
 				$("#errorLogLabel").text("identifiant ou mot de passe invalide");
 			} else {
+				alert("validate pushed");
 				if ($("#url").val()=="local")
 					$("#url").val()="localhost:3000/api/v1/crumbs";
 				var my_user = $("#user").val();

@@ -1,4 +1,7 @@
+var scanner;
+
 function onLoad() {
+	scanner = cordova.require("cordova/plugin/BarcodeScanner");
 	document.addEventListener("deviceready", onDeviceReady, false);
 }
 
@@ -286,7 +289,7 @@ function onDeviceReady() {
 
 		$("#buttonCode").click(function() {
 			//alert('scanning');
-			var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+
 			scanner.scan(function(result) {
 				alert("in");
 				alert("We got a barcode\n" + "Result: " + result.text + "\n" + "Format: " + result.format + "\n" + "Cancelled: " + result.cancelled);

@@ -285,7 +285,7 @@ function onDeviceReady() {
 		});
 
 		$("#buttonCode").click(function() {
-			console.log('scanning');
+			alert('scanning');
 			var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 			scanner.scan(function(result) {
 				alert("in");

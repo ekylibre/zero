@@ -152,6 +152,7 @@ function onDeviceReady() {
 				app.startIntervention(int_name);
 				$('#clockActiveMode').countdown('destroy');
 				window.location.href = "#interventions";
+				alert("val");
 			}
 		});
 

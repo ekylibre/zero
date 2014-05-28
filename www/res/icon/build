@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Depends-on: icoutils inkscape
 
-for size in 36 48 50 57 62 64 72 80 96 114 128 144 173
+for size in 36 48 50 57 64 72 80 96 114 128 144 173
 do
     inkscape -z --export-background=FFFFFF --export-png=icon-${size}px.png --export-width=${size} --export-height=${size} icon.svg
 done
@@ -37,8 +37,7 @@ cp icon-64px.png  webos/icon-64.png
 
 # Windows Phone
 cp icon-48px.png  windows-phone/icon-48.png
-cp icon-62px.png  windows-phone/icon-62-tile.png
-cp icon-173px.png windows-phone/icon-173-tile.png
+cp icon-173px.png windows-phone/icon-173.png
 
 # Removes useless files
 rm -f icon-*px.png

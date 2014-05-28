@@ -216,15 +216,12 @@ function onDeviceReady() {
 		$("#buttonSend").click(function() {
 			app.pushData();
 		});
-
-
-		$("#user").val()="localhost";
 		
 		$("#buttonSubmitLogin").click(function() {
 			if ($("#user").val().length < 3 || $("#pwd").val().length < 3) {
 				$("#errorLogLabel").text("identifiant ou mot de passe invalide");
 			} else {
-				if ($("#url").val()=="localhost")
+				if ($("#url").val()=="local")
 					$("#url").val()="localhost:3000/api/v1/crumbs";
 				var my_user = $("#user").val();
 				var my_pwd = $("#pwd").val();
@@ -253,7 +250,7 @@ function onDeviceReady() {
 						});
 					},
 					error : function(data) {
-						console.log(data);
+						alert(data);
 						$("errorLogLabel").text("identifiant ou mot de passe invalide");
 					}
 				});

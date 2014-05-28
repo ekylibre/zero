@@ -216,34 +216,38 @@ function onDeviceReady() {
 		});
 
 		$("#buttonSubmitLogin").click(function() {
-			if ($("#user").val().length < 3 || $("#pwd").val().length < 3) {
+			if ($("#user").val().length < 3 || $("#pwd").val().length < 3)
 				$("#errorLogLabel").text("identifiant ou mot de passe invalide");
-			} else {
+			else {
 				if ($("#url").val() == "local")
 					$("#url").val() = "localhost:3000/api/v1/crumbs";
+
 				var my_url = $("#url").val();
+
 				$.post(my_url, ( {
-				user : $("#user").val(),
-				pass : $($("#pwd").val()
-			}), function(data) {
-				alert(data);
-				if (data != "") {
-					window.localStorage.setItem("user", $("#user").val());
-					window.localStorage.setItem("pwd", $("#pwd").val());
-					window.localStorage.setItem("url", $("#url").val());
-					alert("connection ok");
-					$("#form-log").hide();
-					$("#buttonDisconnection").show();
-					$("#isLogged").html("<img src='img/logout.png' alt='start' width='75px' height='25px'/>");
-					$.mobile.changePage('#interventions', {
-					transition : "flip",
-					reverse : false,
-					changeHash : false
+					user : $("#user").val(),
+					pass : $("#pwd").val()
+				}
+				), function(data) {
+					alert(data);
+					if (data != "") {
+						window.localStorage.setItem("user", $("#user").val());
+						window.localStorage.setItem("pwd", $("#pwd").val());
+						window.localStorage.setItem("url", $("#url").val());
+						alert("connection ok");
+						$("#form-log").hide();
+						$("#buttonDisconnection").show();
+						$("#isLogged").html("<img src='img/logout.png' alt='start' width='75px' height='25px'/>");
+						$.mobile.changePage('#interventions', {
+							transition : "flip",
+							reverse : false,
+							changeHash : false
+						});
 					} else {
 						$("errorLogLabel").text("identifiant ou mot de passe invalide");
+						alert("could not connect");
 					}
 				}, 'json');
-				});
 			}
 		});
 

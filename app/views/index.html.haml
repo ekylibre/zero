@@ -1,0 +1,105 @@
+!!!
+%html
+  %head
+    %meta{charset: "utf-8"}
+    %meta{content: "width=device-width, initial-scale=1", name: "viewport"}
+    %title Rei
+    %link{href: "application.css", rel: "stylesheet", type: "text/css"}
+    %script{src: "phonegap.js", type: "text/javascript"}
+    %script{src: "barcodescanner.js", type: "text/javascript"}
+    %script{src: "application.js", type: "text/javascript"}
+  %body
+    / Start of first page: #one
+    #home{"data-role" => "page"}
+      %div{"data-role" => "header"}
+        %h1 Connexion
+      .ui-content{"data-role" => "content"}
+        %img.wide-image{alt: "start", src: "ekylibre.png"}/
+        %label#login-errors
+        %form#login-form
+          %div{"data-field" => "instance"}
+            %label{for: "instance"} Instance :
+            %input{name: "instance", placeholder: "mon-exploitation.ergolis.com", type: "text"}/
+          %div{"data-field" => "email"}
+            %label{for: "email"} Adresse e-mail :
+            %input{name: "email", placeholder: "pierre.dupond@mail.tld", type: "email"}/
+          %div{"data-field" => "password"}
+            %label{for: "password"} Mot de passe :
+            %input{name: "password", type: "password"}/
+          %a.ui-btn-center{"data-role" => "button", "data-transition" => "slide-down", href: "#interventions"}
+            %span.fa.fa-sign-in.fa-2x
+
+    / Start of second page: #two
+    #interventions{"data-role" => "page", "data-theme" => "a"}
+      %div{"data-role" => "header"}
+        %h1 Interventions
+        %a#options-edit.ui-btn-right.ui-btn.ui-btn-inline.ui-mini.ui-corner-all.ui-btn-icon-right{href: "#"}
+          %span.fa.fa-wrench
+      / /header
+      .ui-content{"data-role" => "content", "data-theme" => "a"}
+        %label#error-label
+        %table#interventions-list
+        #clock
+        #active-work-clock
+        #tracking-actions{"data-role" => "controlgroup", "data-type" => "horizontal"}
+          %a#intervention-start{"data-role" => "button", href: "#"}
+            %span.fa.fa-plus.fa-2x
+          %a#intervention-pause{"data-role" => "button", href: "#"}
+            %span.fa.fa-pause.fa-2x
+          %a#intervention-resume{"data-role" => "button", href: "#"}
+            %span.fa.fa-play.fa-2x
+          %a#intervention-stop{"data-role" => "button", href: "#"}
+            %span.fa.fa-stop.fa-2x
+        #intervention-actions{"data-role" => "controlgroup", "data-type" => "horizontal"}
+          %a#active-work{"data-role" => "button", href: "#"}
+            %span.fa.fa-cogs.fa-2x
+          %a#barcode-scan{"data-role" => "button", href: "#"}
+            %span.fa.fa-barcode.fa-2x
+
+
+    #config{"data-role" => "page", "data-theme" => "a"}
+      %div{"data-role" => "header"}
+        %h1 Configuration
+      / /header
+      %div{"data-role" => "content", "data-theme" => "a"}
+        .buttons
+          #buttonBack
+            %a{"data-role" => "button"}
+              %span.fa.fa-arrow-left.fa-2x
+        #form-log.ui-hide-label{"data-role" => "fieldcontain"}
+          %form{action: "demoform.asp", method: "post"}
+            %label{for: "URL"} URL :
+            %input#url{name: "url", placeholder: "url", type: "text", value: ""}/
+            %label{for: "URL"} login :
+            %input#user{name: "user", placeholder: "user", type: "text", value: ""}/
+            %label{for: "URL"} password :
+            %input#pwd{name: "passwrd", placeholder: "mot de passe", type: "password", value: ""}/
+            %label#login-errors
+          / Buttons
+          #buttonSubmitLogin
+            %a{"data-role" => "button"} Validate
+          #buttonDisconnection.logButton
+            %a
+              %span.fa.fa-sign-out.fa-2x
+        %div{"data-role" => "fieldcontain"}
+          %fieldset#radio-Intervention{"data-role" => "controlgroup"}
+            %legend
+              Intervention Name :
+            %input#radio-Intervention-Write{name: "radio-choice-1", type: "radio", value: "Write"}/
+            %label{for: "radio-Intervention-Write"} Write
+            %input#radio-Intervention-Auto{name: "radio-choice-1", type: "radio", value: "Auto"}/
+            %label{for: "radio-Intervention-Auto"} Auto
+
+    #close-error{"data-role" => "page", "data-theme" => "a"}
+      %div{"data-role" => "header"}
+        %h1 Close error
+      %div{"data-role" => "content", "data-theme" => "a"}
+
+    #name-choice{"data-role" => "dialog", "data-theme" => "a"}
+      %div{"data-role" => "header"}
+        %h3 Intervention name
+        %div{"data-role" => "fieldcontain"}
+          %label{for: "name"} Write the name of your intervention :
+          %input#interventionTextName{name: "url", placeholder: "intervention name", type: "text", value: ""}/
+          #buttonInterventionNameSubmit
+            %a{"data-role" => "button"} Validate

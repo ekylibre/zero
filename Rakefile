@@ -13,7 +13,7 @@ OUTPUT_DIR = ROOT.join("www")
 SOURCE_DIR = ROOT.join("app", "assets")
 
 desc "Compile assets and html"
-task :compile do
+task :compile_assets do
   config = {
     "files" => ["application.js", "application.css"],
     "js_compressor" => :uglify,
@@ -46,14 +46,10 @@ task :compile do
 
   manifest = Sprockets::Manifest.new(environment, OUTPUT_DIR)
 
-  puts manifest.files.inspect
-
-
   paths = environment.each_logical_path(config["files"]).to_a +
     config["files"].flatten.select { |fn| Pathname.new(fn).absolute? if fn.is_a?(String)}
   
   paths.each do |path|
-    puts path.inspect
     if asset = environment.find_asset(path)
       manifest.files[asset.digest_path] = {
         'logical_path' => asset.logical_path,
@@ -78,9 +74,32 @@ task :compile do
   end
 
   # manifest.compile(config["files"])
-
-  # comp = Sprockets::StaticCompiler.new environment, OUTPUT_DIR, [/\.(png|jpg)$/, /^(application|ie)\.(css|js)$/], {:digest => false, :zip_files => false, :manifest => false }
-  # comp.compile
-  
-  
 end
+
+desc "Compile views as HTML (only for now)"
+task :compile_views do
+  # -r #{ROOT}/app/helpers/helpers.rb
+  # `haml #{ROOT}/app/views/index.html.haml #{ROOT}/www/index.html`
+  unless file = Dir.glob(ROOT.join("app", "views", "index.html.*")).delete_if{|f| f =~ /~$/}.first
+    puts "Need views"
+    exit 1
+  end
+  template = Tilt.new(file)
+  File.write(ROOT.join('www', 'index.html'), template.render)
+end
+
+desc "Compile all"
+task :compile => [:compile_assets, :compile_views]
+
+
+desc "Compile all and build android app"
+task :build => :compile do
+  `phonegap build android`
+end
+
+desc "Compile all, build and install android app"
+task :install => :build do
+  `adb install -r platforms/android/ant-build/Rei-debug.apk`
+end
+
+task default: :install

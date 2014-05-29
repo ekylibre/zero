@@ -4,6 +4,7 @@ require 'pathname'
 require 'logger'
 require 'fileutils'
 require 'yaml'
+require 'active_support/core_ext'
 
 Bundler.require
 
@@ -83,6 +84,13 @@ task :compile_views do
   unless file = Dir.glob(ROOT.join("app", "views", "index.html.*")).delete_if{|f| f =~ /~$/}.first
     puts "Need views"
     exit 1
+  end
+  helpers_dir = ROOT.join("app", "helpers")
+  Dir.chdir helpers_dir do
+    for helper in Dir["*.rb"]
+      require helpers_dir.join(helper)
+      Object.send(:include, helper[0..-4].camelize.constantize)
+    end
   end
   template = Tilt.new(file)
   File.write(ROOT.join('www', 'index.html'), template.render)

@@ -1,221 +1,218 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Rei</title>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Rei</title>
 
-		<link rel="stylesheet" type="text/css" href="css/jquery-mobile/jquery.mobile-1.4.2.min.css">
-		<link rel="stylesheet" type="text/css" href="css/jquery.countdown.css">
-		<link rel="stylesheet" type="text/css" href="css/font-awesome.css">
-		<link rel="stylesheet" type="text/css" href="css/font-open_sans.css">
-		<link rel="stylesheet" type="text/css" href="css/menu.css">
+    <link rel="stylesheet" type="text/css" href="application.css">
 
-		<script type="text/javascript" src="phonegap.js"></script>
-		<script type="text/javascript" src="cordova.js"></script>
-		<script type="text/javascript" src="barcodescanner.js"></script>
+    <script type="text/javascript" src="phonegap.js"></script>
+    <!-- <script type="text/javascript" src="cordova.js"></script> -->
+    <script type="text/javascript" src="barcodescanner.js"></script>
 
-		<script type="text/javascript" src="js/jquery/jquery-2.1.1.min.js"></script>
-		<script type="text/javascript" src="js/jquery-mobile/jquery.mobile-1.4.2.js"></script>
-		<script type="text/javascript" src="js/countdown/jquery.plugin.js"></script>
-		<script type="text/javascript" src="js/countdown/jquery.countdown.js"></script>
-		<!-- <script src="http://debug.phonegap.com/target/target-script-min.js#Ours"></script> -->
-
-		<script type="text/javascript" src="js/menu.js"></script>
-		<script type="text/javascript" src="js/app.js"></script>
-		<script type="text/javascript" src="js/database/database.js"></script>
-		<script type="text/javascript" src="js/database/migrator.js"></script>
-
-
-	</head>
-	<body onload="initApp()">
-		<!-- Start of first page: #one -->
-
-		<div data-role="page" id="home">
-
-			<div data-role="header">
-				<h1>Connexion</h1>
-			</div><!-- /header -->
-
-			<div data-role="content" class="ui-content">
-				<img src="img/ekylibre.png" alt="start" class="wide-image" />
-
-				<label id="login-errors"></label>
-					
-				<form id="login-form">
-					<div data-field="instance">
-						<label for="instance">Instance&nbsp;:</label>
-						<input type="text" name="instance" placeholder="mon-exploitation.ergolis.com"/>
-					</div>
-					<div data-field="email">
-						<label for="email">Adresse e-mail&nbsp;:</label>
-						<input type="email" name="email" placeholder="pierre.dupond@mail.tld"/>
-					</div>
-					<div data-field="password">
-						<label for="password">Mot de passe&nbsp;:</label>
-						<input type="password" name="password"/>
-					</div>
-
-					<a href="#interventions" data-role="button" data-transition="slide-down" class="ui-btn-center"><span class="fa fa-sign-in fa-2x"></span></a>
-				</form>
-
-			</div><!-- /content -->
-
-		</div><!-- /page home -->
-
-		<!-- -->
-		<!-- -->
-		<!-- -->
-		<!-- -->
-
-		<!-- Start of second page: #two -->
-		<div data-role="page" id="interventions" data-theme="a">
-
-			<div data-role="header">
-				<h1>Interventions</h1>
-				<a id="options-edit" href="#" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right"><span class="fa fa-wrench"></span></a>
-			</div><!-- /header -->
-
-			<div data-role="content" class="ui-content" data-theme="a">
-
-				<label id="error-label"></label>
-				<table id="interventions-list" ></table>
-				<div id="clock"></div>
-				<div id="active-work-clock" ></div>
-
-				<div id="tracking-actions" data-role="controlgroup" data-type="horizontal">
-					<a id="intervention-start"  data-role="button" href="#"><span class="fa fa-plus fa-2x"></span></a>
-					<a id="intervention-pause"  data-role="button" href="#"><span class="fa fa-pause fa-2x"></span></a>
-					<a id="intervention-resume" data-role="button" href="#"><span class="fa fa-play fa-2x"></span></a>
-					<a id="intervention-stop"   data-role="button" href="#"><span class="fa fa-stop fa-2x"></span></a>
-				</div>
-				<div id="intervention-actions" data-role="controlgroup" data-type="horizontal">
-					<a id="active-work"  data-role="button" href="#"><span class="fa fa-cogs fa-2x"></span></a>
-					<a id="barcode-scan" data-role="button" href="#"><span class="fa fa-barcode fa-2x"></span></a>
-				</div>
+    <script type="text/javascript" src="application.js"></script>
 <!--
-				<div class="logButton">
-					<a id="authenticator"><img src="img/Play-icon.png" alt="start" width="75px" height="25px"/></a>
-				</div>
-				<div class="buttons">
-					<div id="intervention-start">
-						<a data-role="button" href="#"> <img src="img/Record-Normal-Red-icon.png" alt="start" width="50px" height="50px" /> </a>
-					</div>
-					<div id="intervention-pause">
-						<a data-role="button"><img src="img/Pause-Disabled-icon.png" alt="start" width="50px" height="50px" /></a>
-					</div>
-
-					<div id="intervention-resume">
-						<a data-role="button"><img src="img/Play-icon.png" alt="start" width="50px" height="50px" /></a>
-					</div>
-
-					<div id="intervention-stop">
-						<a data-role="button"><img src="img/Stop-icon.png" alt="start" width="50px" height="50px" /></a>
-					</div>
-					<div id="crumbs-sync">
-						<a data-role="button"><img src="img/synchro.png" alt="start" width="50px" height="50px" /></a>
-					</div>
-					<div id="options-edit">
-						<a data-role="button"><img src="img/right.png" alt="start" width="50px" height="50px" /></a>
-					</div>
-					<div id="barcode-scan">
-						<a data-role="button"><img src="img/QRCode" alt="start" width="50px" height="50px" /></a>
-					</div>
-				</div>
+    <script type="text/javascript" src="js/lib/jquery.js"></script>
+    <script type="text/javascript" src="js/lib/jquery.mobile.js"></script>
+    <script type="text/javascript" src="js/lib/jquery.plugin.js"></script>
+    <script type="text/javascript" src="js/lib/jquery.countdown.js"></script>
+    <script type="text/javascript" src="js/menu.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/database.js"></script>
+    <script type="text/javascript" src="js/migrator.js"></script>
 -->
-<!--
-				<div id="buttonActiveOn">
-					<a><img src="img/settings.png" alt="start" width="50px" height="50px"/>ON</a>
-				</div>
-				<div id="buttonActiveOff">
-					<a><img src="img/settings.png" alt="start" width="50px" height="50px"/>OFF</a>
-				</div>
--->
+<!-- <script src="http://debug.phonegap.com/target/target-script-min.js#Ours"></script> -->
 
-			</div>
-		</div><!-- /page interventions -->
+  </head>
+  <body>
+    <!-- Start of first page: #one -->
 
-		<!-- -->
-		<!-- -->
-		<!-- -->
-		<!-- -->
+    <div data-role="page" id="home">
 
-		<div data-role="page" id="config" data-theme="a">
+      <div data-role="header">
+	<h1>Connexion</h1>
+      </div><!-- /header -->
 
-			<div data-role="header">
-				<h1>Configuration</h1>
-			</div><!-- /header -->
+      <div data-role="content" class="ui-content">
+	<img src="ekylibre.png" alt="start" class="wide-image" />
 
-			<div data-role="content" data-theme="a">
-				<div class= "buttons">
-					<div id="buttonBack">
-						<a data-role="button"><img src="img/left.png" alt="start" width="50px" height="50px" /></a>
-					</div>
-				</div>
-				<div id="form-log" data-role="fieldcontain" class="ui-hide-label">
-					<form method="post" action="demoform.asp">
-						<label for="URL">URL :</label>
-						<input type="text" name="url" id="url" value="" placeholder="url"/>
-						<label for="URL">login :</label>
-						<input type="text" name="user" id="user" value="" placeholder="user"/>
-						<label for="URL">password :</label>
-						<input type="password" name="passwrd" id="pwd" value="" placeholder="mot de passe"/>
-						<label id="login-errors"></label>
-					</form>
-					<!-- Buttons-->
-					<div id="buttonSubmitLogin" >
-						<a data-role="button"> Validate </a>
-					</div>
+	<label id="login-errors"></label>
+	
+	<form id="login-form">
+	  <div data-field="instance">
+	    <label for="instance">Instance&nbsp;:</label>
+	    <input type="text" name="instance" placeholder="mon-exploitation.ergolis.com"/>
+	  </div>
+	  <div data-field="email">
+	    <label for="email">Adresse e-mail&nbsp;:</label>
+	    <input type="email" name="email" placeholder="pierre.dupond@mail.tld"/>
+	  </div>
+	  <div data-field="password">
+	    <label for="password">Mot de passe&nbsp;:</label>
+	    <input type="password" name="password"/>
+	  </div>
 
-					<div class="logButton" id="buttonDisconnection" >
-						<a><img src="img/logout.png" alt="start" width="75px" height="25px"/></a>
-					</div>
-				</div>
-				<div data-role="fieldcontain">
-					<fieldset data-role="controlgroup" id="radio-Intervention">
-						<legend>
-							Intervention Name :
-						</legend>
+	  <a href="#interventions" data-role="button" data-transition="slide-down" class="ui-btn-center"><span class="fa fa-sign-in fa-2x"></span></a>
+	</form>
 
-						<input type="radio" name="radio-choice-1" id="radio-Intervention-Write" value="Write"  />
-						<label for="radio-Intervention-Write">Write</label>
+      </div><!-- /content -->
 
-						<input type="radio" name="radio-choice-1" id="radio-Intervention-Auto" value="Auto"/>
-						<label for="radio-Intervention-Auto">Auto</label>
-					</fieldset>
-				</div>
+    </div><!-- /page home -->
 
-			</div><!-- /content -->
+    <!-- -->
+    <!-- -->
+    <!-- -->
+    <!-- -->
 
-		</div><!-- /page config -->
+    <!-- Start of second page: #two -->
+    <div data-role="page" id="interventions" data-theme="a">
+
+      <div data-role="header">
+	<h1>Interventions</h1>
+	<a id="options-edit" href="#" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right"><span class="fa fa-wrench"></span></a>
+      </div><!-- /header -->
+
+      <div data-role="content" class="ui-content" data-theme="a">
+
+	<label id="error-label"></label>
+	<table id="interventions-list" ></table>
+	<div id="clock"></div>
+	<div id="active-work-clock" ></div>
+
+	<div id="tracking-actions" data-role="controlgroup" data-type="horizontal">
+	  <a id="intervention-start"  data-role="button" href="#"><span class="fa fa-plus fa-2x"></span></a>
+	  <a id="intervention-pause"  data-role="button" href="#"><span class="fa fa-pause fa-2x"></span></a>
+	  <a id="intervention-resume" data-role="button" href="#"><span class="fa fa-play fa-2x"></span></a>
+	  <a id="intervention-stop"   data-role="button" href="#"><span class="fa fa-stop fa-2x"></span></a>
+	</div>
+	<div id="intervention-actions" data-role="controlgroup" data-type="horizontal">
+	  <a id="active-work"  data-role="button" href="#"><span class="fa fa-cogs fa-2x"></span></a>
+	  <a id="barcode-scan" data-role="button" href="#"><span class="fa fa-barcode fa-2x"></span></a>
+	</div>
+	<!--
+	    <div class="logButton">
+	      <a id="authenticator"><img src="img/Play-icon.png" alt="start" width="75px" height="25px"/></a>
+	    </div>
+	    <div class="buttons">
+	      <div id="intervention-start">
+		<a data-role="button" href="#"> <img src="img/Record-Normal-Red-icon.png" alt="start" width="50px" height="50px" /> </a>
+	      </div>
+	      <div id="intervention-pause">
+		<a data-role="button"><img src="img/Pause-Disabled-icon.png" alt="start" width="50px" height="50px" /></a>
+	      </div>
+
+	      <div id="intervention-resume">
+		<a data-role="button"><img src="img/Play-icon.png" alt="start" width="50px" height="50px" /></a>
+	      </div>
+
+	      <div id="intervention-stop">
+		<a data-role="button"><img src="img/Stop-icon.png" alt="start" width="50px" height="50px" /></a>
+	      </div>
+	      <div id="crumbs-sync">
+		<a data-role="button"><img src="img/synchro.png" alt="start" width="50px" height="50px" /></a>
+	      </div>
+	      <div id="options-edit">
+		<a data-role="button"><img src="img/right.png" alt="start" width="50px" height="50px" /></a>
+	      </div>
+	      <div id="barcode-scan">
+		<a data-role="button"><img src="img/QRCode" alt="start" width="50px" height="50px" /></a>
+	      </div>
+	    </div>
+	    -->
+	<!--
+	    <div id="buttonActiveOn">
+	      <a><img src="img/settings.png" alt="start" width="50px" height="50px"/>ON</a>
+	    </div>
+	    <div id="buttonActiveOff">
+	      <a><img src="img/settings.png" alt="start" width="50px" height="50px"/>OFF</a>
+	    </div>
+	    -->
+
+      </div>
+    </div><!-- /page interventions -->
+
+    <!-- -->
+    <!-- -->
+    <!-- -->
+    <!-- -->
+
+    <div data-role="page" id="config" data-theme="a">
+
+      <div data-role="header">
+	<h1>Configuration</h1>
+      </div><!-- /header -->
+
+      <div data-role="content" data-theme="a">
+	<div class= "buttons">
+	  <div id="buttonBack">
+	    <a data-role="button"><span class="fa fa-arrow-left fa-2x"></span></a>
+	  </div>
+	</div>
+	<div id="form-log" data-role="fieldcontain" class="ui-hide-label">
+	  <form method="post" action="demoform.asp">
+	    <label for="URL">URL :</label>
+	    <input type="text" name="url" id="url" value="" placeholder="url"/>
+	    <label for="URL">login :</label>
+	    <input type="text" name="user" id="user" value="" placeholder="user"/>
+	    <label for="URL">password :</label>
+	    <input type="password" name="passwrd" id="pwd" value="" placeholder="mot de passe"/>
+	    <label id="login-errors"></label>
+	  </form>
+	  <!-- Buttons-->
+	  <div id="buttonSubmitLogin" >
+	    <a data-role="button"> Validate </a>
+	  </div>
+
+	  <div class="logButton" id="buttonDisconnection" >
+	    <a><span class="fa fa-sign-out fa-2x"></a>
+	  </div>
+	</div>
+	<div data-role="fieldcontain">
+	  <fieldset data-role="controlgroup" id="radio-Intervention">
+	    <legend>
+	      Intervention Name :
+	    </legend>
+
+	    <input type="radio" name="radio-choice-1" id="radio-Intervention-Write" value="Write"  />
+	    <label for="radio-Intervention-Write">Write</label>
+
+	    <input type="radio" name="radio-choice-1" id="radio-Intervention-Auto" value="Auto"/>
+	    <label for="radio-Intervention-Auto">Auto</label>
+	  </fieldset>
+	</div>
+
+      </div><!-- /content -->
+
+    </div><!-- /page config -->
 
 
-		<div data-role="page" id="close-error" data-theme="a">
+    <div data-role="page" id="close-error" data-theme="a">
 
-			<div data-role="header">
-				<h1>Close error</h1>
-			</div>
+      <div data-role="header">
+	<h1>Close error</h1>
+      </div>
 
-			<div data-role="content" data-theme="a">
+      <div data-role="content" data-theme="a">
 
-			</div><!-- /content -->
-		</div><!-- /page config -->
+      </div><!-- /content -->
+    </div><!-- /page config -->
 
 
 
-		<div id="name-choice" data-role="dialog" data-theme="a">
-			<div data-role="header">
-				<h3>Intervention name</h3>
-				<div data-role="fieldcontain">
+    <div id="name-choice" data-role="dialog" data-theme="a">
+      <div data-role="header">
+	<h3>Intervention name</h3>
+	<div data-role="fieldcontain">
 
-					<label for="name">Write the name of your intervention : </label>
-					<input type="text" name="url" id="interventionTextName" value="" placeholder="intervention name"/>
-					<div id="buttonInterventionNameSubmit" >
-						<a data-role="button">Validate</a>
-					</div>
-				</div>
-			</div>
-		</div>
+	  <label for="name">Write the name of your intervention : </label>
+	  <input type="text" name="url" id="interventionTextName" value="" placeholder="intervention name"/>
+	  <div id="buttonInterventionNameSubmit" >
+	    <a data-role="button">Validate</a>
+	  </div>
+	</div>
+      </div>
+    </div>
 
-	</body>
+  </body>
 </html>

@@ -1,10 +1,14 @@
 #!/usr/bin/env bash
 # Depends-on: icoutils inkscape
 
-for size in 36 48 50 57 64 72 80 96 114 128 144 173
+for size in 36 48 50 57 64 72 80 96 114 128 144 160 173
 do
     inkscape -z --export-background=FFFFFF --export-png=icon-${size}px.png --export-width=${size} --export-height=${size} icon.svg
 done
+
+# Default
+cp icon-128px.png default.png
+cp icon-160px.png ../../img/logo.png
 
 # Android
 cp icon-36px.png android/icon-36-ldpi.png

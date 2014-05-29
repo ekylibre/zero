@@ -1,0 +1,108 @@
+* {
+   font-family: "Open Sans";
+}
+
+.ui-controlgroup-controls {
+   width: 100%;
+}
+
+#tracking-actions a {
+   display: inline-block;
+   margin: 0;
+   min-width: 33.33%;
+   box-sizing: border-box;
+}
+
+#intervention-actions a {
+   display: inline-block;
+   margin: 0;
+   min-width: 50%;
+   box-sizing: border-box;
+}
+
+#home div[data-role="footer"] a {
+   display: block;
+}
+
+
+.wide-image {
+   max-width: 100%;
+}
+
+
+
+.buttons {
+   display: -moz-box;
+   display: -webkit-box;
+   display: box;
+   -moz-box-pack: center;
+   -webkit-box-pack: center;
+   box-pack: center;
+}
+
+#active-work-clock {
+   text-align: left;
+   font-size: small;
+   color: green;
+}
+
+#intervention-start {
+   padding-left: 10;
+   padding-right: 10;
+}
+
+#intervention-pause {
+   padding-left: 10px;
+   padding-right: 10px;
+}
+
+#intervention-resume {
+   padding-left: 10px;
+   padding-right: 10px;
+}
+
+#intervention-stop {
+   padding-left: 10px;
+   padding-right: 10px;
+}
+
+.logButton {
+   text-align: right;
+   color: blue;
+}
+
+#login-errors {
+   color: red;
+}
+
+
+#error-label {
+   color: red;
+}
+
+table {
+   border-collapse: collapse;
+   width: 90%;
+}
+th, td {
+   border: 1px solid black;
+   width: 20%;
+}
+td {
+   text-align: center;
+}
+caption {
+   font-weight: bold
+}
+
+@media (min-width: 40em) {
+        /* Affiche la ligne entête de la table et définit toutes les cellules à display: table-cell */
+   .my-custom-breakpoint td, .my-custom-breakpoint th, .my-custom-breakpoint tbody th, .my-custom-breakpoint tbody td, .my-custom-breakpoint thead td, .my-custom-breakpoint thead th {
+      display: table-cell;
+      margin: 0;
+   }
+        /* Masque les labels dans chaque cellule */
+   .my-custom-breakpoint td .ui-table-cell-label, .my-custom-breakpoint th .ui-table-cell-label {
+      display: none;
+   }
+}

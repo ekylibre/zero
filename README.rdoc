@@ -1,3 +1,10 @@
 = Rei
 
 Mobile app for tracking intelligency for Ekylibre.
+
+
+== Ekylibre API call
+
+Push data with:
+
+    POST /api/v1/crumbs

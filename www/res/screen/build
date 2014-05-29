@@ -50,7 +50,8 @@ for os, exports in EXPORTS
     width, height = (options[:width] * ratio).round, (options[:height] * ratio).round
     x0, y0 = (SOURCE_SIZE - width)/2, (SOURCE_SIZE - height)/2
     x1, y1 = x0 + width, y0 + height
-    puts "#{os}/#{name}: #{options[:width]}x#{options[:height]} from #{x0}:#{y0} -> #{x1}:#{y1} (#{width}x#{height})"
+    label = "#{os}/#{name}:"
+    puts "#{label.ljust(32)} #{options[:width].to_s.rjust(4)}x#{options[:height].to_s.ljust(4)} from #{x0}:#{y0} -> #{x1}:#{y1} (#{width}x#{height})"
     `inkscape -z --export-background=FFFFFF --export-png=#{os}/#{name}.png --export-width=#{options[:width]} --export-height=#{options[:height]} --export-area=#{x0}:#{y0}:#{x1}:#{y1} screen.svg`
     if options[:format]
       `convert #{os}/#{name}.png #{os}/#{name}.#{options[:format]}`
@@ -58,3 +59,5 @@ for os, exports in EXPORTS
     end
   end
 end
+
+`cp android/screen-xhdpi-portrait.png default.png`

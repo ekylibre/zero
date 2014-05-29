@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,42 +7,60 @@
 
 		<link rel="stylesheet" type="text/css" href="css/jquery-mobile/jquery.mobile-1.4.2.min.css">
 		<link rel="stylesheet" type="text/css" href="css/jquery.countdown.css">
+		<link rel="stylesheet" type="text/css" href="css/font-awesome.css">
+		<link rel="stylesheet" type="text/css" href="css/font-open_sans.css">
 		<link rel="stylesheet" type="text/css" href="css/menu.css">
+
+		<script type="text/javascript" src="phonegap.js"></script>
+		<script type="text/javascript" src="cordova.js"></script>
+		<script type="text/javascript" src="barcodescanner.js"></script>
 
 		<script type="text/javascript" src="js/jquery/jquery-2.1.1.min.js"></script>
 		<script type="text/javascript" src="js/jquery-mobile/jquery.mobile-1.4.2.js"></script>
-		<script type="text/javascript" src="phonegap.js"></script>
+		<script type="text/javascript" src="js/countdown/jquery.plugin.js"></script>
+		<script type="text/javascript" src="js/countdown/jquery.countdown.js"></script>
+		<!-- <script src="http://debug.phonegap.com/target/target-script-min.js#Ours"></script> -->
+
 		<script type="text/javascript" src="js/menu.js"></script>
 		<script type="text/javascript" src="js/app.js"></script>
 		<script type="text/javascript" src="js/database/database.js"></script>
 		<script type="text/javascript" src="js/database/migrator.js"></script>
-		<script type="text/javascript" src="js/countdown/jquery.plugin.js"></script>
-		<script type="text/javascript" src="js/countdown/jquery.countdown.js"></script>
-		<script src="http://debug.phonegap.com/target/target-script-min.js#Ours"></script>
 
-		<script src="barcodescanner.js"></script>
-		<script src="cordova.js"></script>
 
 	</head>
-	<body onload="onLoad()">
+	<body onload="initApp()">
 		<!-- Start of first page: #one -->
 
 		<div data-role="page" id="home">
 
 			<div data-role="header">
-				<h1>Home</h1>
+				<h1>Connexion</h1>
 			</div><!-- /header -->
 
-			<div data-role="content" >
+			<div data-role="content" class="ui-content">
+				<img src="img/ekylibre.png" alt="start" class="wide-image" />
 
-				<p>
-					<img src="img/ekylibre.png" alt="start" width="150" height="50px" />
-					<a href="#interventions" data-role="button" data-transition="flip"> Launch</a>
-				</p>
+				<label id="login-errors"></label>
+					
+				<form id="login-form">
+					<div data-field="instance">
+						<label for="instance">Instance&nbsp;:</label>
+						<input type="text" name="instance" placeholder="mon-exploitation.ergolis.com"/>
+					</div>
+					<div data-field="email">
+						<label for="email">Adresse e-mail&nbsp;:</label>
+						<input type="email" name="email" placeholder="pierre.dupond@mail.tld"/>
+					</div>
+					<div data-field="password">
+						<label for="password">Mot de passe&nbsp;:</label>
+						<input type="password" name="password"/>
+					</div>
+
+					<a href="#interventions" data-role="button" data-transition="slide-down" class="ui-btn-center"><span class="fa fa-sign-in fa-2x"></span></a>
+				</form>
 
 			</div><!-- /content -->
 
-			<div data-role="footer" data-theme="d"></div><!-- /footer -->
 		</div><!-- /page home -->
 
 		<!-- -->
@@ -56,52 +73,65 @@
 
 			<div data-role="header">
 				<h1>Interventions</h1>
+				<a id="options-edit" href="#" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right"><span class="fa fa-wrench"></span></a>
 			</div><!-- /header -->
 
-			<div data-role="content" data-theme="a">
-				<div class="logButton">
-					<a id="isLogged"><img src="img/Play-icon.png" alt="start" width="75px" height="25px"/></a>
-				</div>
-				<div class= "buttons">
+			<div data-role="content" class="ui-content" data-theme="a">
 
-					<div id="buttonStart">
+				<label id="error-label"></label>
+				<table id="interventions-list" ></table>
+				<div id="clock"></div>
+				<div id="active-work-clock" ></div>
+
+				<div id="tracking-actions" data-role="controlgroup" data-type="horizontal">
+					<a id="intervention-start"  data-role="button" href="#"><span class="fa fa-plus fa-2x"></span></a>
+					<a id="intervention-pause"  data-role="button" href="#"><span class="fa fa-pause fa-2x"></span></a>
+					<a id="intervention-resume" data-role="button" href="#"><span class="fa fa-play fa-2x"></span></a>
+					<a id="intervention-stop"   data-role="button" href="#"><span class="fa fa-stop fa-2x"></span></a>
+				</div>
+				<div id="intervention-actions" data-role="controlgroup" data-type="horizontal">
+					<a id="active-work"  data-role="button" href="#"><span class="fa fa-cogs fa-2x"></span></a>
+					<a id="barcode-scan" data-role="button" href="#"><span class="fa fa-barcode fa-2x"></span></a>
+				</div>
+<!--
+				<div class="logButton">
+					<a id="authenticator"><img src="img/Play-icon.png" alt="start" width="75px" height="25px"/></a>
+				</div>
+				<div class="buttons">
+					<div id="intervention-start">
 						<a data-role="button" href="#"> <img src="img/Record-Normal-Red-icon.png" alt="start" width="50px" height="50px" /> </a>
 					</div>
-					<div id="buttonPause">
+					<div id="intervention-pause">
 						<a data-role="button"><img src="img/Pause-Disabled-icon.png" alt="start" width="50px" height="50px" /></a>
 					</div>
 
-					<div id="buttonResume">
+					<div id="intervention-resume">
 						<a data-role="button"><img src="img/Play-icon.png" alt="start" width="50px" height="50px" /></a>
 					</div>
 
-					<div id="buttonFinish">
+					<div id="intervention-stop">
 						<a data-role="button"><img src="img/Stop-icon.png" alt="start" width="50px" height="50px" /></a>
 					</div>
-					<div id="buttonSend">
+					<div id="crumbs-sync">
 						<a data-role="button"><img src="img/synchro.png" alt="start" width="50px" height="50px" /></a>
 					</div>
-					<div id="buttonMenu">
+					<div id="options-edit">
 						<a data-role="button"><img src="img/right.png" alt="start" width="50px" height="50px" /></a>
 					</div>
-					<div id="buttonCode">
+					<div id="barcode-scan">
 						<a data-role="button"><img src="img/QRCode" alt="start" width="50px" height="50px" /></a>
 					</div>
 				</div>
-
-				<label id="errorLabel"></label>
-
-				<div id="clock"></div>
-
+-->
+<!--
 				<div id="buttonActiveOn">
-					<a><img src="img/settings.png" alt="start" width="50px" height="50px" />ON</a>
+					<a><img src="img/settings.png" alt="start" width="50px" height="50px"/>ON</a>
 				</div>
 				<div id="buttonActiveOff">
-					<a><img src="img/settings.png" alt="start" width="50px" height="50px" />OFF</a>
+					<a><img src="img/settings.png" alt="start" width="50px" height="50px"/>OFF</a>
 				</div>
-				<div id="clockActiveMode" ></div>
+-->
 
-				<table id="interventions_table" ></table>
 			</div>
 		</div><!-- /page interventions -->
 
@@ -130,7 +160,7 @@
 						<input type="text" name="user" id="user" value="" placeholder="user"/>
 						<label for="URL">password :</label>
 						<input type="password" name="passwrd" id="pwd" value="" placeholder="mot de passe"/>
-						<label id="errorLogLabel"></label>
+						<label id="login-errors"></label>
 					</form>
 					<!-- Buttons-->
 					<div id="buttonSubmitLogin" >
@@ -159,17 +189,21 @@
 
 		</div><!-- /page config -->
 
-		<div data-role="page" id="close_error" data-theme="a">
+
+		<div data-role="page" id="close-error" data-theme="a">
 
 			<div data-role="header">
-				Close Error
-			</div><!-- /header -->
+				<h1>Close error</h1>
+			</div>
 
 			<div data-role="content" data-theme="a">
 
 			</div><!-- /content -->
 		</div><!-- /page config -->
-		<div id ="nameChoice" data-role="dialog" data-theme="a">
+
+
+
+		<div id="name-choice" data-role="dialog" data-theme="a">
 			<div data-role="header">
 				<h3>Intervention name</h3>
 				<div data-role="fieldcontain">
@@ -177,11 +211,10 @@
 					<label for="name">Write the name of your intervention : </label>
 					<input type="text" name="url" id="interventionTextName" value="" placeholder="intervention name"/>
 					<div id="buttonInterventionNameSubmit" >
-						<a data-role="button"> Validate </a>
+						<a data-role="button">Validate</a>
 					</div>
 				</div>
 			</div>
-		</div>
 		</div>
 
 	</body>

@@ -1,4 +1,4 @@
-function onLoad() {
+function initApp() {
 	document.addEventListener("deviceready", onDeviceReady, false);
 }
 
@@ -7,7 +7,7 @@ function disconnection() {
 	window.localStorage.clear("pwd");
 	window.localStorage.clear("url");
 
-	$("#isLogged").html("<img src='img/login.png' alt='start' width='75px' height='25px'/>");
+	$("#authenticator").html("<img src='img/login.png' alt='start' width='75px' height='25px'/>");
 	$("#buttonDisconnection").hide();
 	$("#form-log").show();
 	window.location("#interventions");
@@ -20,6 +20,8 @@ function onDeviceReady() {
 		var app = new App();
 		app.initialize();
 
+		$("#intervention-pause").hide();
+
 		//////Evenement sur les boutons natifs
 		document.addEventListener("menubutton", onMenuKeyDown, false);
 		document.addEventListener("backbutton", onBackKeyDown, false);
@@ -28,9 +30,9 @@ function onDeviceReady() {
 		/////////Gestion de l'icone de log'
 		if (window.localStorage.getItem("user") != null) {
 			$("#form-log").hide();
-			$("#isLogged").html("<img src='img/logout.png' alt='start' width='75px' height='25px'/></br>");
+			$("#authenticator").html("<img src='img/logout.png' alt='start' width='75px' height='25px'/></br>");
 		} else {
-			$("#isLogged").html("<img src='img/login.png' alt='start' width='75px' height='25px'/>");
+			$("#authenticator").html("<img src='img/login.png' alt='start' width='75px' height='25px'/>");
 			$("#buttonDisconnection").hide();
 		}
 
@@ -94,7 +96,7 @@ function onDeviceReady() {
 		}
 
 
-		$("#isLogged").click(function() {
+		$("#authenticator").click(function() {
 			if (window.localStorage.getItem("user") != null) {
 				disconnection();
 			} else {
@@ -108,38 +110,40 @@ function onDeviceReady() {
 
 		$('#clock').countdown('pause');
 		//affichage de boutons
-		$("#buttonFinish").hide();
-		$("#buttonPause").hide();
-		$("#buttonResume").hide();
+		$("#intervention-stop").hide();
+		$("#intervention-pause").hide();
+		$("#intervention-resume").hide();
 		$("#buttonActiveOff").hide();
 		$("#buttonActiveOn").hide();
 
-		$("#buttonStart").click(function() {
+		$("#intervention-start").click(function() {
 			switch (window.localStorage.getItem("saisie")) {
 				case "Write" :
-					window.location.href = "#nameChoice";
+					window.location.href = "#name-choice";
 					break;
 				case "Auto" :
 					$('#clock').countdown('destroy');
 					createClock('#clock');
 					//affichage de boutons
-					$("#buttonFinish").show();
-					$("#buttonPause").show();
-					$("#buttonActiveOn").show();
-					$("#buttonActiveOff").hide();
+					$("#intervention-stop").show();
+					$("#intervention-pause").show();
+					$("#intervention-actions").show();
+					// $("#buttonActiveOn").show();
+					// $("#buttonActiveOff").hide();
 					app.startIntervention();
-					$('#clockActiveMode').countdown('destroy');
+					$('#active-work-clock').countdown('destroy');
 					break;
 				default :
 					$('#clock').countdown('destroy');
 					createClock('#clock');
 					//affichage de boutons
-					$("#buttonFinish").show();
-					$("#buttonPause").show();
-					$("#buttonActiveOn").show();
-					$("#buttonActiveOff").hide();
+					$("#intervention-stop").show();
+					$("#intervention-pause").show();
+					$("#intervention-actions").show();
+					// $("#buttonActiveOn").show();
+					// $("#buttonActiveOff").hide();
 					app.startIntervention();
-					$('#clockActiveMode').countdown('destroy');
+					$('#active-work-clock').countdown('destroy');
 					break;
 			}
 		});
@@ -152,48 +156,46 @@ function onDeviceReady() {
 				$('#clock').countdown('destroy');
 				createClock('#clock');
 				//affichage de boutons
-				$("#buttonFinish").show();
-				$("#buttonPause").show();
+				$("#intervention-stop").show();
+				$("#intervention-pause").show();
 				$("#buttonActiveOn").show();
 				$("#buttonActiveOff").hide();
 				app.startIntervention(int_name);
-				$('#clockActiveMode').countdown('destroy');
+				$('#active-work-clock').countdown('destroy');
 				window.location.href = "#interventions";
 			}
 		});
 
-		$("#buttonFinish").click(function() {
+		$("#intervention-stop").click(function() {
 			$('#clock').countdown('destroy');
 			//affichage de boutons
-			$("#buttonStart").show();
-			$("#buttonPause").hide();
-			$("#buttonResume").hide();
-			$("#buttonActiveOff").hide();
-			$("#buttonActiveOn").hide();
+			$("#intervention-start").show();
+			$("#intervention-pause").hide();
+			$("#intervention-resume").hide();
+			$("#intervention-actions").hide();
 			$(this).hide();
 
 			app.activeModeOff();
-			$('#clockActiveMode').countdown('destroy');
+			$('#active-work-clock').countdown('destroy');
 			app.endIntervention();
 		});
 
-		$("#buttonPause").click(function() {
+		$("#intervention-pause").click(function() {
 			//stop l'horloge
 			$('#clock').countdown('toggle');
 			//affichage des bouton
-			$("#buttonResume").show();
-			$("#buttonActiveOff").hide();
-			$("#buttonActiveOn").hide();
+			$("#intervention-resume").show();
+			$("#intervention-actions").hide();
 			$(this).hide();
 			//On met l'appli en pause'
 			app.pauseIntervention();
 		});
 
-		$("#buttonResume").click(function() {
+		$("#intervention-resume").click(function() {
 			//On relance le compteur
 			$('#clock').countdown('toggle');
 			//affichage de boutons
-			$("#buttonPause").show();
+			$("#intervention-pause").show();
 			$(this).hide();
 			if (app.activeMode()) {
 				$("#buttonActiveOff").show();
@@ -204,27 +206,40 @@ function onDeviceReady() {
 			app.resumeIntervention();
 		});
 
+		$("#active-work").click(function() {
+				var element = $(this);
+				if (element.hasClass("active")) {
+						$('#active-work-clock').countdown('destroy');
+						element.removeClass("active");
+						app.activeModeOff();
+				} else {
+						createClock("#active-work-clock");
+						element.addClass("active");
+						app.activeModeOn();				
+				}
+		});
+/*
 		$("#buttonActiveOn").click(function() {
-			createClock("#clockActiveMode");
+			createClock("#active-work-clock");
 			$("#buttonActiveOn").hide();
 			$("#buttonActiveOff").show();
 			app.activeModeOn();
 		});
 
 		$("#buttonActiveOff").click(function() {
-			$('#clockActiveMode').countdown('destroy');
+			$('#active-work-clock').countdown('destroy');
 			$("#buttonActiveOff").hide();
 			$("#buttonActiveOn").show();
 			app.activeModeOff();
 		});
-
-		$("#buttonSend").click(function() {
+*/
+		$("#crumbs-sync").click(function() {
 			app.pushData();
 		});
 
 		$("#buttonSubmitLogin").click(function() {
 			if ($("#user").val().length < 3 || $("#pwd").val().length < 3)
-				$("#errorLogLabel").text("identifiant ou mot de passe invalide");
+				$("#login-errors").text("identifiant ou mot de passe invalide");
 			else {
 				if ($("#url").val() == "local")
 					$("#url").val() = "localhost:3000/api/v1/crumbs";
@@ -244,25 +259,22 @@ function onDeviceReady() {
 						alert("connection ok");
 						$("#form-log").hide();
 						$("#buttonDisconnection").show();
-						$("#isLogged").html("<img src='img/logout.png' alt='start' width='75px' height='25px'/>");
+						$("#authenticator").html("<img src='img/logout.png' alt='start' width='75px' height='25px'/>");
 						$.mobile.changePage('#interventions', {
 							transition : "flip",
 							reverse : false,
 							changeHash : false
 						});
 					} else {
-						$("errorLogLabel").text("identifiant ou mot de passe invalide");
+						$("login-errors").text("identifiant ou mot de passe invalide");
 						alert("could not connect");
 					}
 				}, 'json');
 			}
 		});
 
-		$("#buttonSend").click(function() {
-			app.pushData();
-		});
 
-		$("#buttonMenu").click(function() {
+		$("#options-edit").click(function() {
 			$.mobile.changePage('#config', {
 				transition : "flip",
 				reverse : false,
@@ -276,7 +288,7 @@ function onDeviceReady() {
 			window.localStorage.removeItem("url");
 			$("#form-log").show();
 			$("#buttonDisconnection").hide();
-			$("#isLogged").html("<img src='img/login.png' alt='start' width='75px' height='25px'/>");
+			$("#authenticator").html("<img src='img/login.png' alt='start' width='75px' height='25px'/>");
 		});
 
 		$("#buttonBack").click(function() {
@@ -287,7 +299,7 @@ function onDeviceReady() {
 			});
 		});
 
-		$("#buttonCode").click(function() {
+		$("#barcode-scan").click(function() {
 			alert('scanning');
 			var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 			scanner.scan(function(result) {

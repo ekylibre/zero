@@ -73,7 +73,7 @@ function Database() {
 	this.writeInterventions = function() {
 		var query = "SELECT * from points where type in ('start', 'end')";
 		//Creation de la table POINTS
-		$('#interventions_table').html("<thead><tr><th>Title</th><th>Duration</th><th>Begining</th></tr></thead><tbody>");
+		$('#interventions-list').html("<thead><tr><th>Title</th><th>Duration</th><th>Begining</th></tr></thead><tbody>");
 		db.transaction(function(tx) {
 			tx.executeSql(query, [], function(tx, rs) {
 				var i = 0;
@@ -92,7 +92,7 @@ function Database() {
 					}
 					var duree = new Date(date2.getTime() - date1.getTime());
 					duree.setTime(duree.getTime() + (duree.getTimezoneOffset() * 1000 * 60));
-					$('#interventions_table').append("<tr><th>" + name + "</th><td>" + time_format(duree) + "</td><td>" + formattedDate(date1) + "</td></tr>");
+					$('#interventions-list').append("<tr><th>" + name + "</th><td>" + time_format(duree) + "</td><td>" + formattedDate(date1) + "</td></tr>");
 					if (row2.type == 'end') {
 						i += 2;
 					} else {
@@ -101,7 +101,7 @@ function Database() {
 					}
 					num_int++;
 				}
-				$('#interventions_table').append("</tbody>");
+				$('#interventions-list').append("</tbody>");
 				//	table.find("thead").html(thead);
 			}, function(error) {
 				console.log("Transaction Error: " + error.message);
@@ -184,7 +184,7 @@ function Database() {
 	db.transaction(function(tx) {
 	tx.executeSql(query, [], function(tx, rs) {
 	if (!rs.rows.item(0).type == 'end') {
-	$.mobile.changePage('#close_error', 'flip', true, true);
+	$.mobile.changePage('#close-error', 'flip', true, true);
 	}
 	}, function(error) {
 	alert(error);

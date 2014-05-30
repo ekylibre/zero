@@ -1,4 +1,5 @@
 *~
+/.project
+/.settings
 /platforms
-.project
-.settings
+/log/*.log

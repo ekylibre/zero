@@ -1,3 +1,6 @@
+/*
+  Migrator
+*/
 function Migrator(db) {
     var migrations = [];
     this.migration = function(number, func) {

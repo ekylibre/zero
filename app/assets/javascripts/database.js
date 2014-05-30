@@ -1,7 +1,7 @@
 //Lancer la base
 function Database() {
     var db;
-    var date_options = {
+    var dateOptions = {
 	formatLength : 'short',
 	selector : 'date and time'
     };

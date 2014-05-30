@@ -1,4 +1,5 @@
 require 'active_support/core_ext'
+require 'tilt'
 
 module Rei
   module ViewsCompiler
@@ -11,6 +12,10 @@ module Rei
         puts "Need views"
         exit 1
       end
+
+      Object.send(:include, Rei::Helpers::AssetTagHelper)
+      Object.send(:include, Rei::Helpers::RenderingHelper)
+      Object.send(:include, Rei::Helpers::TagHelper)
       helpers_dir = Rei.root.join("app", "helpers")
       Dir.chdir helpers_dir do
         for helper in Dir["*.rb"]

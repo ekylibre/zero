@@ -49,12 +49,12 @@ define(["jquery", "jquery.mobile"], function ($) {
 
 function App() {
 
-  var db = null;
-  var refreshTime = 1000;
+  var database = null;
+  var geolocalizationIntervalDuration = 1000;
   var geolocalizationInterval = null;
-  var active_mode;
+  var activeMode;
   var running;
-  var intervention_name;
+  var interventionName;
 
   var optionsLoc = {
     enableHighAccuracy: true,
@@ -62,14 +62,14 @@ function App() {
   };
 
   this.initialize = function() {
-    if (db == null) {
-      db = new Database();
-      db.create();
+    if (database == null) {
+      database = new Database();
+      database.create();
       running = false;
-      db.writeInterventions();
+      database.writeInterventions();
     } else
       console.log("Database already initialized");
-			active_mode = false;
+			activeMode = false;
   };
 
   ///////////////////////////////////////
@@ -77,7 +77,7 @@ function App() {
     if(navigator.geolocation)
     { 
       if (geolocalizationInterval == null) {
-        geolocalizationInterval = setInterval(location, refreshTime);
+        geolocalizationInterval = setInterval(location, geolocalizationIntervalDuration);
       }
     }
     else
@@ -95,11 +95,11 @@ function App() {
 
 
   this.activeMode = function() {
-    return active_mode;
+    return activeMode;
   };
   /////////////////////////////////////
 
-  //Fonction appellée tous les refreshTime
+  //Fonction appellée tous les geolocalizationIntervalDuration
   function location() {
     getCurrentPosition(successLoc);
   }
@@ -114,20 +114,20 @@ function App() {
       name : name
     };
     if (typePoint == 'end' || typePoint == 'start')
-      db.storePoint(point, db.writeInterventions);
+      database.storePoint(point, database.writeInterventions);
     else
-      db.storePoint(point);
+      database.storePoint(point);
   }
 
 
   this.showInterventions = function() {
-    db.writeInterventions();
+    database.writeInterventions();
   };
 
   //////////////////////////////////////
 
   function successLocStart(pos) {
-    createLocPoint(pos.coords, "start", intervention_name);
+    createLocPoint(pos.coords, "start", interventionName);
   }
 
   function successLocResume(pos) {
@@ -166,7 +166,7 @@ function App() {
 
   this.pushData = function() {
     if (window.localStorage.getItem("user") != null)
-      db.send();
+      database.send();
     else
       $("#error-label").text("utilisateur non identifié");
   };
@@ -178,7 +178,7 @@ function App() {
 
   ////////////////////////////////////////
   this.startIntervention = function(name) {
-    intervention_name = name;
+    interventionName = name;
     getCurrentPosition(successLocStart);
     run();
     running = true;
@@ -201,15 +201,15 @@ function App() {
   };
 
   this.activeModeOn = function() {
-    if (locationIsRunning() && !active_mode) {
-      active_mode = true;
+    if (locationIsRunning() && !activeMode) {
+      activeMode = true;
       getCurrentPosition(successLocActiveModeOn);
     }
   };
 
   this.activeModeOff = function() {
-    if (locationIsRunning() && active_mode) {
-      active_mode = false;
+    if (locationIsRunning() && activeMode) {
+      activeMode = false;
       getCurrentPosition(successLocActiveModeOff);
     }
   };

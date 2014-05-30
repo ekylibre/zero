@@ -7,6 +7,7 @@ module Rei
 
   autoload :AssetsCompiler, 'rei/assets_compiler'
   autoload :ViewsCompiler,  'rei/views_compiler'
+  autoload :Helper,         'rei/helper'
 
   class << self
     

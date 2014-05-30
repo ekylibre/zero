@@ -10,7 +10,7 @@ module Rei
     # Writes index.html
     def self.write!
       # Needed for assets path
-      ActionView::Base.send :include, Rei::Helper
+      ActionView::Base.send :include, Rei::AssetUrlHelper
 
       # Custom helpers
       helpers_dir = Rei.root.join("app", "helpers")

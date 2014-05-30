@@ -1,11 +1,12 @@
 require 'logger'
 require 'pathname'
+require 'rubygems'
+require 'bundler/setup'
 
 module Rei
 
   autoload :AssetsCompiler, 'rei/assets_compiler'
   autoload :ViewsCompiler,  'rei/views_compiler'
-  autoload :Helpers,        'rei/helpers'
 
   class << self
     

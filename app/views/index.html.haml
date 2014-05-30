@@ -8,26 +8,9 @@
     = javascript_include_tag "phonegap.js", "barcodescanner.js"
     = javascript_include_tag "application.js"
   %body
-    / Start of first page: #one
-    #home{"data-role" => "page"}
-      %div{"data-role" => "header"}
-        %h1 Connexion
-      .ui-content{"data-role" => "content"}
-        = image_tag("ekylibre.png", class: "wide-image", alt: "start")
-        %label#login-errors
-        %form#login-form
-          %div{"data-field" => "instance"}
-            %label{for: "instance"} Instance :
-            %input{name: "instance", placeholder: "mon-exploitation.ergolis.com", type: "text"}/
-          %div{"data-field" => "email"}
-            %label{for: "email"} Adresse e-mail :
-            %input{name: "email", placeholder: "pierre.dupond@mail.tld", type: "email"}/
-          %div{"data-field" => "password"}
-            %label{for: "password"} Mot de passe :
-            %input{name: "password", type: "password"}/
-          %a.ui-btn-center{"data-role" => "button", "data-transition" => "slide-down", href: "#interventions"}
-            %span.fa.fa-sign-in.fa-2x
 
+    = render "home"
+    
     / Start of second page: #two
     #interventions{"data-role" => "page", "data-theme" => "a"}
       %div{"data-role" => "header"}
@@ -60,7 +43,7 @@
       %div{"data-role" => "header"}
         %h1 Configuration
       / /header
-      %div{"data-role" => "content", "data-theme" => "a"}
+      .ui-content{"data-role" => "content", "data-theme" => "a"}
         .buttons
           #buttonBack
             %a{"data-role" => "button"}

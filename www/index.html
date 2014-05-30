@@ -1,143 +1,145 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset='utf-8'>
-    <meta content='width=device-width, initial-scale=1' name='viewport'>
-    <title>Rei</title>
-    <link rel="stylesheet" media="screen" href="application.css"/>
-    <script src="phonegap.js"></script>
-    <script src="barcodescanner.js"></script>
-    <script src="application.js"></script>
-  </head>
-  <body>
-    <!-- Start of first page: #one -->
-    <div data-role='page' id='home'>
-      <div data-role='header'>
-        <h1>Connexion</h1>
-      </div>
-      <div class='ui-content' data-role='content'>
-        <img class="wide-image" alt="start" src="ekylibre.png"/>
-        <label id='login-errors'></label>
-        <form id='login-form'>
-          <div data-field='instance'>
-            <label for='instance'>Instance :</label>
-            <input name='instance' placeholder='mon-exploitation.ergolis.com' type='text'>
-          </div>
-          <div data-field='email'>
-            <label for='email'>Adresse e-mail :</label>
-            <input name='email' placeholder='pierre.dupond@mail.tld' type='email'>
-          </div>
-          <div data-field='password'>
-            <label for='password'>Mot de passe :</label>
-            <input name='password' type='password'>
-          </div>
-          <a class='ui-btn-center' data-role='button' data-transition='slide-down' href='#interventions'>
-            <span class='fa fa-sign-in fa-2x'></span>
-          </a>
-        </form>
-      </div>
-    </div>
-    <!-- Start of second page: #two -->
-    <div data-role='page' data-theme='a' id='interventions'>
-      <div data-role='header'>
-        <h1>Interventions</h1>
-        <a class='ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right' href='#' id='options-edit'>
-          <span class='fa fa-wrench'></span>
-        </a>
-      </div>
-      <!-- /header -->
-      <div class='ui-content' data-role='content' data-theme='a'>
-        <label id='error-label'></label>
-        <table id='interventions-list'></table>
-        <div id='clock'></div>
-        <div id='active-work-clock'></div>
-        <div data-role='controlgroup' data-type='horizontal' id='tracking-actions'>
-          <a data-role='button' href='#' id='intervention-start'>
-            <span class='fa fa-plus fa-2x'></span>
-          </a>
-          <a data-role='button' href='#' id='intervention-pause'>
-            <span class='fa fa-pause fa-2x'></span>
-          </a>
-          <a data-role='button' href='#' id='intervention-resume'>
-            <span class='fa fa-play fa-2x'></span>
-          </a>
-          <a data-role='button' href='#' id='intervention-stop'>
-            <span class='fa fa-stop fa-2x'></span>
-          </a>
-        </div>
-        <div data-role='controlgroup' data-type='horizontal' id='intervention-actions'>
-          <a data-role='button' href='#' id='active-work'>
-            <span class='fa fa-cogs fa-2x'></span>
-          </a>
-          <a data-role='button' href='#' id='barcode-scan'>
-            <span class='fa fa-barcode fa-2x'></span>
-          </a>
-        </div>
-      </div>
-    </div>
-    <div data-role='page' data-theme='a' id='config'>
-      <div data-role='header'>
-        <h1>Configuration</h1>
-      </div>
-      <!-- /header -->
-      <div data-role='content' data-theme='a'>
-        <div class='buttons'>
-          <div id='buttonBack'>
-            <a data-role='button'>
-              <span class='fa fa-arrow-left fa-2x'></span>
-            </a>
-          </div>
-        </div>
-        <div class='ui-hide-label' data-role='fieldcontain' id='form-log'>
-          <form action='demoform.asp' method='post'>
-            <label for='URL'>URL :</label>
-            <input id='url' name='url' placeholder='url' type='text' value=''>
-            <label for='URL'>login :</label>
-            <input id='user' name='user' placeholder='user' type='text' value=''>
-            <label for='URL'>password :</label>
-            <input id='pwd' name='passwrd' placeholder='mot de passe' type='password' value=''>
-            <label id='login-errors'></label>
-          </form>
-          <!-- Buttons -->
-          <div id='buttonSubmitLogin'>
-            <a data-role='button'>Validate</a>
-          </div>
-          <div class='logButton' id='buttonDisconnection'>
-            <a>
-              <span class='fa fa-sign-out fa-2x'></span>
-            </a>
-          </div>
-        </div>
-        <div data-role='fieldcontain'>
-          <fieldset data-role='controlgroup' id='radio-Intervention'>
-            <legend>
-              Intervention Name :
-            </legend>
-            <input id='radio-Intervention-Write' name='radio-choice-1' type='radio' value='Write'>
-            <label for='radio-Intervention-Write'>Write</label>
-            <input id='radio-Intervention-Auto' name='radio-choice-1' type='radio' value='Auto'>
-            <label for='radio-Intervention-Auto'>Auto</label>
-          </fieldset>
-        </div>
-      </div>
-    </div>
-    <div data-role='page' data-theme='a' id='close-error'>
-      <div data-role='header'>
-        <h1>Close error</h1>
-      </div>
-      <div data-role='content' data-theme='a'></div>
-    </div>
-    <div data-role='dialog' data-theme='a' id='name-choice'>
-      <div data-role='header'>
-        <h3>Intervention name</h3>
-        <div data-role='fieldcontain'>
-          <label for='name'>Write the name of your intervention :</label>
-          <input id='interventionTextName' name='url' placeholder='intervention name' type='text' value=''>
-          <div id='buttonInterventionNameSubmit'>
-            <a data-role='button'>Validate</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </body>
+<head>
+<meta charset='utf-8'>
+<meta content='width=device-width, initial-scale=1' name='viewport'>
+<title>Rei</title>
+<link href="/stylesheets/application.css" media="screen" rel="stylesheet" />
+<script src="/javascripts/phonegap.js"></script>
+<script src="/javascripts/barcodescanner.js"></script>
+<script src="/javascripts/application.js"></script>
+</head>
+<body>
+<!-- Start of first page: #one -->
+<div data-role='page' id='home'>
+<div data-role='header'>
+<h1>Connexion</h1>
+</div>
+<div class='ui-content' data-role='content'>
+<img alt="start" class="wide-image" src="/images/ekylibre.png" />
+<label id='login-errors'></label>
+<form id='login-form'>
+<div data-field='instance'>
+<label for='instance'>Instance :</label>
+<input name='instance' placeholder='mon-exploitation.ergolis.com' type='text'>
+</div>
+<div data-field='email'>
+<label for='email'>Adresse e-mail :</label>
+<input name='email' placeholder='pierre.dupond@mail.tld' type='email'>
+</div>
+<div data-field='password'>
+<label for='password'>Mot de passe :</label>
+<input name='password' type='password'>
+</div>
+<a class='ui-btn-center' data-role='button' data-transition='slide-down' href='#interventions'>
+<span class='fa fa-sign-in fa-2x'></span>
+</a>
+</form>
+</div>
+</div>
+
+TEST of the life
+<!-- Start of second page: #two -->
+<div data-role='page' data-theme='a' id='interventions'>
+<div data-role='header'>
+<h1>Interventions</h1>
+<a class='ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right' href='#' id='options-edit'>
+<span class='fa fa-wrench'></span>
+</a>
+</div>
+<!-- /header -->
+<div class='ui-content' data-role='content' data-theme='a'>
+<label id='error-label'></label>
+<table id='interventions-list'></table>
+<div id='clock'></div>
+<div id='active-work-clock'></div>
+<div data-role='controlgroup' data-type='horizontal' id='tracking-actions'>
+<a data-role='button' href='#' id='intervention-start'>
+<span class='fa fa-plus fa-2x'></span>
+</a>
+<a data-role='button' href='#' id='intervention-pause'>
+<span class='fa fa-pause fa-2x'></span>
+</a>
+<a data-role='button' href='#' id='intervention-resume'>
+<span class='fa fa-play fa-2x'></span>
+</a>
+<a data-role='button' href='#' id='intervention-stop'>
+<span class='fa fa-stop fa-2x'></span>
+</a>
+</div>
+<div data-role='controlgroup' data-type='horizontal' id='intervention-actions'>
+<a data-role='button' href='#' id='active-work'>
+<span class='fa fa-cogs fa-2x'></span>
+</a>
+<a data-role='button' href='#' id='barcode-scan'>
+<span class='fa fa-barcode fa-2x'></span>
+</a>
+</div>
+</div>
+</div>
+<div data-role='page' data-theme='a' id='config'>
+<div data-role='header'>
+<h1>Configuration</h1>
+</div>
+<!-- /header -->
+<div class='ui-content' data-role='content' data-theme='a'>
+<div class='buttons'>
+<div id='buttonBack'>
+<a data-role='button'>
+<span class='fa fa-arrow-left fa-2x'></span>
+</a>
+</div>
+</div>
+<div class='ui-hide-label' data-role='fieldcontain' id='form-log'>
+<form action='demoform.asp' method='post'>
+<label for='URL'>URL :</label>
+<input id='url' name='url' placeholder='url' type='text' value=''>
+<label for='URL'>login :</label>
+<input id='user' name='user' placeholder='user' type='text' value=''>
+<label for='URL'>password :</label>
+<input id='pwd' name='passwrd' placeholder='mot de passe' type='password' value=''>
+<label id='login-errors'></label>
+</form>
+<!-- Buttons -->
+<div id='buttonSubmitLogin'>
+<a data-role='button'>Validate</a>
+</div>
+<div class='logButton' id='buttonDisconnection'>
+<a>
+<span class='fa fa-sign-out fa-2x'></span>
+</a>
+</div>
+</div>
+<div data-role='fieldcontain'>
+<fieldset data-role='controlgroup' id='radio-Intervention'>
+<legend>
+Intervention Name :
+</legend>
+<input id='radio-Intervention-Write' name='radio-choice-1' type='radio' value='Write'>
+<label for='radio-Intervention-Write'>Write</label>
+<input id='radio-Intervention-Auto' name='radio-choice-1' type='radio' value='Auto'>
+<label for='radio-Intervention-Auto'>Auto</label>
+</fieldset>
+</div>
+</div>
+</div>
+<div data-role='page' data-theme='a' id='close-error'>
+<div data-role='header'>
+<h1>Close error</h1>
+</div>
+<div data-role='content' data-theme='a'></div>
+</div>
+<div data-role='dialog' data-theme='a' id='name-choice'>
+<div data-role='header'>
+<h3>Intervention name</h3>
+<div data-role='fieldcontain'>
+<label for='name'>Write the name of your intervention :</label>
+<input id='interventionTextName' name='url' placeholder='intervention name' type='text' value=''>
+<div id='buttonInterventionNameSubmit'>
+<a data-role='button'>Validate</a>
+</div>
+</div>
+</div>
+</div>
+</body>
 </html>

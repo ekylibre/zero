@@ -11,8 +11,11 @@ var app = {
     refreshTime: 1000,
     
     initialize: function () {
-	
+	// Hide hidden things
+
 	// Search token. If no token, ask for authentication
+
+
 	
     }
 

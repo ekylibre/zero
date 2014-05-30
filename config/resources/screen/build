@@ -1,0 +1,63 @@
+#!/usr/bin/env ruby
+# Depends-on: icoutils inkscape
+
+SOURCE_SIZE = 800
+
+EXPORTS = {
+  android: {
+    "ldpi-landscape"  => {width: 320,  height: 200},
+    "ldpi-portrait"   => {width: 200,  height: 320},
+    "mdpi-landscape"  => {width: 480,  height: 320},
+    "mdpi-portrait"   => {width: 320,  height: 480},
+    "hdpi-landscape"  => {width: 800,  height: 480},
+    "hdpi-portrait"   => {width: 480,  height: 800},
+    "xhdpi-landscape" => {width: 1280, height: 720},
+    "xhdpi-portrait"  => {width: 720,  height: 1280},
+  },
+  bada: {
+    # "landscape"  => {width: 800,  height: 480},
+    "portrait"   => {width: 480,  height: 800},
+  },
+  "bada-wac" => {
+    "type3"  => {width: 320,  height: 480},
+    "type4"  => {width: 480,  height: 800},
+    "type5"  => {width: 240,  height: 400},
+  },
+  blackberry: {
+    "default"  => {width: 225,  height: 225}, # Icon?
+  },
+  ios: {
+    "ipad-retina-landscape"   => {width: 2048,  height: 1536},
+    "ipad-landscape"          => {width: 1024,  height: 768},
+    "ipad-retina-portrait"    => {width: 1536,  height: 2048},
+    "ipad-portrait"           => {width: 768,   height: 1024},
+    "iphone-retina-landscape" => {width: 960,   height: 640},
+    "iphone-landscape"        => {width: 480,   height: 320},
+    "iphone-retina-portrait"  => {width: 640,   height: 960},
+    "iphone-portrait"         => {width: 320,   height: 480},
+  },
+  webos: {
+    "default"  => {width: 64,  height: 64}, # Icon?
+  },
+  "windows-phone" => {
+    "portrait" => {width: 480,  height: 800, format: :jpg},
+  }
+}
+
+for os, exports in EXPORTS
+  for name, options in exports
+    ratio = SOURCE_SIZE.to_f / [options[:width], options[:height]].max
+    width, height = (options[:width] * ratio).round, (options[:height] * ratio).round
+    x0, y0 = (SOURCE_SIZE - width)/2, (SOURCE_SIZE - height)/2
+    x1, y1 = x0 + width, y0 + height
+    label = "#{os}/#{name}:"
+    puts "#{label.ljust(32)} #{options[:width].to_s.rjust(4)}x#{options[:height].to_s.ljust(4)} from #{x0}:#{y0} -> #{x1}:#{y1} (#{width}x#{height})"
+    `inkscape -z --export-background=FFFFFF --export-png=#{os}/#{name}.png --export-width=#{options[:width]} --export-height=#{options[:height]} --export-area=#{x0}:#{y0}:#{x1}:#{y1} screen.svg`
+    if options[:format]
+      `convert #{os}/#{name}.png #{os}/#{name}.#{options[:format]}`
+      `rm #{os}/#{name}.png`
+    end
+  end
+end
+
+`cp android/xhdpi-portrait.png default.png`

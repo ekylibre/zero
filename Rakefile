@@ -6,6 +6,7 @@ require 'rei'
 ENV["RAILS_ENV"] = "production"
 
 COPIED_RESOURCES = {
+  # Android
   "config/resources/icon/android/xhdpi.png" => "platforms/android/res/drawable/icon.png",
   "config/resources/icon/android/xhdpi.png" => "platforms/android/res/drawable-xhdpi/icon.png",
   "config/resources/icon/android/hdpi.png"  => "platforms/android/res/drawable-hdpi/icon.png",
@@ -16,6 +17,7 @@ COPIED_RESOURCES = {
   "config/resources/screen/android/hdpi-portrait.png"  => "platforms/android/res/drawable-hdpi/splash.png",
   "config/resources/screen/android/mdpi-portrait.png"  => "platforms/android/res/drawable-mdpi/splash.png",
   "config/resources/screen/android/ldpi-portrait.png"  => "platforms/android/res/drawable-ldpi/splash.png"
+  # iOS ?
 }
 
 
@@ -43,6 +45,10 @@ namespace :precompile do
   task :views do
     Rei::ViewsCompiler.write!
   end
+
+  desc "Precompile assets and views"
+  task :app => [:assets, :views]
+
 end
 
 desc "Precompile all"
@@ -50,7 +56,7 @@ task :precompile => [:"precompile:resources", :"precompile:assets", :"precompile
 
 
 desc "Precompile all and build android app"
-task :build => :precompile do
+task :build => :"precompile:app" do
   `phonegap build android`
 end
 

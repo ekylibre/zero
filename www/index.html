@@ -38,22 +38,33 @@
 </div>
 </div>
 
-<!-- Start of second page: #two -->
-<div data-role='page' data-theme='a' id='interventions'>
-<div data-role='header'>
-<h1>Interventions</h1>
+<div data-role="page" id="authentication"><div data-role="header"><h1>Connexion</h1></div>
+<div class="ui-content" data-role="content"><label id='login-errors'></label>
+<form id='login-form'>
+<div data-field='instance'>
+<label for="instance">Instance</label>
+<input id="instance" name="instance" placeholder="demo.ergolis.com" required="required" type="text" />
+</div>
+<div data-field='email'>
+<label for="email">Adresse e-mail</label>
+<input id="email" name="email" placeholder="admin@ekylibre.org" required="required" type="email" />
+</div>
+<div data-field='password'>
+<label for="password">Mot de passe</label>
+<input id="password" name="password" type="password" value="{:required=&gt;true}" />
+</div>
+<a data-role="button" data-transition="slide-down" href="#" id="sign-in"><span class="fa fa-2x fa-sign-in"></span></a>
+</form>
+</div></div>
+<div data-role="page" id="interventions"><div data-role="header"><h1>Interventions</h1>
 <a class='ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right' href='#' id='options-edit'>
 <span class='fa fa-wrench'></span>
 </a>
-</div>
-<!-- /header -->
-<div class='ui-content' data-role='content' data-theme='a'>
-<label id='error-label'></label>
+</div><div class="ui-content" data-role="content"><label id='error-label'></label>
 <table id='interventions-list'></table>
 <div id='clock'></div>
 <div id='active-work-clock'></div>
-<div data-role='controlgroup' data-type='horizontal' id='tracking-actions'>
-<a data-role='button' href='#' id='intervention-start'>
+<div data-role="controlgroup" data-type="null" id="tracking-actions"><a data-role='button' href='#' id='intervention-start'>
 <span class='fa fa-plus fa-2x'></span>
 </a>
 <a data-role='button' href='#' id='intervention-pause'>
@@ -65,17 +76,13 @@
 <a data-role='button' href='#' id='intervention-stop'>
 <span class='fa fa-stop fa-2x'></span>
 </a>
-</div>
-<div data-role='controlgroup' data-type='horizontal' id='intervention-actions'>
-<a data-role='button' href='#' id='active-work'>
+</div><div data-role="controlgroup" data-type="null" id="intervention-actions"><a data-role='button' href='#' id='active-work'>
 <span class='fa fa-cogs fa-2x'></span>
 </a>
 <a data-role='button' href='#' id='barcode-scan'>
 <span class='fa fa-barcode fa-2x'></span>
 </a>
-</div>
-</div>
-</div>
+</div></div></div>
 <div data-role='page' data-theme='a' id='config'>
 <div data-role='header'>
 <h1>Configuration</h1>

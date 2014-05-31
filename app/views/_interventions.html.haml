@@ -1,0 +1,26 @@
+= page :interventions do
+
+  = page_header do
+    %h1 Interventions
+    %a#options-edit.ui-btn-right.ui-btn.ui-btn-inline.ui-mini.ui-corner-all.ui-btn-icon-right{href: "#"}
+      %span.fa.fa-wrench
+
+  = page_content do
+    %label#error-label
+    %table#interventions-list
+    #clock
+    #active-work-clock
+    = control_group "tracking-actions" do
+      %a#intervention-start{"data-role" => "button", href: "#"}
+        %span.fa.fa-plus.fa-2x
+      %a#intervention-pause{"data-role" => "button", href: "#"}
+        %span.fa.fa-pause.fa-2x
+      %a#intervention-resume{"data-role" => "button", href: "#"}
+        %span.fa.fa-play.fa-2x
+      %a#intervention-stop{"data-role" => "button", href: "#"}
+        %span.fa.fa-stop.fa-2x
+    = control_group "intervention-actions" do
+      %a#active-work{"data-role" => "button", href: "#"}
+        %span.fa.fa-cogs.fa-2x
+      %a#barcode-scan{"data-role" => "button", href: "#"}
+        %span.fa.fa-barcode.fa-2x

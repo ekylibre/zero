@@ -1,6 +1,6 @@
 {
-	"id": "org.ekylibre.rei",
-	"name": "rei",
+    "id": "org.ekylibre.rei",
+    "name": "rei",
     "lib": {
         "www": {
             "id": "phonegap",

@@ -2,8 +2,19 @@
 
 Mobile app for tracking intelligency for Ekylibre.
 
+== Platforms
+
+  * Android
+  * iOS
+  * BlackBerry 10
+
+== TODO
+
+  * Migrates to IndexedDB because webSQL is deprecated
 
 == Ekylibre API call
+
+Use OAuth2 to connect to Ekylibre.
 
 Push data with:
 

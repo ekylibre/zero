@@ -10,34 +10,10 @@
   %body
 
     = render "home"
-    
-    / Start of second page: #two
-    #interventions{"data-role" => "page", "data-theme" => "a"}
-      %div{"data-role" => "header"}
-        %h1 Interventions
-        %a#options-edit.ui-btn-right.ui-btn.ui-btn-inline.ui-mini.ui-corner-all.ui-btn-icon-right{href: "#"}
-          %span.fa.fa-wrench
-      / /header
-      .ui-content{"data-role" => "content", "data-theme" => "a"}
-        %label#error-label
-        %table#interventions-list
-        #clock
-        #active-work-clock
-        #tracking-actions{"data-role" => "controlgroup", "data-type" => "horizontal"}
-          %a#intervention-start{"data-role" => "button", href: "#"}
-            %span.fa.fa-plus.fa-2x
-          %a#intervention-pause{"data-role" => "button", href: "#"}
-            %span.fa.fa-pause.fa-2x
-          %a#intervention-resume{"data-role" => "button", href: "#"}
-            %span.fa.fa-play.fa-2x
-          %a#intervention-stop{"data-role" => "button", href: "#"}
-            %span.fa.fa-stop.fa-2x
-        #intervention-actions{"data-role" => "controlgroup", "data-type" => "horizontal"}
-          %a#active-work{"data-role" => "button", href: "#"}
-            %span.fa.fa-cogs.fa-2x
-          %a#barcode-scan{"data-role" => "button", href: "#"}
-            %span.fa.fa-barcode.fa-2x
 
+    = render "authentication"
+    
+    = render "interventions"
 
     #config{"data-role" => "page", "data-theme" => "a"}
       %div{"data-role" => "header"}

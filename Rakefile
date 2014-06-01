@@ -60,9 +60,12 @@ task :build => :"precompile:app" do
   `phonegap build android`
 end
 
-desc "Precompile all, build and install android app"
-task :install => :build do
+desc "Precompile all and build android app"
+task :deploy do
   `adb install -r platforms/android/ant-build/Rei-debug.apk`
 end
+
+desc "Precompile all, build and install android app"
+task :install => [:build, :deploy]
 
 task default: :install

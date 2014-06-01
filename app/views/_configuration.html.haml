@@ -1,0 +1,22 @@
+= page :configuration do
+
+  = page_header do
+    %h1 Configuration
+    = button :record_crumbs, icon: :arrow_left, as: :left_tool
+    = button :sign_out, as: :right_tool
+    -# %a#record-crumbs.ui-btn-left.ui-btn.ui-btn-inline.ui-mini.ui-corner-all.ui-btn-icon-left{href: "#interventions"}
+      %span.fa.fa-arrow-left
+    -# %a#sign-out.ui-btn-right.ui-btn.ui-btn-inline.ui-mini.ui-corner-all.ui-btn-icon-right{href: "#"}
+      %span.fa.fa-sign-out
+
+  = page_content do
+    = list do |l|
+      = list_divider "Saisie du nom des interventions"
+      = list_item do
+        = control_group do
+          = radio_button_tag :intervention_name_input_method, :auto
+          = label_tag :intervention_name_input_method_auto, "Automatique"
+          = radio_button_tag :intervention_name_input_method, :write
+          = label_tag :intervention_name_input_method_write, "Saisie manuelle"
+        -# = field do
+          = select_tag :intervention_name_input_method, options_for_select({"Automatique" => :auto, "Saisie manuelle" => :write})

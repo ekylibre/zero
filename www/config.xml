@@ -83,7 +83,6 @@
   <gap:splash src="../config/resources/screen/ios/ipad-landscape.png"     gap:platform="ios"     width="1024" height="768" />
   <gap:splash src="../config/resources/screen/windows-phone/portrait.jpg" gap:platform="winphone" />
 
-  <content src="index.html" />
   <!--
       Define access to external domains.
 

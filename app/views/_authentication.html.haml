@@ -4,14 +4,14 @@
 
   = page_content do
     %label#login-errors
-    %form#login-form
-      %div{"data-field" => "instance"}
+    %form
+      = field :instance do
         = label_tag :instance, "Instance"
-        = text_field_tag(:instance, nil, placeholder: "demo.ergolis.com", required: true)
-      %div{"data-field" => "email"}
+        = text_field_tag(:instance, nil, placeholder: "https://demo.ergolis.com", required: true)
+      = field :email do
         = label_tag :email, "Adresse e-mail"
         = email_field_tag(:email, nil, placeholder: "admin@ekylibre.org", required: true)
-      %div{"data-field" => "password"}
+      = field :password do
         = label_tag :password, "Mot de passe"
-        = password_field_tag(:password, required: true)
+        = password_field_tag(:password, nil, required: true)
       = button(:sign_in)

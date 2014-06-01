@@ -17,12 +17,18 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
     builder (3.2.2)
+    chunky_png (1.3.1)
     coffee-script (2.2.0)
       coffee-script-source
       execjs
     coffee-script-source (1.7.0)
+    compass (0.12.2)
+      chunky_png (~> 1.2)
+      fssm (>= 0.2.7)
+      sass (~> 3.1)
     erubis (2.7.0)
     execjs (2.1.0)
+    fssm (0.2.10)
     haml (4.0.5)
       tilt
     hike (1.2.3)
@@ -56,6 +62,7 @@ DEPENDENCIES
   actionview (>= 4.1)
   activesupport (>= 4.1)
   coffee-script
+  compass
   haml
   rake
   sass

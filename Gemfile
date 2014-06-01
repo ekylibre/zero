@@ -9,5 +9,6 @@ gem 'sprockets', '~> 2.12'
 gem 'sass'
 gem 'coffee-script'
 gem 'uglifier'
+gem 'compass'
 
 gem 'haml'

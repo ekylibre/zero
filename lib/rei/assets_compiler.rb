@@ -1,3 +1,4 @@
+require 'compass'
 require 'yaml'
 require 'sprockets'
 

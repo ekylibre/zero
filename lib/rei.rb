@@ -1,6 +1,7 @@
 require 'logger'
 require 'pathname'
 require 'rubygems'
+require 'active_support'
 # require 'bundler/setup'
 
 module Rei

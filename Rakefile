@@ -12,14 +12,13 @@ COPIED_RESOURCES = {
   "config/resources/icon/android/hdpi.png"  => "platforms/android/res/drawable-hdpi/icon.png",
   "config/resources/icon/android/mdpi.png"  => "platforms/android/res/drawable-mdpi/icon.png",
   "config/resources/icon/android/ldpi.png"  => "platforms/android/res/drawable-ldpi/icon.png",
-  "config/resources/screen/android/xhdpi-portrait.png" => "platforms/android/res/drawable/splash.png",
-  "config/resources/screen/android/xhdpi-portrait.png" => "platforms/android/res/drawable-xhdpi/splash.png",
-  "config/resources/screen/android/hdpi-portrait.png"  => "platforms/android/res/drawable-hdpi/splash.png",
-  "config/resources/screen/android/mdpi-portrait.png"  => "platforms/android/res/drawable-mdpi/splash.png",
-  "config/resources/screen/android/ldpi-portrait.png"  => "platforms/android/res/drawable-ldpi/splash.png"
+  "config/resources/screen/android/xhdpi-portrait.png" => "platforms/android/res/drawable/screen.png",
+  "config/resources/screen/android/xhdpi-portrait.png" => "platforms/android/res/drawable-xhdpi/screen.png",
+  "config/resources/screen/android/hdpi-portrait.png"  => "platforms/android/res/drawable-hdpi/screen.png",
+  "config/resources/screen/android/mdpi-portrait.png"  => "platforms/android/res/drawable-mdpi/screen.png",
+  "config/resources/screen/android/ldpi-portrait.png"  => "platforms/android/res/drawable-ldpi/screen.png"
   # iOS ?
 }
-
 
 namespace :precompile do
   
@@ -46,11 +45,8 @@ namespace :precompile do
   desc "Precompile assets and views"
   task :app => [:assets, :views] do
     for source, dest in COPIED_RESOURCES
-      if File.exist? File.dirname(dest)
-        FileUtils.cp(source, dest)
-      else
-        puts "Skip #{dest}"
-      end
+      FileUtils.mkdir_p File.dirname(dest)
+      FileUtils.cp(source, dest)
     end
   end
 

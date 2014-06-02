@@ -1,0 +1,108 @@
+/* Adds sprockets directives below:
+ *= require jquery.mobile
+ *= require font/awesome
+ *= require animations
+ */
+
+@import "compass/css3/box-sizing";
+@import "compass/css3/inline-block";
+
+$green: green;
+
+.ui-controlgroup-controls {
+    width: 100%;
+}
+
+div[data-role="controlgroup"] {
+    a {
+        margin: 0;
+        @include box-sizing(border-box);
+    }
+    &#tracking-actions a {
+        width: 33.33%;
+        &#intervention-start {
+            &, * {
+                color: red;
+            }
+        }
+        &#intervention-pause, &#intervention-resume {
+            &, * {
+                color: blue;
+            }
+        }
+    }
+    &#intervention-actions a {
+        width: 50%;
+        &#active-work {
+            &, * {
+                color: $green;
+            }
+            &.ui-btn-active {
+                background: $green;
+                &, * {
+                    color: white;
+                }     
+            }
+        }
+    }
+}
+
+div[data-role="footer"]  {
+    div[data-role="controlgroup"]  {
+        margin: 0;
+        a {
+            padding: 1.7em;
+        }
+    }
+}
+
+
+.wide-image {
+    max-width: 100%;
+}
+
+.clock {
+    display: block;
+    text-align: center;
+    font-size: 350%;
+    line-height: 1.4em;
+    font-weight: bold;
+}
+
+#active-work-clock {
+    color: green;
+}
+
+#login-errors, #error-label {
+    color: red;
+}
+
+#debug {
+    color: #777;
+    font-family: monospace;
+    font-size: small;
+    line-height:1.4em;
+    padding: 0.1em;
+    background: #EEE;
+    p {
+        border-top: 1px solid #BBB;
+        margin: 0.1em;
+    }
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    th, td {
+        border: none;
+        text-align: center;
+    }
+    th {
+        color: #777;
+    }
+    td {
+        border-top: 1px solid #AAA;
+    }
+}

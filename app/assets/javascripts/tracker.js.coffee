@@ -3,7 +3,7 @@
 # 
 
 geoloc = (position) ->
-  jQuery.debug("Geoloc... #{position}")
+  jQuery.debug("Global geolocation... #{position}")
 
 jQuery.tracking =
 

@@ -12,9 +12,9 @@ module ApplicationHelper
     options = args.extract_options!
     if block_given?
       options = options.deep_merge(id: args.first) if args.first.is_a?(Symbol)
-      content_tag(:div, options.deep_merge(data: {role: "header", position: "fixed"}), &block)
+      content_tag(:div, options.deep_merge(data: {role: "header", zposition: "fixed"}), &block)
     else
-      content_tag(:div, options.deep_merge(data: {role: "header", position: "fixed"})) do
+      content_tag(:div, options.deep_merge(data: {role: "header", zposition: "fixed"})) do
         content_tag(:h1, args.shift || "No title")
       end
     end
@@ -30,7 +30,7 @@ module ApplicationHelper
   end
 
   def page_footer(options = {}, &block)
-    content_tag(:div, options.deep_merge(data: {role: "footer", position: "fixed"}), &block)
+    content_tag(:div, options.deep_merge(data: {role: "footer", zposition: "fixed"}), &block)
   end
 
   def control_group(*args, &block)

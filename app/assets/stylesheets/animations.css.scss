@@ -1,0 +1,36 @@
+@mixin keyframes($name) {
+		@keyframes $name {
+				@content
+		}
+		@-o-keyframes $name {
+				@content
+		}
+		@-ms-keyframes $name {
+				@content
+		}
+		@-moz-keyframes $name {
+				@content
+		}
+		@-webkit-keyframes $name {
+				@content
+		}
+}
+
+@mixin animation($expr) {
+    animation: $expr;
+    -o-animation: $expr;
+    -ms-animation: $expr;
+    -moz-animation: $expr;
+    -webkit-animation: $expr;
+}
+
+
+@include keyframes(fade) {
+    from { opacity: 1.0; }
+    50% { opacity: 0.4; }
+    to { opacity: 1.0; }
+}
+
+@mixin blink {
+		@include animation(fade 3000mx infinite);
+}

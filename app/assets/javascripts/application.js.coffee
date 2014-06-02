@@ -6,11 +6,14 @@
 #= require tracker
 # 
 
+if navigator.splashscreen and navigator.splashscreen.show
+  navigator.splashscreen.show()
+
 (($) ->
   "use strict"
 
   $.debug = (html) ->
-    $("#debug").prepend("<p>#{html}</p>")
+    $("#debug").append("<p>#{html}</p>")
 
   $.fn.extend
     disable: ->
@@ -22,6 +25,7 @@
     refreshTime: 1000
 
     initialize: ->
+      
       # Sets default parameters
       unless window.localStorage.getItem("interventionNameInputMethod")?
         window.localStorage.setItem("interventionNameInputMethod", "auto")
@@ -35,17 +39,18 @@
         return false
         
       # Initialize tracker
-      @tracker = new jQuery.tracking.Tracker("rei_db_23", this.refreshTime)
+      @tracker = new jQuery.tracking.Tracker("rei_db_24", this.refreshTime)
 
-      # Search token. If no token, ask for authentication
+      # Search token for to known on which page we need to go
       if window.localStorage.getItem("token")? and window.localStorage.getItem("instance")?
         this.recordCrumbs()
       else
         this.authenticate()
 
-      # Ensure list is shown
-      this._refreshInterventionsList()
-      
+      # Hide splashscreen
+      if navigator.splashscreen and navigator.splashscreen.hide
+        navigator.splashscreen.hide()
+        
       jQuery.debug("App initialized")
       return true
 
@@ -59,6 +64,7 @@
 
     # Go to interventions page and initialize buttons
     recordCrumbs: ->
+      this._refreshInterventionsList()
       $.mobile.navigate("#interventions")
       this.toggleActiveWork(false)
       $("#intervention-stop").disable()
@@ -260,7 +266,7 @@
       jQuery.debug("DB: #{@tracker.database.name} v#{@tracker.database.version}")
       jQuery.debug("Refresh list")
       @tracker.database.execute "SELECT * FROM crumbs WHERE type IN ('start', 'stop')", (result) ->
-        jQuery.debug("RIL")
+        jQuery.debug("RIL: #{result.rows.length} rows")
         html = "<thead><tr><th data-priority='critical'>Title</th><th>Duration</th><th>Beginning</th></tr></thead><tbody>"
         i = 0
         interventionNumber = 1

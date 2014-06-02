@@ -31,9 +31,6 @@ namespace :precompile do
     Dir.chdir(Rei.root.join("config", "resources", "screen")) do
       `./build`
     end
-    for source, dest in COPIED_RESOURCES
-      FileUtils.cp(source, dest)
-    end
   end
 
   desc "Precompile assets (JS, CSS and media files)"
@@ -47,12 +44,20 @@ namespace :precompile do
   end
 
   desc "Precompile assets and views"
-  task :app => [:assets, :views]
+  task :app => [:assets, :views] do
+    for source, dest in COPIED_RESOURCES
+      if File.exist? File.dirname(dest)
+        FileUtils.cp(source, dest)
+      else
+        puts "Skip #{dest}"
+      end
+    end
+  end
 
 end
 
 desc "Precompile all"
-task :precompile => [:"precompile:resources", :"precompile:assets", :"precompile:views"]
+task :precompile => [:"precompile:resources", :"precompile:app"]
 
 
 desc "Precompile all and build android app"

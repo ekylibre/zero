@@ -3,10 +3,6 @@
 
 $green: green;
 
-* {
-   font-family: "Open Sans";
-}
-
 .ui-controlgroup-controls {
    width: 100%;
 }
@@ -57,17 +53,6 @@ div[data-role="footer"]  {
 
 .wide-image {
    max-width: 100%;
-}
-
-
-
-.buttons {
-   display: -moz-box;
-   display: -webkit-box;
-   display: box;
-   -moz-box-pack: center;
-   -webkit-box-pack: center;
-   box-pack: center;
 }
 
 .clock {

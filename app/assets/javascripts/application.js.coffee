@@ -51,7 +51,7 @@ if navigator.splashscreen and navigator.splashscreen.show
       if navigator.splashscreen and navigator.splashscreen.hide
         navigator.splashscreen.hide()
         
-      jQuery.debug("App initialized")
+      jQuery.debug("App initialized.")
       return true
 
     # Go to authenticate page and ask for password

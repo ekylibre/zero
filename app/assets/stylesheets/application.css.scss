@@ -47,6 +47,7 @@ div[data-role="controlgroup"] {
     }
 }
 
+
 div[data-role="footer"]  {
     div[data-role="controlgroup"]  {
         margin: 0;
@@ -64,7 +65,7 @@ div[data-role="footer"]  {
 .clock {
     display: block;
     text-align: center;
-    font-size: 350%;
+    font-size: 320%;
     line-height: 1.4em;
     font-weight: bold;
 }
@@ -86,7 +87,8 @@ div[data-role="footer"]  {
     background: #EEE;
     p {
         border-top: 1px solid #BBB;
-        margin: 0.1em;
+				padding: 0.1em;
+				margin: 0;
     }
 }
 

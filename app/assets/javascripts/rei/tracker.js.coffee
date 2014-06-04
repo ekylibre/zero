@@ -4,12 +4,10 @@
 class rei.Tracker
 
   constructor: (@database, @geolocationIntervalDuration) ->
-    rei.debug("New tracker")
     @geolocationIntervalDuration ?= 1000
     @geolocationOptions =
       enableHighAccuracy: true
       maximumAge: 0
-    rei.debug("Tracker!")
     return
 
   # Begins to collect crumbs with regular interval
@@ -35,7 +33,6 @@ class rei.Tracker
     rei.debug("Track #{type}")
     that = this
     successCallback = (position) ->
-      rei.debug("Geoloc !")
       that._addCrumb(position, type, attributes)
     navigator.geolocation.getCurrentPosition(successCallback, that._geolocationError, @geolocationOptions)
     return
@@ -44,7 +41,7 @@ class rei.Tracker
 
   # Generic method to add crumbs
   _addCrumb: (position, type, attributes = {}) ->
-    rei.debug("NEW CRUMB #{type} (#{position.coords.latitude}, #{position.coords.longitude})")
+    rei.debug("Add #{type} crumb (#{position.coords.latitude}, #{position.coords.longitude})")
     crumb = jQuery.extend {}, attributes, 
       latitude:  position.coords.latitude
       longitude: position.coords.longitude

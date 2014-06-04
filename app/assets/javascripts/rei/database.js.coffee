@@ -21,11 +21,9 @@ class rei.Database
     successCallbackWrapper = that._defaultQuerySuccessCallback
     if jQuery.isFunction(successCallback)
       successCallbackWrapper = (transaction, resultSet) ->
-        rei.debug('Select!')
         successCallback(resultSet)
     else
       successCallbackWrapper = (transaction, result) ->
-        rei.debug('Select!!')
         jQuery(document).trigger("#{table}:select")
     unless @connection and @connection.transaction
       alert("No connection for query execution.")
@@ -47,11 +45,9 @@ class rei.Database
       "?"
     if jQuery.isFunction(successCallback)
       successCallbackWrapper = (transaction, result) ->
-        rei.debug('Insert!')
         successCallback(result)
     else
       successCallbackWrapper = (transaction, result) ->
-        rei.debug('Insert!!')
         jQuery(document).trigger("#{table}:insert")
     unless @connection and @connection.transaction
       alert("No connection for query execution.")     

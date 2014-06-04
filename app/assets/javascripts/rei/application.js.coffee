@@ -134,7 +134,6 @@ class rei.Application
  	  jQuery('#clock').countdown("pause")
     @tracker.stopWatching()
     @tracker.track("pause")
-    this._refreshInterventionsList()
 
   resumeIntervention: ->
     rei.debug('resumeIntervention')
@@ -147,7 +146,6 @@ class rei.Application
  	  jQuery('#clock').countdown("resume")
     @tracker.track("resume")
     @tracker.watch()
-    this._refreshInterventionsList()
 
   toggleActiveWork: (value) ->
     if value == true or value == false
@@ -156,13 +154,6 @@ class rei.Application
       this.stopActiveWork()
     else
       this.startActiveWork()
-
-  stopActiveWork: ->
-    rei.debug('stopActiveWork')
-    @workingActively = false
-    jQuery('#active-work').removeClass('ui-btn-active')
- 	  jQuery('#active-work-clock').countdown 'destroy'
-    @tracker.track("work-stop")      
     
   startActiveWork: ->
     rei.debug('startActiveWork')
@@ -174,6 +165,13 @@ class rei.Application
       description: ''
       compact: true      
     @tracker.track("work-start")      
+
+  stopActiveWork: ->
+    rei.debug('stopActiveWork')
+    @workingActively = false
+    jQuery('#active-work').removeClass('ui-btn-active')
+ 	  jQuery('#active-work-clock').countdown 'destroy'
+    @tracker.track("work-stop")      
 
   scanBarcode: ->
 	  alert('scanning');
@@ -290,36 +288,22 @@ class rei.Application
         console.log "Transaction Error: " + error.message
 
   _refreshInterventionsList: ->
-    rei.debug("DB: #{@database.name} v#{@database.version}")
-    rei.debug("Refresh list")
+    rei.debug("Refresh Intervention List...")
     @database.select "SELECT * FROM crumbs WHERE type IN ('start', 'stop')", (result) ->
       rei.debug("RIL: #{result.rows.length} rows")
       html = "<table><thead><tr><th data-priority='critical'>Title</th><th>Duration</th><th>Beginning</th></tr></thead><tbody>"
       i = 0
       interventionNumber = 1
       while i < result.rows.length - 1
-        rei.debug("RIL?")
         started_row = result.rows.item(i)
         stopped_row = result.rows.item(i + 1)
-        rei.debug("RIL.?")
         started_at = new Date(started_row.read_at)
         stopped_at = new Date(stopped_row.read_at)
-        rei.debug("RIL..?")
         name = started_row.name
         name ?= "Intervention n°#{interventionNumber}"
-        rei.debug("RIL...?")
         duration = new Date(stopped_at.getTime() - started_at.getTime())
-        rei.debug("RIL....?")
         duration.setTime duration.getTime() + (duration.getTimezoneOffset() * 1000 * 60)
-        rei.debug("RIL.....?")
-        rei.debug(duration)
-        rei.debug(started_at)
-        rei.debug(jQuery.formattedTime)
-        rei.debug(jQuery.formattedDate)
-        rei.debug(jQuery.formattedTime(duration))
-        rei.debug(jQuery.formattedDate(started_at))
-        html += "<tr><th>#{name}</th><td>#{jQuery.formattedTime(duration)}</td><td>#{jQuery.formattedDate(started_at)}</td></tr>"
-        rei.debug("RIL......?")
+        html += "<tr><td><em>#{name}</em></td><td>#{jQuery.formattedTime(duration)}</td><td>#{jQuery.formattedDate(started_at)}</td></tr>"
         if stopped_row.type == "stop"
           i += 2
         else
@@ -327,5 +311,6 @@ class rei.Application
         interventionNumber += 1
       html += "</tbody></table>"
       jQuery("#interventions-list").html html
+      rei.debug("RIL: done")
     return
 

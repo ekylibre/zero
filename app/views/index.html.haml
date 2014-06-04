@@ -2,18 +2,12 @@
 %html
   %head
     %meta{charset: "utf-8"}
-    %meta{content: "width=device-width, initial-scale=1", name: "viewport"}
+    %meta{content: "user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi", name: "viewport"}
     %title Rei
     = stylesheet_link_tag "application.css"
     = javascript_include_tag "phonegap.js", "barcodescanner.js"
     = javascript_include_tag "application.js"
   %body
-    -#= render "home"
     = render "interventions"
     = render "authentication"
     = render "configuration"
-
-    = page :close_error do
-      = page_header "Close error"
-      = page_content do
-        / Nothing

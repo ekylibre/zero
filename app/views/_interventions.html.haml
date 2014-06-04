@@ -7,11 +7,10 @@
 
   = page_content do
     %span#error-label
-    %table#interventions-list.table-striped
+    #interventions-list
     -# {data: {role: "table"}}
-    #debug
 
-  = page_footer do
+    -#= page_footer do
     #active-work-clock.clock
     #clock.clock
     = control_group :tracking_actions do
@@ -22,6 +21,7 @@
     = control_group :intervention_actions do
       = button :active_work,  icon: :cogs
       = button :barcode_scan, icon: :barcode
+    #debug
 
 = dialog :choose_intervention_name do
   = page_header do

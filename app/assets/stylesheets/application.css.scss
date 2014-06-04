@@ -4,6 +4,7 @@
  *= require animations
  */
 
+@import "compass/css3/border-radius";
 @import "compass/css3/box-sizing";
 @import "compass/css3/inline-block";
 
@@ -11,11 +12,15 @@ $green: green;
 
 .ui-controlgroup-controls {
     width: 100%;
+		display: block;
 }
 
 div[data-role="controlgroup"] {
+    width: 100%;
+		display: block;
     a {
         margin: 0;
+				@include inline-block;
         @include box-sizing(border-box);
     }
     &#tracking-actions a {
@@ -53,6 +58,7 @@ div[data-role="footer"]  {
         margin: 0;
         a {
             padding: 1.7em;
+						@include border-radius(none);
         }
     }
 }

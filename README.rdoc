@@ -4,9 +4,9 @@ Mobile app for tracking intelligency for Ekylibre.
 
 == Platforms
 
- * Android
- * iOS
- * BlackBerry 10
+* Android
+* iOS
+* BlackBerry 10
 
 == Install
 Get latest version of node.js and install it:
@@ -26,7 +26,7 @@ Install Phonegap:
 Build app:
 
     cd /path/to/rei
-		rake build
+    rake build
 
 Install in opened emulator:
 
@@ -36,10 +36,9 @@ To do build and deploy:
 
     rake
 
-
 == TODO
 
- * Migrates to IndexedDB because webSQL is deprecated
+* Migrates to IndexedDB because webSQL is deprecated
 
 == Ekylibre API call
 

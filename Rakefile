@@ -7,16 +7,16 @@ ENV["RAILS_ENV"] = "production"
 
 COPIED_RESOURCES = {
   # Android
-  "config/resources/icon/android/xhdpi.png" => "platforms/android/res/drawable/icon.png",
-  "config/resources/icon/android/xhdpi.png" => "platforms/android/res/drawable-xhdpi/icon.png",
-  "config/resources/icon/android/hdpi.png"  => "platforms/android/res/drawable-hdpi/icon.png",
-  "config/resources/icon/android/mdpi.png"  => "platforms/android/res/drawable-mdpi/icon.png",
-  "config/resources/icon/android/ldpi.png"  => "platforms/android/res/drawable-ldpi/icon.png",
-  "config/resources/screen/android/xhdpi-portrait.png" => "platforms/android/res/drawable/screen.png",
-  "config/resources/screen/android/xhdpi-portrait.png" => "platforms/android/res/drawable-xhdpi/screen.png",
-  "config/resources/screen/android/hdpi-portrait.png"  => "platforms/android/res/drawable-hdpi/screen.png",
-  "config/resources/screen/android/mdpi-portrait.png"  => "platforms/android/res/drawable-mdpi/screen.png",
-  "config/resources/screen/android/ldpi-portrait.png"  => "platforms/android/res/drawable-ldpi/screen.png"
+  "platforms/android/res/drawable/icon.png"       => "config/resources/icon/android/xhdpi.png",
+  "platforms/android/res/drawable-xhdpi/icon.png" => "config/resources/icon/android/xhdpi.png",
+  "platforms/android/res/drawable-hdpi/icon.png"  => "config/resources/icon/android/hdpi.png",
+  "platforms/android/res/drawable-mdpi/icon.png"  => "config/resources/icon/android/mdpi.png",
+  "platforms/android/res/drawable-ldpi/icon.png"  => "config/resources/icon/android/ldpi.png",
+  "platforms/android/res/drawable/screen.png"       => "config/resources/screen/android/xhdpi-portrait.png",
+  "platforms/android/res/drawable-xhdpi/screen.png" => "config/resources/screen/android/xhdpi-portrait.png",
+  "platforms/android/res/drawable-hdpi/screen.png"  => "config/resources/screen/android/hdpi-portrait.png",
+  "platforms/android/res/drawable-mdpi/screen.png"  => "config/resources/screen/android/mdpi-portrait.png",
+  "platforms/android/res/drawable-ldpi/screen.png"  => "config/resources/screen/android/ldpi-portrait.png"
   # iOS ?
 }
 
@@ -44,9 +44,9 @@ namespace :precompile do
 
   desc "Precompile assets and views"
   task :app => [:assets, :views] do
-    for source, dest in COPIED_RESOURCES
-      FileUtils.mkdir_p File.dirname(dest)
-      FileUtils.cp(source, dest)
+    for dest, source in COPIED_RESOURCES
+      FileUtils.mkdir_p Rei.root.join(dest).dirname
+      FileUtils.cp Rei.root.join(source), Rei.root.join(dest)
     end
   end
 

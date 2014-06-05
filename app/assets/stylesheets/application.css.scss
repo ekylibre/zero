@@ -1,4 +1,5 @@
 /* Adds sprockets directives below:
+ *= require jquery.mobile
  *= require font/awesome
  *= require animations
  */
@@ -14,6 +15,7 @@ $green: green;
 		display: block;
 }
 
+
 div[data-role="controlgroup"] {
     width: 100%;
 		display: block;
@@ -21,6 +23,7 @@ div[data-role="controlgroup"] {
         margin: 0;
 				@include inline-block;
         @include box-sizing(border-box);
+				padding: 1.4em;
     }
     &#tracking-actions a {
         width: 33.33%;
@@ -51,8 +54,13 @@ div[data-role="controlgroup"] {
     }
 }
 
+div[data-role="header"]  {
+		height: 4em;
+}
 
 div[data-role="footer"]  {
+		position: absolute;
+		bottom: 0;
     div[data-role="controlgroup"]  {
         margin: 0;
         a {

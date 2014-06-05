@@ -11,23 +11,22 @@
 </head>
 <body>
 <div data-role="page" id="interventions"><div data-role="header" data-tap-toggle="false" data-zposition="fixed"><h1>Interventions</h1>
-<a class="ui-btn-left ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left" data-role="button" data-transition="slide-down" href="#" id="quit"><span class="fa fa-power-off"></span></a>
-<a class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right" data-role="button" data-transition="slide-down" href="#" id="edit-options"><span class="fa fa-wrench"></span></a>
+<a class="ui-btn ui-btn-left ui-corner-all" data-role="button" data-transition="slide-down" href="#" id="quit"><span class="fa fa-3x fa-power-off"></span></a>
+<a class="ui-btn ui-btn-right ui-corner-all" data-role="button" data-transition="slide-down" href="#" id="edit-options"><span class="fa fa-3x fa-wrench"></span></a>
 </div><div class="ui-content" data-role="content"><span id='error-label'></span>
 <div id='interventions-list'></div>
 <div class='clock' id='active-work-clock'></div>
 <div class='clock' id='clock'></div>
-<div data-role="controlgroup" data-type="horizontal" id="tracking-actions"><a data-role="button" data-transition="slide-down" href="#" id="intervention-start"><span class="fa fa-2x fa-circle"></span></a>
-<a data-role="button" data-transition="slide-down" href="#" id="intervention-pause"><span class="fa fa-2x fa-pause"></span></a>
-<a data-role="button" data-transition="slide-down" href="#" id="intervention-resume"><span class="fa fa-2x fa-play"></span></a>
-<a data-role="button" data-transition="slide-down" href="#" id="intervention-stop"><span class="fa fa-2x fa-stop"></span></a>
-</div><div data-role="controlgroup" data-type="horizontal" id="intervention-actions"><a data-role="button" data-transition="slide-down" href="#" id="active-work"><span class="fa fa-2x fa-cogs"></span></a>
-<a data-role="button" data-transition="slide-down" href="#" id="barcode-scan"><span class="fa fa-2x fa-barcode"></span></a>
-</div><div id='debug'></div>
-</div></div><div data-role="dialog" id="choose_intervention_name"><div data-role="header" data-tap-toggle="false" data-zposition="fixed"><h3>Nouvelle intervention</h3>
+<div data-role="controlgroup" data-type="horizontal" id="tracking-actions"><a data-role="button" data-transition="slide-down" href="#" id="intervention-start"><span class="fa fa-3x fa-circle"></span></a>
+<a data-role="button" data-transition="slide-down" href="#" id="intervention-pause"><span class="fa fa-3x fa-pause"></span></a>
+<a data-role="button" data-transition="slide-down" href="#" id="intervention-resume"><span class="fa fa-3x fa-play"></span></a>
+<a data-role="button" data-transition="slide-down" href="#" id="intervention-stop"><span class="fa fa-3x fa-stop"></span></a>
+</div><div data-role="controlgroup" data-type="horizontal" id="intervention-actions"><a data-role="button" data-transition="slide-down" href="#" id="active-work"><span class="fa fa-3x fa-cogs"></span></a>
+<a data-role="button" data-transition="slide-down" href="#" id="barcode-scan"><span class="fa fa-3x fa-barcode"></span></a>
+</div></div></div><div data-role="dialog" id="choose_intervention_name"><div data-role="header" data-tap-toggle="false" data-zposition="fixed"><h3>Nouvelle intervention</h3>
 </div><div class="ui-content" data-role="content"><div class="ui-field-contain" data-field="null" data-role="fieldcontain"><label for="name">Nom de l&#39;intervention</label>
 <input id="name" name="name" placeholder="Semis, Récolte, Vidange..." type="text" />
-</div><a data-role="button" data-transition="slide-down" href="#" id="validate"><span class="fa fa-2x fa-check"></span></a>
+</div><a data-role="button" data-transition="slide-down" href="#" id="validate"><span class="fa fa-3x fa-check"></span></a>
 </div></div>
 <div data-role="page" id="authentication"><div data-role="header" data-tap-toggle="false" data-zposition="fixed"><h1>Connexion</h1></div>
 <div class="ui-content" data-role="content"><label id='login-errors'></label>
@@ -38,12 +37,12 @@
 <input id="email" name="email" placeholder="admin@ekylibre.org" required="required" type="email" />
 </div><div class="ui-field-contain" data-field="password" data-role="fieldcontain"><label for="password">Mot de passe</label>
 <input id="password" name="password" required="required" type="password" />
-</div><a data-role="button" data-transition="slide-down" href="#" id="sign-in"><span class="fa fa-2x fa-sign-in"></span></a>
+</div><a data-role="button" data-transition="slide-down" href="#" id="sign-in"><span class="fa fa-3x fa-sign-in"></span></a>
 </form>
 </div></div>
 <div data-role="page" id="configuration"><div data-role="header" data-tap-toggle="false" data-zposition="fixed"><h1>Configuration</h1>
-<a class="ui-btn-left ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left" data-role="button" data-transition="slide-down" href="#" id="record-crumbs"><span class="fa fa-arrow-left"></span></a>
-<a class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right" data-role="button" data-transition="slide-down" href="#" id="sign-out"><span class="fa fa-sign-out"></span></a>
+<a class="ui-btn ui-btn-left ui-corner-all" data-role="button" data-transition="slide-down" href="#" id="record-crumbs"><span class="fa fa-3x fa-arrow-left"></span></a>
+<a class="ui-btn ui-btn-right ui-corner-all" data-role="button" data-transition="slide-down" href="#" id="sign-out"><span class="fa fa-3x fa-sign-out"></span></a>
 </div><div class="ui-content" data-role="content"><ul data-inset="true" data-role="listview"><li data-role="list-divider">Saisie du nom des interventions</li>
 <li><div data-role="controlgroup" data-type="vertical"><input id="intervention_name_input_method_auto" name="intervention_name_input_method" type="radio" value="auto" />
 <label for="intervention_name_input_method_auto">Automatique</label>

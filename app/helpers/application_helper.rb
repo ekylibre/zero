@@ -53,9 +53,9 @@ module ApplicationHelper
     default = {data: {role: "button", transition: "slide-down"}, href: "#", id: name.to_s.gsub('_', '-')}
     if as = options.delete(:as)
       if as == :left_tool
-        default[:class] = "ui-btn-left ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left"
+        default[:class] = "ui-btn ui-btn-left ui-corner-all"
       elsif as == :right_tool
-        default[:class] = "ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right"
+        default[:class] = "ui-btn ui-btn-right ui-corner-all"
       end
     end
     options = default.deep_merge(options)
@@ -63,7 +63,8 @@ module ApplicationHelper
       content_tag(:a, options, &block)
     else
       content_tag(:a, options) do
-        content_tag(:span, "", class: "fa#{' fa-2x' unless as} fa-#{options[:icon] ? options.delete(:icon).to_s.gsub('_', '-') : options[:id]}")
+        # #{' fa-2x' unless as}
+        content_tag(:span, "", class: "fa fa-3x fa-#{options[:icon] ? options.delete(:icon).to_s.gsub('_', '-') : options[:id]}")
       end
     end
   end

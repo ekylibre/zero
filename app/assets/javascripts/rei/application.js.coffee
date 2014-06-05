@@ -211,13 +211,13 @@ class rei.Application
   # Permit to bind event with "this" as the actual object and not the event "target" element.
   # The event object is given as the second parameter
   _on: (scope, event, func) ->
-    that = this
+    app = this
     if jQuery.isFunction(func)
       jQuery(scope).on event, (eventObject) ->
-        func.call(that, eventObject)
+        func.call(app, eventObject)
     else
       jQuery(scope).on event, (eventObject) ->
-        that[func].call(that, eventObject)
+        app[func].call(app, eventObject)
     
 
   _signIn: ->
@@ -227,6 +227,7 @@ class rei.Application
     window.localStorage.setItem "email", email
     password = jQuery('#authentication form input[name="password"]').val()
     rei.debug("Send to: #{this.instance}/api/v1/tokens.json")
+    app = this
     jQuery.ajax
       type: "POST"
       url: "#{this.instance}/api/v1/tokens.json"
@@ -235,7 +236,7 @@ class rei.Application
         password: password
       success: (data, status, request) ->
         window.localStorage.setItem "token", data.token
-        this.recordCrumbs()
+        app.recordCrumbs()
         return
       error: (request, status, error) ->
         alert("#{status}: #{error}")

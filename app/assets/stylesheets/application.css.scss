@@ -1,9 +1,10 @@
 /* Adds sprockets directives below:
- *= require jquery.mobile
+ * require jquery.mobile
  *= require font/awesome
  *= require animations
  */
 
+@import "compass/reset";
 @import "compass/css3/border-radius";
 @import "compass/css3/box-sizing";
 @import "compass/css3/inline-block";
@@ -18,14 +19,17 @@ $green: green;
 div[data-role="controlgroup"] {
     width: 100%;
 		display: block;
+		margin: 0;
+		padding: 0;
     a {
         margin: 0;
 				@include inline-block;
         @include box-sizing(border-box);
 				padding: 1.4em;
+				text-align: center;
     }
     &#tracking-actions a {
-        width: 33.33%;
+        width: 33%;
         &#intervention-start {
             &, * {
                 color: red;

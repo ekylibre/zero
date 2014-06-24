@@ -65,12 +65,12 @@ class rei.Application
     jQuery('#authentication form input[name="instance"]').val window.localStorage.getItem("instance")
     jQuery('#authentication form input[name="email"]').val    window.localStorage.getItem("email")
     jQuery('#authentication form input[name="password"]').val ""
-    jQuery.mobile.navigate("#authentication")
+    this._navigate("#authentication")
 
   # Go to interventions page and initialize buttons
   recordCrumbs: ->
     this._refreshInterventionsList()
-    jQuery.mobile.navigate("#interventions")
+    this._navigate("#interventions")
     this.toggleActiveWork(false)
     jQuery("#intervention-stop").disable()
     jQuery("#intervention-pause").disable()
@@ -78,7 +78,7 @@ class rei.Application
     jQuery("#intervention-actions").disable()
 
   editOptions: ->
-    jQuery.mobile.navigate("#configuration")
+    this._navigate("#configuration")
     inputMethod = window.localStorage.getItem("interventionNameInputMethod")
     jQuery("input[name='intervention_name_input_method'][type='radio'][value='#{inputMethod}']").prop("checked", true)
 
@@ -208,6 +208,11 @@ class rei.Application
     this._on document, "crumbs:new:stop", "_refreshInterventionsList"
     rei.debug('Bind events!')
 
+  _navigate: (page) ->
+    # jQuery.mobile.navigate("##{page}")
+    jQuery("div[data-role='page'], div[data-role='dialog']").hide()
+    jQuery("#{page}[data-role='page'], #{page}[data-role='dialog']").show()
+
   # Permit to bind event with "this" as the actual object and not the event "target" element.
   # The event object is given as the second parameter
   _on: (scope, event, func) ->
@@ -244,7 +249,7 @@ class rei.Application
 
   _askForInterventionName: (name = "Nouvelle intervention") ->
     if window.localStorage.getItem("interventionNameInputMethod") == "write"
-      # jQuery.mobile.navigate("#choose-intervention-name")
+      # this._navigate("#choose-intervention-name")
       name = prompt("Nom de l'intervention", name)
     return name
 

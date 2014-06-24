@@ -1,6 +1,6 @@
 # Add sprockets directives below:
 #= require jquery
-#= require jquery.mobile
+# require jquery.mobile
 #= require jquery.plugin
 #= require jquery.countdown
 #= require rei/application

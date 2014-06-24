@@ -14,7 +14,9 @@
     <feature name="http://api.phonegap.com/1.0/device" />
     <feature name="http://api.phonegap.com/1.0/geolocation" />
     <feature name="http://api.phonegap.com/1.0/notification" />
+    <gap:plugin name="com.phonegap.plugins.barcodescanner" />
     <preference name="permissions" value="none" />
+    <preference name="phonegap-version" value="3.4.0" />
     <preference name="orientation" value="portrait" />
     <preference name="target-device" value="universal" />
     <preference name="fullscreen" value="true" />

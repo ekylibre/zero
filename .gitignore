@@ -1,8 +1,1 @@
 *~
-/.project
-/.settings
-/log/*.log
-/platforms/android/ant-*
-# /platforms/android/res/drawable*/*.png
-/platforms/android/assets/www/*
-/platforms/android/CordovaLib/ant-*

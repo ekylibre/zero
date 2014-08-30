@@ -1,49 +1,26 @@
 = Rei
 
-Mobile app for tracking intelligency for Ekylibre.
+Mobile app for tracking intelligency for {Ekylibre}[https://ekylibre.org].
 
 == Platforms
 
-* Android
-* iOS
-* BlackBerry 10
+* {Android}[https://github.com/ekylibre/rei-android]
 
-== Install
-Get latest version of node.js and install it:
+== History
 
-    sudo apt-get install libv8-dev
-    wget http://nodejs.org/dist/v0.10.28/node-v0.10.28.tar.gz
-    tar xzvf node-v0.10.28.tar.gz
-    cd node-v0.10.28/
-    ./configure
-    make
-    sudo make install
+=== Now
 
-Install Phonegap:
+Only native development. We separate development in other repositories. See above.
 
-    sudo npm install -g phonegap
+=== {Prototype 2}[https://github.com/ekylibre/rei/tree/prototype-2]
 
-Build app:
+The second prototype based on the first, integrate Sprockets in order to add MVC development. It shows its limitations on different android versions.
 
-    cd /path/to/rei
-    rake build
+=== {Prototype}[https://github.com/ekylibre/rei/tree/prototype]
 
-Install in opened emulator:
+Made with [Julien]{https://github.com/jleveau}, the first prototype uses PhoneGap and direct JS and HTML.
 
-    rake deploy
 
-To do build and deploy:
+== License
 
-    rake
-
-== TODO
-
-* Migrates to IndexedDB because webSQL is deprecated
-
-== Ekylibre API call
-
-Use OAuth2 to connect to Ekylibre.
-
-Push data with:
-
-    POST /api/v1/crumbs
+Rei is released under the {GNU/GPL3}[http://opensource.org/licenses/GPL-3.0] license.

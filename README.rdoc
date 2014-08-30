@@ -18,7 +18,7 @@ The second prototype based on the first, integrate Sprockets in order to add MVC
 
 === {Prototype}[https://github.com/ekylibre/rei/tree/prototype]
 
-Made with [Julien]{https://github.com/jleveau}, the first prototype uses PhoneGap and direct JS and HTML.
+Made with {Julien}[https://github.com/jleveau], the first prototype uses PhoneGap and direct JS and HTML.
 
 
 == License

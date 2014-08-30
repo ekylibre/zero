@@ -10,15 +10,15 @@ Mobile app for tracking intelligency for {Ekylibre}[https://ekylibre.org].
 
 === Now
 
-Only native development. We separate development in other repositories. See above.
+Only native development. We separate development in OS-specific repositories. See above.
 
 === {Prototype 2}[https://github.com/ekylibre/rei/tree/prototype-2]
 
-The second prototype based on the first, integrate Sprockets in order to add MVC development. It shows its limitations on different android versions.
+The second prototype based on the first, integrates Rack, ActionView, and {Sprockets}[https://github.com/sstephenson/sprockets] and in order to look like Rails app development. It shows its limitations on different android versions.
 
 === {Prototype}[https://github.com/ekylibre/rei/tree/prototype]
 
-Made with {Julien}[https://github.com/jleveau], the first prototype uses PhoneGap and direct JS and HTML.
+Made with {Julien}[https://github.com/jleveau], the first prototype uses PhoneGap and pure JS and HTML.
 
 
 == License

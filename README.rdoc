@@ -1,4 +1,4 @@
-= Rei
+= Rei (Prototype 2)
 
 Mobile app for tracking intelligency for Ekylibre.
 

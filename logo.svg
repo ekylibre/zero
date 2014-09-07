@@ -16,9 +16,9 @@
    version="1.1"
    inkscape:version="0.48.4 r9939"
    sodipodi:docname="original.svg"
-   inkscape:export-filename="/home/brice/Projets/rei/logo/original.png"
-   inkscape:export-xdpi="1800"
-   inkscape:export-ydpi="1800">
+   inkscape:export-filename="/home/brice/Projets/rei/logo/mdpi.png"
+   inkscape:export-xdpi="180"
+   inkscape:export-ydpi="180">
   <defs
      id="defs4">
     <linearGradient
@@ -206,7 +206,7 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.23"
-     inkscape:cx="110.46805"
+     inkscape:cx="112.09407"
      inkscape:cy="14.792845"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"

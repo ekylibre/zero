@@ -1,10 +1,10 @@
-= Rei
+= Zero
 
 Mobile app for tracking intelligency for {Ekylibre}[https://ekylibre.org].
 
 == Platforms
 
-* {Android}[https://github.com/ekylibre/rei-android]
+* {Android}[https://github.com/ekylibre/zero-android]
 
 == History
 
@@ -12,15 +12,15 @@ Mobile app for tracking intelligency for {Ekylibre}[https://ekylibre.org].
 
 Only native development. We separate development in OS-specific repositories. See above.
 
-=== {Prototype 2}[https://github.com/ekylibre/rei/tree/prototype-2]
+=== {Prototype 2}[https://github.com/ekylibre/zero/tree/prototype-2]
 
 The second prototype based on the first, integrates Rack, ActionView, and {Sprockets}[https://github.com/sstephenson/sprockets] and in order to look like Rails app development. It shows its limitations on different android versions.
 
-=== {Prototype}[https://github.com/ekylibre/rei/tree/prototype]
+=== {Prototype}[https://github.com/ekylibre/zero/tree/prototype]
 
 Made with {Julien}[https://github.com/jleveau], the first prototype uses PhoneGap and pure JS and HTML.
 
 
 == License
 
-Rei is released under the {GNU/GPL3}[http://opensource.org/licenses/GPL-3.0] license.
+Zero is released under the {GNU/GPL3}[http://opensource.org/licenses/GPL-3.0] license.
